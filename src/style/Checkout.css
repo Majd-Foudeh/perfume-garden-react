@@ -1,0 +1,87 @@
+a{
+    text-decoration: none!important;
+}
+.bannerimg {
+  /* background-color: #161616; */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1920' height='300' preserveAspectRatio='none' viewBox='0 0 1920 300'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1668%26quot%3b)' fill='none'%3e%3crect width='1920' height='300' x='0' y='0' fill='url(%23SvgjsLinearGradient1669)'%3e%3c/rect%3e%3cpath d='M0 0L442.28 0L0 28.13z' fill='rgba(255%2c 255%2c 255%2c .1)'%3e%3c/path%3e%3cpath d='M0 28.13L442.28 0L1149.83 0L0 49.5z' fill='rgba(255%2c 255%2c 255%2c .075)'%3e%3c/path%3e%3cpath d='M0 49.5L1149.83 0L1333.2199999999998 0L0 155.91z' fill='rgba(255%2c 255%2c 255%2c .05)'%3e%3c/path%3e%3cpath d='M0 155.91L1333.2199999999998 0L1554.4899999999998 0L0 249.69z' fill='rgba(255%2c 255%2c 255%2c .025)'%3e%3c/path%3e%3cpath d='M1920 300L1704.32 300L1920 207.11z' fill='rgba(0%2c 0%2c 0%2c .1)'%3e%3c/path%3e%3cpath d='M1920 207.11L1704.32 300L1051.34 300L1920 162.82000000000002z' fill='rgba(0%2c 0%2c 0%2c .075)'%3e%3c/path%3e%3cpath d='M1920 162.82L1051.34 300L863.9999999999999 300L1920 149.85999999999999z' fill='rgba(0%2c 0%2c 0%2c .05)'%3e%3c/path%3e%3cpath d='M1920 149.85999999999999L864 300L473.94 300L1920 99.80999999999999z' fill='rgba(0%2c 0%2c 0%2c .025)'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1668'%3e%3crect width='1920' height='280' fill='white'%3e%3c/rect%3e%3c/mask%3e%3clinearGradient x1='50%25' y1='0%25' x2='50%25' y2='100%25' gradientUnits='userSpaceOnUse' id='SvgjsLinearGradient1669'%3e%3cstop stop-color='rgba(0%2c 0%2c 0%2c 1)' offset='0.06'%3e%3c/stop%3e%3cstop stop-color='rgba(255%2c 193%2c 7%2c 1)' offset='1'%3e%3c/stop%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e");    background-repeat: no-repeat;
+  /* background-image: url('../images/banner.png'); */
+  /* background-size: 100% 100%;
+  height: 25vh;
+  background-position: center right; */
+}
+.checkoutbtn {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: white;
+    background-color: #171717;
+    padding: .5em 1em ;
+    border: none;
+    border-radius: .6rem;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  
+  .checkoutbtn span:not(:nth-child(6)) {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 30px;
+    width: 30px;
+    background-color: #ffc107;
+    border-radius: 50%;
+    transition: .6s ease;
+  }
+  
+  .checkoutbtn span:nth-child(6) {
+    position: relative;
+  }
+  
+  .checkoutbtn span:nth-child(1) {
+    transform: translate(-3.3em, -4em);
+  }
+  
+  .checkoutbtn span:nth-child(2) {
+    transform: translate(-6em, 1.3em);
+  }
+  
+  .checkoutbtn span:nth-child(3) {
+    transform: translate(-.2em, 1.8em);
+  }
+  
+  .checkoutbtn span:nth-child(4) {
+    transform: translate(3.5em, 1.4em);
+  }
+  
+  .checkoutbtn span:nth-child(5) {
+    transform: translate(3.5em, -3.8em);
+  }
+  
+  .checkoutbtn:hover span:not(:nth-child(6)) {
+    transform: translate(-50%, -50%) scale(4);
+    transition: 1.5s ease;
+  }
+.checkoutbtn:hover{
+    color: black;
+    transition: 1.5s ease;
+}    
+/*-------------------------------------------------end of button style */
+.container {
+    max-width: 960px;
+  }
+  
+  .lh-condensed { line-height: 1.25; }
+  .redeembtn{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius:5px ;
+    height: 36px;
+    border: 1px solid #cacaca;
+    color: white;
+    background-color: #171717;
+  }
+  .redeembtn:hover{
+    background-color: #ffc107;
+    color: black;
+    transition: 0.2s ease;
+  }

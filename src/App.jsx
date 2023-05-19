@@ -4,6 +4,10 @@ import { Navbar } from './components/navbar'
 import { Footer } from './components/Footer'
 import { Home } from './components/Home/Home'
 import { Signup } from './components/SignUp/signup'
+import { Cart } from './components/cart'
+import { Checkout } from './components/Checkout'
+import { Shop } from './components/Shop'
+import { ProductDetails } from './components/ProductDetails'
 
 
 
@@ -16,6 +20,10 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/signUp' element={<Signup />} />
+          <Route path='/cart' element={<Cart/>}/>
+          <Route path='/checkout' element={<Checkout/>}/>
+          <Route path='/shop' element={<Shop/>}/>
+          <Route path='/productDetails' element={<ProductDetails/>}/>
         </Routes>
       </BrowserRouter>
       <Footer />

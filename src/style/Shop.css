@@ -1,0 +1,30 @@
+a {
+    text-decoration: none !important;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.bannerimg {
+    /* background-color: #161616; */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1920' height='300' preserveAspectRatio='none' viewBox='0 0 1920 300'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1668%26quot%3b)' fill='none'%3e%3crect width='1920' height='300' x='0' y='0' fill='url(%23SvgjsLinearGradient1669)'%3e%3c/rect%3e%3cpath d='M0 0L442.28 0L0 28.13z' fill='rgba(255%2c 255%2c 255%2c .1)'%3e%3c/path%3e%3cpath d='M0 28.13L442.28 0L1149.83 0L0 49.5z' fill='rgba(255%2c 255%2c 255%2c .075)'%3e%3c/path%3e%3cpath d='M0 49.5L1149.83 0L1333.2199999999998 0L0 155.91z' fill='rgba(255%2c 255%2c 255%2c .05)'%3e%3c/path%3e%3cpath d='M0 155.91L1333.2199999999998 0L1554.4899999999998 0L0 249.69z' fill='rgba(255%2c 255%2c 255%2c .025)'%3e%3c/path%3e%3cpath d='M1920 300L1704.32 300L1920 207.11z' fill='rgba(0%2c 0%2c 0%2c .1)'%3e%3c/path%3e%3cpath d='M1920 207.11L1704.32 300L1051.34 300L1920 162.82000000000002z' fill='rgba(0%2c 0%2c 0%2c .075)'%3e%3c/path%3e%3cpath d='M1920 162.82L1051.34 300L863.9999999999999 300L1920 149.85999999999999z' fill='rgba(0%2c 0%2c 0%2c .05)'%3e%3c/path%3e%3cpath d='M1920 149.85999999999999L864 300L473.94 300L1920 99.80999999999999z' fill='rgba(0%2c 0%2c 0%2c .025)'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1668'%3e%3crect width='1920' height='280' fill='white'%3e%3c/rect%3e%3c/mask%3e%3clinearGradient x1='50%25' y1='0%25' x2='50%25' y2='100%25' gradientUnits='userSpaceOnUse' id='SvgjsLinearGradient1669'%3e%3cstop stop-color='rgba(0%2c 0%2c 0%2c 1)' offset='0.06'%3e%3c/stop%3e%3cstop stop-color='rgba(255%2c 193%2c 7%2c 1)' offset='1'%3e%3c/stop%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e");    background-repeat: no-repeat;
+    /* background-image: url('../images/banner.png'); */
+    /* background-size: 100% 100%;
+    height: 25vh;
+    background-position: center right; */
+}
+main img{
+    /* width: 100%; */
+    aspect-ratio: 2/3;
+    object-fit:contain;
+
+}
+.cardshadow{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.cardshadow:hover{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
