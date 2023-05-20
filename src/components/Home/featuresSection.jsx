@@ -1,6 +1,6 @@
 
 import React from 'react'
-
+import ease from '../../assets/easy-use.png'
 export const FeaturesSection = () => {
     return (
         <>
@@ -18,7 +18,7 @@ export const FeaturesSection = () => {
                         <div className="col-md-4 col-sm-8">
                             <div className="single-content mt-30 text-center">
                                 <div className="content-image">
-                                    <img src="../images/easy-use.png" alt="content" />
+                                    <img src={ease} alt="content" />
                                 </div>
                                 <div className="content-content">
                                     <h4 className="title my-3">Innovative Lenses</h4>

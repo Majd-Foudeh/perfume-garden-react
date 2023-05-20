@@ -1,7 +1,10 @@
 import React from 'react'
 import '../style/Checkout.css'
+import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 export const Checkout = () => {
+    const navigate =useNavigate()
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     (function () {
         'use strict'
@@ -40,9 +43,9 @@ export const Checkout = () => {
                                             </a>
                                         </li>
                                         <li className="breadcrumb-item ">
-                                            <a className="text-black" href="" onclick="history.go(-1) ">
+                                            <Link className="text-black"   onClick={()=>{navigate(-1)}}>
                                                 Cart
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li className="breadcrumb-item active" aria-current="page">
                                             Checkout
@@ -290,6 +293,7 @@ export const Checkout = () => {
                   </div> */}
                                     <hr className="mb-4" />
                                     {/* <button class="btn col-4 btn-dark submitbtn btn-lg btn-block" type="submit">Continue to checkout</button> */}
+                                    <Link to="/thankyou">
                                     <button className="checkoutbtn">
                                         <span className="circle1" />
                                         <span className="circle2" />
@@ -298,6 +302,7 @@ export const Checkout = () => {
                                         <span className="circle5" />
                                         <span className="text">Submit</span>
                                     </button>
+                                    </Link>
                                 </form>
                             </div>
                         </div>

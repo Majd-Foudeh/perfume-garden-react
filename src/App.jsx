@@ -8,6 +8,7 @@ import { Cart } from './components/cart'
 import { Checkout } from './components/Checkout'
 import { Shop } from './components/Shop'
 import { ProductDetails } from './components/ProductDetails'
+import { ThankYou } from './components/ThankYou'
 
 
 
@@ -21,9 +22,10 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/signUp' element={<Signup />} />
           <Route path='/cart' element={<Cart/>}/>
-          <Route path='/checkout' element={<Checkout/>}/>
+          <Route path='/checkOut' element={<Checkout/>}/>
           <Route path='/shop' element={<Shop/>}/>
           <Route path='/productDetails' element={<ProductDetails/>}/>
+          <Route path='/thankYou' element={<ThankYou/>}/>
         </Routes>
       </BrowserRouter>
       <Footer />

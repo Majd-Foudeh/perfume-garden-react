@@ -1,13 +1,16 @@
 import React from 'react'
+import hero1 from '../../assets/hero1.jpg'
+import { Link } from 'react-router-dom'
 
 export const Hero = () => {
     return (
         <>
+        <Link></Link>
             <div
                 className="mb-10 text-center d-flex flex-column justify-content-center  "
                 style={{
                     height: "94vh",
-                    backgroundImage: 'url("../../assets/hero1.jpg")',
+                    backgroundImage:`url(${hero1})`,
                     backgroundRepeat: "no-repeat",
                     backgroundPosition: "center center",
                     backgroundSize: "cover"
@@ -32,14 +35,14 @@ export const Hero = () => {
                             prebuilt components, and powerful JavaScript plugins.
                         </p>
                         <div className="d-grid row gap-2 d-sm-flex justify-content-sm-center">
-                            <a href="./shop page/shop.html">
+                            <Link to="/checkout">
                                 <button
                                     type="button"
                                     className="btn btn-warning btn-lg col-lg-5 px-4 gap-3"
                                 >
                                     Primary button
                                 </button>
-                            </a>
+                            </Link>
                             <button
                                 type="button"
                                 className="btn btn-outline-light btn-lg col-lg-5 px-4"

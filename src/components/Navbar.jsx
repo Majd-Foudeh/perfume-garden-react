@@ -100,7 +100,7 @@ export const Navbar = () => {
                                 </div>
                                 <form className="px-4 py-3">
                                     {/* Email input */}
-                                    <div className="form-outline mb-4">
+                                    <div className="form-outline mb-4" >
                                         <input type="email" id="email" className="form-control" />
                                         <label className="form-label" htmlFor="email">
                                             Email address
