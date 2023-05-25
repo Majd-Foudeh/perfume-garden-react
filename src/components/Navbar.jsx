@@ -1,13 +1,14 @@
-
+import { Link } from "react-router-dom";
+import welcome from '../assets/welcome.png'
 
 export const Navbar = () => {
     return (
         <>
             <nav className="navbar navbar-expand-lg bg-black navbar-dark ">
                 <div className="container px-4 px-lg-5">
-                    <a className="navbar-brand" href="#!">
+                    <Link className="navbar-brand" to="/">
                         Start Bootstrap
-                    </a>
+                    </Link >
                     <button
                         className="navbar-toggler"
                         type="button"
@@ -31,9 +32,14 @@ export const Navbar = () => {
                                 </a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#!">
+                                <Link className="nav-link" to="/shop">
+                                    Shop
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="">
                                     About
-                                </a>
+                                </Link>
                             </li>
                             <li className="nav-item dropdown">
                                 <a
@@ -69,7 +75,7 @@ export const Navbar = () => {
                             </li>
                         </ul>
                         <form className="d-flex">
-                            <a href="./cartPage/cart.html">
+                            <Link to="/cart">
                                 <button type="button" className="btn btn-outline-light">
                                     <i className="fa fa-cart-shopping me-1" />
                                     Cart
@@ -77,7 +83,7 @@ export const Navbar = () => {
                                         0
                                     </span>
                                 </button>
-                            </a>
+                            </Link >
                         </form>
                         <div className="dropdown ms-3 p-0">
                             <button
@@ -91,7 +97,7 @@ export const Navbar = () => {
                             <div className="dropdown-menu position-absolute end-0" style={{ width: 320 }}>
                                 <div className=" " style={{ height: "15vh" }}>
                                     <img
-                                        src="./images/welcome.png"
+                                        src={welcome}
                                         height="100%"
                                         width="100%"
                                         alt=""
@@ -165,14 +171,14 @@ export const Navbar = () => {
                                 </form>
                                 <div className="pb-2">
                                     <div className="dropdown-divider" />
-                                    <a
+                                    <Link
                                         className="dropdown-item"
-                                        href="./sing up page/login.html"
+                                        to="/signup"
                                         target="_blank"
                                     >
                                         New around here?{" "}
                                         <strong style={{ color: "#E38B29" }}>Sign up</strong>{" "}
-                                    </a>
+                                    </Link>
                                     <a className="dropdown-item" href="#">
                                         Forgot password?
                                     </a>

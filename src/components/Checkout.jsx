@@ -1,35 +1,36 @@
 import React from 'react'
-import '../style/Checkout.css'
+
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import '../style/Checkout.css'
 
 export const Checkout = () => {
-    const navigate =useNavigate()
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function () {
-        'use strict'
-      
-        window.addEventListener('load', function () {
-          // Fetch all the forms we want to apply custom Bootstrap validation styles to
-          var forms = document.getElementsByClassName('needs-validation')
-      
-          // Loop over them and prevent submission
-          Array.prototype.filter.call(forms, function (form) {
-            form.addEventListener('submit', function (event) {
-              if (form.checkValidity() === false) {
-                event.preventDefault()
-                event.stopPropagation()
-              }
-              form.classList.add('was-validated')
+    const navigate = useNavigate()
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict'
+
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation')
+
+                // Loop over them and prevent submission
+                Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        form.classList.add('was-validated')
+                    }, false)
+                })
             }, false)
-          })
-        }, false)
-      }())
+        }())
     return (
         <>
             <>
                 <header className="bannerimg  py-5 shadow-6-strong " style={{ height: 280 }}>
-                    <div className="container px-4 px-lg-5 my-5">
+                    <div className="container container1 px-4 px-lg-5 my-5">
                         <div className="text-black d-flex justify-content-between">
                             <div>
                                 <h1 className="display-4 fw-bolder">Checkout</h1>
@@ -43,7 +44,7 @@ export const Checkout = () => {
                                             </a>
                                         </li>
                                         <li className="breadcrumb-item ">
-                                            <Link className="text-black"   onClick={()=>{navigate(-1)}}>
+                                            <Link className="text-black" onClick={() => { navigate(-1) }}>
                                                 Cart
                                             </Link>
                                         </li>
@@ -294,14 +295,14 @@ export const Checkout = () => {
                                     <hr className="mb-4" />
                                     {/* <button class="btn col-4 btn-dark submitbtn btn-lg btn-block" type="submit">Continue to checkout</button> */}
                                     <Link to="/thankyou">
-                                    <button className="checkoutbtn">
-                                        <span className="circle1" />
-                                        <span className="circle2" />
-                                        <span className="circle3" />
-                                        <span className="circle4" />
-                                        <span className="circle5" />
-                                        <span className="text">Submit</span>
-                                    </button>
+                                        <button className="checkoutbtn">
+                                            <span className="circle1" />
+                                            <span className="circle2" />
+                                            <span className="circle3" />
+                                            <span className="circle4" />
+                                            <span className="circle5" />
+                                            <span className="text">Submit</span>
+                                        </button>
                                     </Link>
                                 </form>
                             </div>

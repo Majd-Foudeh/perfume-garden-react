@@ -1,72 +1,72 @@
 import React from 'react'
 import './signUp.css'
 export const Signup = () => {
-    let usernameerror=document.getElementById("username");
-let phonenumbererror=document.getElementById("phonenumber");
-let emailerror=document.getElementById("email");
-let passworderror=document.getElementById("password");
-let confirmpassworderror=document.getElementById("confirmpassword");
-let form=document.getElementById("loginform");
+    //     let usernameerror=document.getElementById("username");
+    // let phonenumbererror=document.getElementById("phonenumber");
+    // let emailerror=document.getElementById("email");
+    // let passworderror=document.getElementById("password");
+    // let confirmpassworderror=document.getElementById("confirmpassword");
+    // let form=document.getElementById("loginform");
 
-form.addEventListener("submit", function(event){
-    event.preventDefault();
+    // form.addEventListener("submit", function(event){
+    //     event.preventDefault();
 
-    const usernameRegex = /^\S+$/;
-    const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-    const phoneRegex = /^07\d{8}$/;
-    const passwordRegex = /^(?=.*\d)(?=.*[A-Z])(?=.*\W).{8,}$/;
-    
-const username=event.target.username.value;
-if (!usernameRegex.test(username)) {
-    usernameerror.classList.add("is-invalid")
-}
-else{
-    usernameerror.classList.add("is-valid")
-}
+    //     const usernameRegex = /^\S+$/;
+    //     const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+    //     const phoneRegex = /^07\d{8}$/;
+    //     const passwordRegex = /^(?=.*\d)(?=.*[A-Z])(?=.*\W).{8,}$/;
 
-const phonenumber=event.target.phonenumber.value;
-if (!phoneRegex.test(phonenumber)) {
-    phonenumbererror.classList.add("is-invalid")
-}
-else{
-    phonenumbererror.classList.add("is-valid")
-}
+    // const username=event.target.username.value;
+    // if (!usernameRegex.test(username)) {
+    //     usernameerror.classList.add("is-invalid")
+    // }
+    // else{
+    //     usernameerror.classList.add("is-valid")
+    // }
 
-const email=event.target.email.value;
-if (!emailRegex.test(email)) {
-    emailerror.classList.add("is-invalid")
-}
-else{
-    emailerror.classList.add("is-valid")
-}
+    // const phonenumber=event.target.phonenumber.value;
+    // if (!phoneRegex.test(phonenumber)) {
+    //     phonenumbererror.classList.add("is-invalid")
+    // }
+    // else{
+    //     phonenumbererror.classList.add("is-valid")
+    // }
 
-const password=event.target.password.value;
-if (!passwordRegex.test(password)) {
-    passworderror.classList.add("is-invalid")
-}
-else{
-    passworderror.classList.add("is-valid")
-}
+    // const email=event.target.email.value;
+    // if (!emailRegex.test(email)) {
+    //     emailerror.classList.add("is-invalid")
+    // }
+    // else{
+    //     emailerror.classList.add("is-valid")
+    // }
 
-const confirmpassword=event.target.confirmpassword.value;
-if (!(confirmpassword===password)) {
-    confirmpassworderror.classList.add("is-invalid")
-}
-else{
-    confirmpassworderror.classList.add("is-valid")
-}
-})
+    // const password=event.target.password.value;
+    // if (!passwordRegex.test(password)) {
+    //     passworderror.classList.add("is-invalid")
+    // }
+    // else{
+    //     passworderror.classList.add("is-valid")
+    // }
+
+    // const confirmpassword=event.target.confirmpassword.value;
+    // if (!(confirmpassword===password)) {
+    //     confirmpassworderror.classList.add("is-invalid")
+    // }
+    // else{
+    //     confirmpassworderror.classList.add("is-valid")
+    // }
+    // })
     return (
         <>
             <section
                 className=" backimg "
                 style={{ backgroundColor: "#eee", height: "94vh" }}
             >
-                <div className="container h-100 w-100  ">
+                <div className="container  h-100 w-100  ">
                     <div className="row d-flex justify-content-center align-items-center h-100 ">
-                        <div className="col-lg-12 col-xl-11 ">
+                        <div className="col-lg-12  col-xl-11 ">
                             <div
-                                className="card text-black border-2 shadow-6-strong "
+                                className="card text-black  border-2 shadow-6-strong "
                                 style={{
                                     backgroundColor: "rgba(255, 255, 255, 0.856)",
                                     borderRadius: 25
