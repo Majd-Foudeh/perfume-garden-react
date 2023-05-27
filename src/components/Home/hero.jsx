@@ -1,58 +1,90 @@
 import React from 'react'
 import hero1 from '../../assets/hero1.jpg'
+import hero2 from '../../assets/hero2.jpg'
+import hero3 from '../../assets/hero3.jpg'
 import { Link } from 'react-router-dom'
 
 export const Hero = () => {
     return (
         <>
-        <Link></Link>
-            <div
-                className="mb-10 text-center d-flex flex-column justify-content-center  "
-                style={{
-                    height: "94vh",
-                    backgroundImage:`url(${hero1})`,
-                    backgroundRepeat: "no-repeat",
-                    backgroundPosition: "center center",
-                    backgroundSize: "cover"
-                }}
-            >
-                {/* <img class="d-block mx-auto mb-4" src="../images/hero.jpg" alt="" > */}
+
+            <>
+                {/* Example Code */}
                 <div
-                    className="h-100 d-flex flex-column justify-content-center"
-                    style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+                    id="carouselExampleFade"
+                    className="carousel slide carousel-fade"
+                    data-bs-ride="carousel"
                 >
-                    <h1
-                        className="display-5 fw-bold "
-                        style={{ color: "#F6F1E9", fontSize: 80 }}
-                    >
-                        Centered hero
-                    </h1>
-                    <div className="col-lg-6 mx-auto">
-                        <p className="lead mb-4 fw-bolder" style={{ color: "#F6F1E9" }}>
-                            Quickly design and customize responsive mobile-first sites with
-                            Bootstrap, the world’s most popular front-end open source toolkit,
-                            featuring Sass variables and mixins, responsive grid system, extensive
-                            prebuilt components, and powerful JavaScript plugins.
-                        </p>
-                        <div className="d-grid row gap-2 d-sm-flex justify-content-sm-center">
-                            <Link to="/checkout">
-                                <button
-                                    type="button"
-                                    className="btn btn-warning btn-lg col-lg-5 px-4 gap-3"
-                                >
-                                    Primary button
-                                </button>
-                            </Link>
-                            <button
-                                type="button"
-                                className="btn btn-outline-light btn-lg col-lg-5 px-4"
-                            >
-                                Secondary
-                            </button>
+                    <div className="carousel-indicators">
+                        <button
+                            type="button"
+                            data-bs-target="#carouselExampleCaptions"
+                            data-bs-slide-to={0}
+                            className="active"
+                            aria-current="true"
+                            aria-label="Slide 1"
+                        />
+                        <button
+                            type="button"
+                            data-bs-target="#carouselExampleCaptions"
+                            data-bs-slide-to={1}
+                            aria-label="Slide 2"
+                        />
+                        <button
+                            type="button"
+                            data-bs-target="#carouselExampleCaptions"
+                            data-bs-slide-to={2}
+                            aria-label="Slide 3"
+                        />
+                    </div>
+                    <div className="carousel-inner">
+                        <div className="carousel-item active" data-bs-interval="5000">
+                            <img src={hero1} className="d-block w-100" style={{ height: "95vh" }} alt="..." />
+
+                            <div className="carousel-caption d-none d-md-block">
+                                <h5>First slide label</h5>
+                                <p>Some representative placeholder content for the first slide.</p>
+                            </div>
+                        </div>
+                        <div className="carousel-item" data-bs-interval="5000">
+                            <img src={hero3} className="d-block w-100" style={{ height: "95vh" }} alt="..." />
+
+                            <div className="carousel-caption d-none d-md-block">
+                                <h5>Second slide label</h5>
+                                <p>Some representative placeholder content for the second slide.</p>
+                            </div>
+                        </div>
+                        <div className="carousel-item " data-bs-interval="5000">
+                            <img src={hero2} className="d-block w-100" style={{ height: "95vh" }} alt="..." />
+
+                            <div className="carousel-caption d-none d-md-block">
+                                <h5>Third slide label</h5>
+                                <p>Some representative placeholder content for the third slide.</p>
+                            </div>
                         </div>
                     </div>
+                    <button
+                        className="carousel-control-prev"
+                        type="button"
+                        data-bs-target="#carouselExampleFade"
+                        data-bs-slide="prev"
+                    >
+                        <span className="carousel-control-prev-icon" aria-hidden="true" />
+                        <span className="visually-hidden">Previous</span>
+                    </button>
+                    <button
+                        className="carousel-control-next"
+                        type="button"
+                        data-bs-target="#carouselExampleFade"
+                        data-bs-slide="next"
+                    >
+                        <span className="carousel-control-next-icon" aria-hidden="true" />
+                        <span className="visually-hidden">Next</span>
+                    </button>
                 </div>
-            </div>
+                {/* End Example Code */}
+            </>
+
 
         </>
     )

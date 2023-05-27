@@ -15,27 +15,27 @@ export const Footer = () => {
                             <ul className="list-inline mt-4">
                                 <li className="list-inline-item">
                                     <a href="#" target="_blank" title="twitter">
-                                        <i className="fa fa-twitter" style={{ color: "#E38B29" }} />
+                                        <i className="fa fa-twitter text-dark"  />
                                     </a>
                                 </li>
                                 <li className="list-inline-item">
                                     <a href="#" target="_blank" title="facebook">
-                                        <i className="fa fa-facebook" style={{ color: "#E38B29" }} />
+                                        <i className="fa fa-facebook text-dark"  />
                                     </a>
                                 </li>
                                 <li className="list-inline-item">
                                     <a href="#" target="_blank" title="instagram">
-                                        <i className="fa fa-instagram " style={{ color: "#E38B29" }} />
+                                        <i className="fa fa-instagram  text-dark"  />
                                     </a>
                                 </li>
                                 <li className="list-inline-item">
                                     <a href="#" target="_blank" title="pinterest">
-                                        <i className="fa fa-pinterest " style={{ color: "#E38B29" }} />
+                                        <i className="fa fa-pinterest  text-dark"  />
                                     </a>
                                 </li>
                                 <li className="list-inline-item">
                                     <a href="#" target="_blank" title="vimeo">
-                                        <i className="fa fa-github" style={{ color: "#E38B29" }} />
+                                        <i className="fa fa-github text-dark"  />
                                     </a>
                                 </li>
                             </ul>
@@ -106,7 +106,7 @@ export const Footer = () => {
                                     />
                                     <div className="input-group-append">
                                         <button id="button-addon1" type="submit" className="btn btn-link">
-                                            <i className="fa fa-paper-plane" style={{ color: "#E38B29" }} />
+                                            <i className="fa fa-paper-plane text-dark"  />
                                         </button>
                                     </div>
                                 </div>
@@ -115,7 +115,7 @@ export const Footer = () => {
                     </div>
                 </div>
                 {/* Copyrights */}
-                <div className=" py-4" style={{ backgroundColor: "#1a1a1a" }}>
+                <div className=" py-4 bg-black">
                     <div className="container text-center">
                         <p className="text-light mb-0 py-2">
                             © 2019 Bootstrapious All rights reserved.

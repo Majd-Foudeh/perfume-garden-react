@@ -1,0 +1,105 @@
+@import url(//fonts.googleapis.com/css?family=Montserrat:300,400,500);
+.contact2 {
+  color: #8d97ad;
+  font-weight: 300;
+	padding: 60px 0;
+  margin-bottom: 170px;
+  background-position: center top;
+}
+
+.contact2 h1,
+.contact2 h2,
+.contact2 h3,
+.contact2 h4,
+.contact2 h5,
+.contact2 h6 {
+  color: #3e4555;
+}
+
+.contact2 .font-weight-medium {
+  font-weight: 500;
+}
+
+.contact2 .subtitle {
+  color: #8d97ad;
+  line-height: 24px;
+}
+
+.contact2 .bg-image {
+  background-size: cover;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.contact2 .card.card-shadow {
+    -webkit-box-shadow: 0px 0px 30px rgba(115, 128, 157, 0.1);
+    box-shadow: 0px 0px 30px rgba(115, 128, 157, 0.1);
+}
+
+.contact2 .detail-box .round-social {
+  margin-top: 100px;
+}
+
+.contact2 .round-social a {
+  background: transparent;
+  margin: 0 7px;
+  padding: 11px 12px;
+}
+
+.contact2 .contact-container .links a {
+  color: #8d97ad;
+}
+
+.contact2 .contact-container {
+  position: relative;
+  top: 200px;
+}
+
+.contact2 .btn-danger-gradiant {
+  background: yellow;
+  background: -webkit-linear-gradient(legacy-direction(to right), yellow 0%, #ff6a5b 100%);
+  background: -webkit-gradient(linear, left top, right top, from(yellow), to(#ff6a5b));
+  background: -webkit-linear-gradient(left, yellow 0%, #ff6a5b 100%);
+  background: -o-linear-gradient(left, yellow 0%, #ff6a5b 100%);
+  background: linear-gradient(to right, yellow 0%, #ff6a5b 100%);
+}
+
+ .contact2 .btn-danger-gradiant:hover {
+  background: #ff6a5b;
+  background: -webkit-linear-gradient(legacy-direction(to right), #ff6a5b 0%, #ff4d7e 100%);
+  background: -webkit-gradient(linear, left top, right top, from(#ff6a5b), to(#ff4d7e));
+  background: -webkit-linear-gradient(left, #ff6a5b 0%, #ff4d7e 100%);
+  background: -o-linear-gradient(left, #ff6a5b 0%, #ff4d7e 100%);
+  background: linear-gradient(to right, #ff6a5b 0%, #ff4d7e 100%);
+}
+
+
+.contactsubmit {
+    position: relative;
+    display: inline-block;
+    margin-top: 15px;
+    padding: 7px 20px;
+    text-align: center;
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: #ffc107;
+    background: transparent;
+    cursor: pointer;
+    transition: ease-out 0.5s;
+    border: 2px solid #4d4a42;
+    border-radius: 10px;
+    box-shadow: inset 0 0 0 0 #ffc107;
+  }
+  
+  .contactsubmit:hover {
+    color: black;
+    box-shadow: inset 0 -100px 0 0 #ffc107;
+  }
+  
+  .contactsubmit:active {
+    transform: scale(0.9);
+  }

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import welcome from '../assets/welcome.png'
+import '../style/navbar.css'
 
 export const Navbar = () => {
     return (
@@ -23,13 +24,13 @@ export const Navbar = () => {
                     <div className="navbar-collapse collapse show" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                             <li className="nav-item">
-                                <a
+                                <Link
                                     className="nav-link active"
                                     aria-current="page"
-                                    href="./index.html"
+                                    to="/"
                                 >
                                     Home
-                                </a>
+                                </Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/shop">
@@ -37,8 +38,13 @@ export const Navbar = () => {
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="">
+                                <Link className="nav-link" to="/about">
                                     About
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/contact">
+                                    Contact Us
                                 </Link>
                             </li>
                             <li className="nav-item dropdown">
@@ -73,7 +79,11 @@ export const Navbar = () => {
                                     </li>
                                 </ul>
                             </li>
+
+
                         </ul>
+
+                        <div className="d-flex gap-3 align-items-center">
                         <form className="d-flex">
                             <Link to="/cart">
                                 <button type="button" className="btn btn-outline-light">
@@ -85,7 +95,11 @@ export const Navbar = () => {
                                 </button>
                             </Link >
                         </form>
-                        <div className="dropdown ms-3 p-0">
+                        <Link to="/login">
+                        <button type="button" className="btn btn-outline-light">login</button>
+                        </Link>
+                        {/* login dropdown */}
+                        <div className="dropdown  p-0">
                             <button
                                 className="btn btn-outline-light dropdown-toggle"
                                 type="button"
@@ -182,12 +196,58 @@ export const Navbar = () => {
                                     <a className="dropdown-item" href="#">
                                         Forgot password?
                                     </a>
+
                                 </div>
+
                             </div>
+
                         </div>
+
+                        {/* Avatar */}
+                        <div className=" nav-item dropdown" >
+                            <a
+                                className="nav-link dropdown-toggle d-flex align-items-center"
+                                href="#"
+                                id="navbarDropdownMenuLink"
+                                role="button"
+                                data-mdb-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                <div className="rounded-circle">
+                                <img
+                                    src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzl8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
+                                    className="rounded-circle"
+                                    height={31}
+                                    width={34}
+                                    alt="your profile page"
+                                    loading="lazy"
+                                />
+                                </div>
+                            </a>
+                            <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li>
+                                    <Link className="dropdown-item" to="/userprofile">
+                                        My profile
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link className="dropdown-item" to="/editprofile">
+                                        Edit profile
+                                    </Link>
+                                </li>
+                                <li className="logout">
+                                    <a className="dropdown-item" href="#">
+                                        Logout
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        </div>
+
                     </div>
                 </div>
             </nav>
+
 
 
 
