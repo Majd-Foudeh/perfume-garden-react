@@ -32,7 +32,7 @@ export const Cart = () => {
               </div>
             </div>
           </header>
-          <main>
+          <main className='main'>
             <div className="px-4 px-lg-0">
               <div className="pb-5">
                 <div className="container">

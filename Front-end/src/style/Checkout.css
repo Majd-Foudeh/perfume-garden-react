@@ -12,7 +12,8 @@ a {
   background-position: center right; */
 }
 
-.checkoutbtn {
+.checkoutbtn2 {
+  
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
   color: white;
@@ -25,7 +26,7 @@ a {
   overflow: hidden;
 }
 
-.checkoutbtn span:not(:nth-child(6)) {
+.checkoutbtn2 span:not(:nth-child(6)) {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -37,36 +38,36 @@ a {
   transition: .6s ease;
 }
 
-.checkoutbtn span:nth-child(6) {
+.checkoutbtn2 span:nth-child(6) {
   position: relative;
 }
 
-.checkoutbtn span:nth-child(1) {
+.checkoutbtn2 span:nth-child(1) {
   transform: translate(-3.3em, -4em);
 }
 
-.checkoutbtn span:nth-child(2) {
+.checkoutbtn2 span:nth-child(2) {
   transform: translate(-6em, 1.3em);
 }
 
-.checkoutbtn span:nth-child(3) {
+.checkoutbtn2 span:nth-child(3) {
   transform: translate(-.2em, 1.8em);
 }
 
-.checkoutbtn span:nth-child(4) {
+.checkoutbtn2 span:nth-child(4) {
   transform: translate(3.5em, 1.4em);
 }
 
-.checkoutbtn span:nth-child(5) {
+.checkoutbtn2 span:nth-child(5) {
   transform: translate(3.5em, -3.8em);
 }
 
-.checkoutbtn:hover span:not(:nth-child(6)) {
+.checkoutbtn2:hover span:not(:nth-child(6)) {
   transform: translate(-50%, -50%) scale(4);
   transition: 1.5s ease;
 }
 
-.checkoutbtn:hover {
+.checkoutbtn2:hover {
   color: black;
   transition: 1.5s ease;
 }
