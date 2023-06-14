@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './signup.css'
 import login from '../../assets/login.jpg'
-
+import axios from 'axios'
 
 export const Signup = () => {
     //     let usernameerror=document.getElementById("username");
@@ -59,6 +59,25 @@ export const Signup = () => {
     //     confirmpassworderror.classList.add("is-valid")
     // }
     // })
+
+    const [firstname, setfirstname] = useState("")
+    const [lastname, setlastname] = useState("")
+    const [phonenumber, setphonenumber] = useState("")
+    const [email, setemail] = useState("")
+    const [password, setpassword] = useState("")
+
+    const handlesubmit = (e) => {
+        e.preventDefault()
+
+        axios.post('http://localhost:3000/adduser',{firstname,lastname,email,password,phonenumber})
+        .then((response)=>{
+            console.log("signed up successfully");
+            console.log(response.data);
+        })
+        .catch((error)=>{
+            console.error(error,"error in signup the user");
+        })
+    }
     return (
         <>
             <section
@@ -87,7 +106,7 @@ export const Signup = () => {
                                         <p className="text-muted fw-bold mx-1 mx-md-4 mt-4">
                                             Sign up
                                         </p>
-                                        <form className="mx-1 mx-md-4 " id="loginform">
+                                        <form className="mx-1 mx-md-4 " id="loginform" onSubmit={handlesubmit}>
                                             <div className="row">
                                                 <div className="col-6 d-flex flex-row align-items-center mb-4">
                                                     {/* <i class="fas fa-user fa-lg me-3 fa-fw"></i> */}
@@ -100,6 +119,8 @@ export const Signup = () => {
                                                             id="validationCustom01"
                                                             placeholder="Enter your first name"
                                                             required=""
+                                                            onChange={(e) => { setfirstname(e.target.value) }}
+
                                                         />
                                                         <div className="valid-feedback">Looks good!</div>
                                                     </div>
@@ -115,6 +136,8 @@ export const Signup = () => {
                                                             id="validationCustom01"
                                                             placeholder="Enter your Last name"
                                                             required=""
+                                                            onChange={(e) => { setlastname(e.target.value) }}
+
                                                         />
                                                         <div className="valid-feedback">Looks good!</div>
                                                     </div>
@@ -134,6 +157,7 @@ export const Signup = () => {
                                                             id="email"
                                                             placeholder="Enter your Email account"
                                                             required=""
+                                                            onChange={(e) => { setemail(e.target.value) }}
                                                         />
                                                         <div className="valid-feedback">Looks good!</div>
                                                     </div>
@@ -149,6 +173,8 @@ export const Signup = () => {
                                                             id="phonenumber"
                                                             placeholder="Enter your phone number"
                                                             required=""
+                                                            onChange={(e) => { setphonenumber(e.target.value) }}
+
                                                         />
                                                         <div className="valid-feedback">Looks good!</div>
                                                     </div>
@@ -167,6 +193,8 @@ export const Signup = () => {
                                                             id="password"
                                                             placeholder="Enter your Password"
                                                             required=""
+                                                            onChange={(e) => { setpassword(e.target.value) }}
+
                                                         />
                                                         <div className="valid-feedback">Looks good!</div>
                                                     </div>
@@ -194,16 +222,16 @@ export const Signup = () => {
                                                     {/* <i class="fas fa-user fa-lg me-3 fa-fw"></i> */}
 
                                                     <div className="w-100 ">
-                                                    <label htmlFor="validationCustom01" className='mb-1 ms-2'><i className="fas fa-location-dot me-2" />Address</label>
-                                                    <input
-                                                        type="text"
-                                                        className="form-control  "
-                                                        id="address"
-                                                        placeholder="Re-Enter your Password"
-                                                        required=""
-                                                    />
-                                                    <div className="valid-feedback">Looks good!</div>
-                                                </div>
+                                                        <label htmlFor="validationCustom01" className='mb-1 ms-2'><i className="fas fa-location-dot me-2" />Address</label>
+                                                        <input
+                                                            type="text"
+                                                            className="form-control  "
+                                                            id="address"
+                                                            placeholder="Re-Enter your Password"
+                                                            required=""
+                                                        />
+                                                        <div className="valid-feedback">Looks good!</div>
+                                                    </div>
                                                 </div>
                                                 <div className="col-6 d-flex flex-row align-items-center mb-4">
                                                     {/* <i class="fas fa-user fa-lg me-3 fa-fw"></i> */}
@@ -236,109 +264,109 @@ export const Signup = () => {
                                                 </div>
                                             </div> */}
 
-                                            
-                                                <div className="form-check d-flex" >
-                                                    <input
-                                                        className="form-check-input me-4"
-                                                        type="checkbox"
-                                                        defaultValue=""
-                                                        id="form2Example3"
-                                                    />
-                                                    <label
-                                                        className="d-flex form-check-label"
-                                                        htmlFor="form2Example3"
-                                                    >
-                                                        <div className=" p-0" style={{ width: "310px" }}>
-                                                            <p> I agree all statements in</p>
-                                                        </div>
-                                                        <div className="container-fluid p-0 ">
 
-                                                            {/* Button trigger modal */}
-                                                            <a
-                                                                type="button"
-                                                                className=" text-black fw-bold"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#exampleModal"
-                                                            >
-                                                                <u>
-                                                                    
+                                            <div className="form-check d-flex" >
+                                                <input
+                                                    className="form-check-input me-4"
+                                                    type="checkbox"
+                                                    defaultValue=""
+                                                    id="form2Example3"
+                                                />
+                                                <label
+                                                    className="d-flex form-check-label"
+                                                    htmlFor="form2Example3"
+                                                >
+                                                    <div className=" p-0" style={{ width: "310px" }}>
+                                                        <p> I agree all statements in</p>
+                                                    </div>
+                                                    <div className="container-fluid p-0 ">
+
+                                                        {/* Button trigger modal */}
+                                                        <a
+                                                            type="button"
+                                                            className=" text-black fw-bold"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#exampleModal"
+                                                        >
+                                                            <u>
+
                                                                 Terms of Use
-                                                                </u>
-                                                            </a>
-                                                            {/* Modal */}
-                                                            <div
-                                                                className="modal fade"
-                                                                id="exampleModal"
-                                                                tabIndex={-1}
-                                                                aria-labelledby="exampleModalLabel"
-                                                                aria-hidden="true"
-                                                            >
-                                                                <div className="modal-dialog">
-                                                                    <div className="modal-content">
-                                                                        <div className="modal-header ">
-                                                                            <h5
-                                                                                className="modal-title"
-                                                                                id="exampleModalLabel"
-                                                                            >
-                                                                                Terms of Use
-                                                                            </h5>
-                                                                            <button
-                                                                                type="button"
-                                                                                className="btn-close"
-                                                                                data-bs-dismiss="modal"
-                                                                                aria-label="Close"
-                                                                            />
-                                                                        </div>
-                                                                        <div className="modal-body">
-                                                                            You agree to use our website for legitimate
-                                                                            purposes and not for any illegal or
-                                                                            unauthorized purpose, including without
-                                                                            limitation, in violation of any intellectual
-                                                                            property or privacy law. By agreeing to the
-                                                                            Terms, you represent and warrant that you
-                                                                            are at least the age of majority in your
-                                                                            state or province of residence and are
-                                                                            legally capable of entering into a binding
-                                                                            contract.
-                                                                            <br />
-                                                                            <br />
-                                                                            You agree to not use our website to conduct
-                                                                            any activity that would constitute a civil
-                                                                            or criminal offence or violate any law. You
-                                                                            agree not to attempt to interfere with our
-                                                                            website’s network or security features or to
-                                                                            gain unauthorized access to our systems.
-                                                                        </div>
-                                                                        <div className="modal-footer justify-content-between">
-                                                                            <button
-                                                                                type="button"
-                                                                                className="btn bg-gradient bg-dark text-light"
-                                                                                data-bs-dismiss="modal"
-                                                                            >
-                                                                                Close
-                                                                            </button>
-                                                                            <button
-                                                                                type="button"
-                                                                                className="btn bg-gradient bg-warning "
-                                                                            >
-                                                                                I've read it
-                                                                            </button>
-                                                                        </div>
+                                                            </u>
+                                                        </a>
+                                                        {/* Modal */}
+                                                        <div
+                                                            className="modal fade"
+                                                            id="exampleModal"
+                                                            tabIndex={-1}
+                                                            aria-labelledby="exampleModalLabel"
+                                                            aria-hidden="true"
+                                                        >
+                                                            <div className="modal-dialog">
+                                                                <div className="modal-content">
+                                                                    <div className="modal-header ">
+                                                                        <h5
+                                                                            className="modal-title"
+                                                                            id="exampleModalLabel"
+                                                                        >
+                                                                            Terms of Use
+                                                                        </h5>
+                                                                        <button
+                                                                            type="button"
+                                                                            className="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"
+                                                                        />
+                                                                    </div>
+                                                                    <div className="modal-body">
+                                                                        You agree to use our website for legitimate
+                                                                        purposes and not for any illegal or
+                                                                        unauthorized purpose, including without
+                                                                        limitation, in violation of any intellectual
+                                                                        property or privacy law. By agreeing to the
+                                                                        Terms, you represent and warrant that you
+                                                                        are at least the age of majority in your
+                                                                        state or province of residence and are
+                                                                        legally capable of entering into a binding
+                                                                        contract.
+                                                                        <br />
+                                                                        <br />
+                                                                        You agree to not use our website to conduct
+                                                                        any activity that would constitute a civil
+                                                                        or criminal offence or violate any law. You
+                                                                        agree not to attempt to interfere with our
+                                                                        website’s network or security features or to
+                                                                        gain unauthorized access to our systems.
+                                                                    </div>
+                                                                    <div className="modal-footer justify-content-between">
+                                                                        <button
+                                                                            type="button"
+                                                                            className="btn bg-gradient bg-dark text-light"
+                                                                            data-bs-dismiss="modal"
+                                                                        >
+                                                                            Close
+                                                                        </button>
+                                                                        <button
+                                                                            type="button"
+                                                                            className="btn bg-gradient bg-warning "
+                                                                        >
+                                                                            I've read it
+                                                                        </button>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </label>
-                                                </div>
-                                                <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                                    <button
-                                                        type="button submit"
-                                                        style={{ backgroundColor: "#fbf1d0" }}
-                                                        className="btn submit btn-lg"
-                                                    >
-                                                        <span>Register</span>{" "}
-                                                    </button>
-                                                </div>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                            <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                                <button
+                                                    type="button submit"
+                                                    style={{ backgroundColor: "#fbf1d0" }}
+                                                    className="btn submit btn-lg"
+                                                >
+                                                    <span>Register</span>{" "}
+                                                </button>
+                                            </div>
                                         </form>
                                     </div>
                                     <div
@@ -360,7 +388,7 @@ export const Signup = () => {
             </section>
 
 
-          
+
 
         </>
     )

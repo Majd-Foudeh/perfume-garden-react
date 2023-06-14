@@ -1,0 +1,3 @@
+const createproduct = (req, res) => {
+
+}
