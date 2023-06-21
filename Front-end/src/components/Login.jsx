@@ -1,7 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../components/SignUp/signUp.css'
+import axios from 'axios'
 
 export const Login = () => {
+
+    const [email, setemail] = useState("")
+    const [password, setpassword] = useState("")
+
+    const handlesubmit = (e) => {
+        e.preventDefault()
+
+        axios.post('http://localhost:3000/login', { email, password })
+            .then((response) => {
+                console.log('user login successfuly');
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.log('error in login the user');
+                console.error(error);
+            })
+    }
     return (
         <>
 
@@ -54,7 +72,7 @@ export const Login = () => {
                                         <p className="text-muted fw-bold mx-1 mx-md-4 mt-4">
                                             Log in
                                         </p>
-                                        <form className="mx-1 mx-md-4 " id="loginform">
+                                        <form className="mx-1 mx-md-4 " id="loginform" onSubmit={handlesubmit}>
 
                                             <div className="row">
                                                 <div className="col-12 d-flex flex-row align-items-center mb-4">
@@ -68,6 +86,7 @@ export const Login = () => {
                                                             id="email"
                                                             placeholder="Enter your Email account"
                                                             required=""
+                                                            onChange={(e) => { setemail(e.target.value) }}
                                                         />
                                                         <div className="valid-feedback">Looks good!</div>
                                                     </div>
@@ -87,6 +106,7 @@ export const Login = () => {
                                                             id="password"
                                                             placeholder="Enter your Password"
                                                             required=""
+                                                            onChange={(e) => { setpassword(e.target.value) }}
                                                         />
                                                         <div className="valid-feedback">Looks good!</div>
                                                     </div>

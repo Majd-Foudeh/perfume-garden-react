@@ -60,23 +60,23 @@ export const Signup = () => {
     // }
     // })
 
-    const [firstname, setfirstname] = useState("")
-    const [lastname, setlastname] = useState("")
-    const [phonenumber, setphonenumber] = useState("")
+    const [fname, setfname] = useState("")
+    const [lname, setlname] = useState("")
+    const [phoneNumber, setphoneNumber] = useState("")
     const [email, setemail] = useState("")
     const [password, setpassword] = useState("")
 
     const handlesubmit = (e) => {
         e.preventDefault()
 
-        axios.post('http://localhost:3000/adduser',{firstname,lastname,email,password,phonenumber})
-        .then((response)=>{
-            console.log("signed up successfully");
-            console.log(response.data);
-        })
-        .catch((error)=>{
-            console.error(error,"error in signup the user");
-        })
+        axios.post('http://localhost:3000/adduser', { fname, lname, email, password, phoneNumber })
+            .then((response) => {
+                console.log("signed up successfully");
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.error(error, "error in signup the user");
+            })
     }
     return (
         <>
@@ -119,7 +119,7 @@ export const Signup = () => {
                                                             id="validationCustom01"
                                                             placeholder="Enter your first name"
                                                             required=""
-                                                            onChange={(e) => { setfirstname(e.target.value) }}
+                                                            onChange={(e) => { setfname(e.target.value) }}
 
                                                         />
                                                         <div className="valid-feedback">Looks good!</div>
@@ -136,7 +136,7 @@ export const Signup = () => {
                                                             id="validationCustom01"
                                                             placeholder="Enter your Last name"
                                                             required=""
-                                                            onChange={(e) => { setlastname(e.target.value) }}
+                                                            onChange={(e) => { setlname(e.target.value) }}
 
                                                         />
                                                         <div className="valid-feedback">Looks good!</div>
@@ -173,7 +173,7 @@ export const Signup = () => {
                                                             id="phonenumber"
                                                             placeholder="Enter your phone number"
                                                             required=""
-                                                            onChange={(e) => { setphonenumber(e.target.value) }}
+                                                            onChange={(e) => { setphoneNumber(e.target.value) }}
 
                                                         />
                                                         <div className="valid-feedback">Looks good!</div>

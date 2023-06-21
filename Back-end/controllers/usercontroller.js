@@ -68,6 +68,7 @@ const login = async (req, res) => {
 
 
         res.json(isuser.user_token)
+        console.log(isuser.user_token);
     } catch (error) {
         console.error(error);
     }
