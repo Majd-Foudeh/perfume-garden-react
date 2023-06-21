@@ -1,5 +1,5 @@
 import React from 'react'
-import '../style/EditProfile.css'
+import '../../style/EditProfile.css'
 import { Link } from 'react-router-dom'
 export const EditProfile = () => {
   return (

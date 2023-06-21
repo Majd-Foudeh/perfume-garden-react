@@ -5,6 +5,7 @@ export const Footer = () => {
         <>
             <footer className="bg-white">
                 <div className="container py-5">
+                <hr />
                     <div className="row py-4">
                         <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
                             <img src="img/logo.png" alt="" width={180} className="mb-3" />
