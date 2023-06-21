@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt')
 function jwttoken({ first_Name, last_Name, user_email }) {
     const userdata = { first_Name, last_Name, user_email }
     const token = jwt.sign(userdata, process.env.ACCESS_TOKEN_SECRET)
+
     return token;
 }
 
@@ -44,7 +45,7 @@ const adduser = async (req, res) => {
             user_token: token,
         })
         const newuser = await newaccount.save()
-        res.json({ message: "Signup successfuly" })
+        res.json({ message: "Signup successfuly" ,token:token})
     } catch (error) {
         console.error('error in signup', error);
         res.json({ message: 'error in signup' })

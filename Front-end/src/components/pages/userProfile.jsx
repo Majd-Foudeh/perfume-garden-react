@@ -1,34 +1,19 @@
-import React, { useState } from 'react';
-import '../../style/userProfile.css';
-import { Link, useNavigate } from 'react-router-dom';
-import { FaShoppingCart, FaUser } from 'react-icons/fa';
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
-import { OrderHistory } from '../userProfile/orderHistory';
-import { UserProducts } from '../userProfile/userProducts';
-import { UserInfo } from '../userProfile/userInfo';
+import React, { useState } from "react";
+import "../../style/userProfile.css";
+import { Link, useNavigate } from "react-router-dom";
+import Tab from "react-bootstrap/Tab";
+import Tabs from "react-bootstrap/Tabs";
+import { OrderHistory } from "../userProfile/orderHistory";
+import { UserProducts } from "../userProfile/userProducts";
+import { UserInfo } from "../userProfile/userInfo";
 
 export const UserProfile = () => {
   const navigate = useNavigate();
-  const [activeLink, setActiveLink] = useState('home');
-
-  const renderContent = () => {
-    if (activeLink === 'home') {
-      return <Profilehome />;
-    } else if (activeLink === 'volunteering') {
-      return <VolunteerHistory />;
-    } else if (activeLink === 'Donations') {
-      return <Orderhistory />;
-    }
-  };
-
-  const handleLinkClick = (link) => {
-    setActiveLink(link);
-  };
+  const [activeLink, setActiveLink] = useState("home");
 
   function handleLogout() {
     localStorage.clear();
-    navigate('/');
+    navigate("/");
   }
 
   return (
@@ -54,7 +39,7 @@ export const UserProfile = () => {
               fill
             >
               <Tab eventKey="profile" title="Profile">
-                <UserInfo />{' '}
+                <UserInfo />{" "}
               </Tab>
               <Tab eventKey="home" title="Home">
                 <OrderHistory />
@@ -62,10 +47,10 @@ export const UserProfile = () => {
               <Tab eventKey="longer-tab" title="My products">
                 <UserProducts />
               </Tab>
-              <Tab eventKey="add product" title="add product" >
+              <Tab eventKey="add product" title="add product">
                 Tab content for Contact
               </Tab>
-              <Tab eventKey="contact" title="Contact" >
+              <Tab eventKey="contact" title="Contact">
                 Tab content for Contact
               </Tab>
             </Tabs>
@@ -103,7 +88,7 @@ export const UserProfile = () => {
               className="form-control p-input"
               id="exampleTextarea"
               rows={3}
-              defaultValue={''}
+              defaultValue={""}
             />
           </div>
           <div className="form-group">
