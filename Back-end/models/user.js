@@ -26,7 +26,7 @@ const userSchema = new Schema({
         required: true
     },
     user_phoneNumber: {
-        type: String,
+        type: String, 
         // required: true
     },
     payment:{type:[{}]},
