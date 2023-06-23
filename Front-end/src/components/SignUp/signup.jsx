@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import "./signup.css";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
+import { UserContext } from "../../context/UserContext";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Signup = () => {
   // let { auth, setAuth, refresh } = useContext(AuthContext);
@@ -62,31 +64,94 @@ export const Signup = () => {
   // }
   // })
 
-  const [fname, setfname] = useState("");
-  const [lname, setlname] = useState("");
-  const [phoneNumber, setphoneNumber] = useState("");
-  const [email, setemail] = useState("");
-  const [password, setpassword] = useState("");
+  const { auth, setAuth, refresh } = useContext(AuthContext);
+  const { user, setUser, userRefresh } = useContext(UserContext);
+
+  const [errors, setErrors] = useState({});
+
+  const navigate = useNavigate();
+
+  const [newUser, setNewUser] = useState({
+    fname: "",
+    lname: "",
+    phoneNumber: "",
+    email: "",
+    password: "",
+    re_password: "",
+  });
+
+  const validateForm = () => {
+    const errors = {};
+
+    // Perform validation checks
+    if (!newUser.fname) {
+      errors.fname = "First name is required";
+    }
+    if (!newUser.lname) {
+      errors.lname = "Last name is required";
+    }
+
+    if (!newUser.email) {
+      errors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(newUser.email)) {
+      errors.email = "Must be example@test.com";
+    }
+    if (!newUser.phoneNumber) {
+      errors.phoneNumber = "phone number is required";
+    } else if (!/^07\d{8}$/.test(newUser.phoneNumber)) {
+      errors.phoneNumber = "Must be like this 07xxxxxxxx";
+    }
+
+    if (!newUser.password) {
+      errors.password = "password is required";
+    } else if (newUser.password.length < 6) {
+      errors.password = "Password must contain at least 6 characters";
+    } else if (!/^[a-zA-Z0-9!@#$%^&*]+$/.test(newUser.password)) {
+      errors.password =
+        "The password must contain English letters, numbers and special characters";
+    } else if (!/\d/.test(newUser.password)) {
+      errors.password = "Password must contain at least one number";
+    } else if (!/[!@#$%^&*]/.test(newUser.password)) {
+      errors.password =
+        "Password must contain at least one special character (!@#$%^&*).";
+    }
+
+    if (newUser.password !== newUser.re_password) {
+      errors.re_password = "passwords are not match";
+    }
+    return errors;
+  };
 
   const handlesubmit = (e) => {
     e.preventDefault();
+    const errors = validateForm();
 
-    axios
-      .post("http://localhost:3000/adduser", {
-        fname,
-        lname,
-        email,
-        password,
-        phoneNumber,
-      })
-      .then((response) => {
-        console.log("signed up successfully");
-        console.log(response.data);
-        localStorage.setItem("token", response.data.token);
-      })
-      .catch((error) => {
-        console.error(error, "error in signup the user");
-      });
+    if (Object.keys(errors).length === 0) {
+      const userData = {
+        first_Name: newUser.fname,
+        last_Name: newUser.lname,
+        user_email: newUser.email,
+        user_password: newUser.password,
+        user_phoneNumber: newUser.phoneNumber, // Include the chosen role in the form data
+      };
+
+      axios
+        .post("http://localhost:3000/adduser", userData)
+        .then((response) => {
+          console.log("signed up successfully");
+          console.log(response.data);
+          localStorage.setItem("token", response.data.token);
+          setAuth(true);
+          userRefresh();
+          refresh();
+          navigate("/");
+        })
+        .catch((error) => {
+          console.error(error, "error in signup the user");
+        });
+    } else {
+      setErrors(errors);
+    }
   };
   return (
     <>
@@ -140,10 +205,21 @@ export const Signup = () => {
                               id="validationCustom01"
                               placeholder="Enter your first name"
                               required=""
+                              name="fname"
                               onChange={(e) => {
-                                setfname(e.target.value);
+                                setNewUser({
+                                  ...newUser,
+                                  [e.target.name]: e.target.value,
+                                });
                               }}
                             />
+                            <div>
+                              {errors.fname && (
+                                <span className="text-danger">
+                                  {errors.fname}
+                                </span>
+                              )}
+                            </div>
                             <div className="valid-feedback">Looks good!</div>
                           </div>
                         </div>
@@ -164,10 +240,21 @@ export const Signup = () => {
                               id="validationCustom01"
                               placeholder="Enter your Last name"
                               required=""
+                              name="lname"
                               onChange={(e) => {
-                                setlname(e.target.value);
+                                setNewUser({
+                                  ...newUser,
+                                  [e.target.name]: e.target.value,
+                                });
                               }}
                             />
+                            <div>
+                              {errors.lname && (
+                                <span className="text-danger">
+                                  {errors.lname}
+                                </span>
+                              )}
+                            </div>
                             <div className="valid-feedback">Looks good!</div>
                           </div>
                         </div>
@@ -190,10 +277,21 @@ export const Signup = () => {
                               id="email"
                               placeholder="Enter your Email account"
                               required=""
+                              name="email"
                               onChange={(e) => {
-                                setemail(e.target.value);
+                                setNewUser({
+                                  ...newUser,
+                                  [e.target.name]: e.target.value,
+                                });
                               }}
                             />
+                            <div>
+                              {errors.email && (
+                                <span className="text-danger">
+                                  {errors.email}
+                                </span>
+                              )}
+                            </div>
                             <div className="valid-feedback">Looks good!</div>
                           </div>
                         </div>
@@ -214,10 +312,21 @@ export const Signup = () => {
                               id="phonenumber"
                               placeholder="Enter your phone number"
                               required=""
+                              name="phoneNumber"
                               onChange={(e) => {
-                                setphoneNumber(e.target.value);
+                                setNewUser({
+                                  ...newUser,
+                                  [e.target.name]: e.target.value,
+                                });
                               }}
                             />
+                            <div>
+                              {errors.phoneNumber && (
+                                <span className="text-danger">
+                                  {errors.phoneNumber}
+                                </span>
+                              )}
+                            </div>
                             <div className="valid-feedback">Looks good!</div>
                           </div>
                         </div>
@@ -240,10 +349,21 @@ export const Signup = () => {
                               id="password"
                               placeholder="Enter your Password"
                               required=""
+                              name="password"
                               onChange={(e) => {
-                                setpassword(e.target.value);
+                                setNewUser({
+                                  ...newUser,
+                                  [e.target.name]: e.target.value,
+                                });
                               }}
                             />
+                            <div>
+                              {errors.password && (
+                                <span className="text-danger">
+                                  {errors.password}
+                                </span>
+                              )}
+                            </div>
                             <div className="valid-feedback">Looks good!</div>
                           </div>
                         </div>
@@ -264,57 +384,26 @@ export const Signup = () => {
                               id="password"
                               placeholder="Re-Enter your Password"
                               required=""
+                              name="re_password"
+                              onChange={(e) => {
+                                setNewUser({
+                                  ...newUser,
+                                  [e.target.name]: e.target.value,
+                                });
+                              }}
                             />
+                            <div>
+                              {errors.re_password && (
+                                <span className="text-danger">
+                                  {errors.re_password}
+                                </span>
+                              )}
+                            </div>
                             <div className="valid-feedback">Looks good!</div>
                           </div>
                         </div>
                       </div>
-                      <div className="row">
-                        <div className="col-6 d-flex flex-row align-items-center mb-4">
-                          {/* <i class="fas fa-user fa-lg me-3 fa-fw"></i> */}
 
-                          <div className="w-100 ">
-                            <label
-                              htmlFor="validationCustom01"
-                              className="mb-1 ms-2"
-                            >
-                              <i className="fas fa-location-dot me-2" />
-                              Address
-                            </label>
-                            <input
-                              type="text"
-                              className="form-control  "
-                              id="address"
-                              placeholder="Re-Enter your Password"
-                              required=""
-                            />
-                            <div className="valid-feedback">Looks good!</div>
-                          </div>
-                        </div>
-                        <div className="col-6 d-flex flex-row align-items-center mb-4">
-                          {/* <i class="fas fa-user fa-lg me-3 fa-fw"></i> */}
-
-                          <div className="w-100 ">
-                            <label
-                              htmlFor="validationCustom01"
-                              className="mb-1 ms-2"
-                            >
-                              <i className="fas fa-home me-2" />
-                              Your City
-                            </label>
-                            <select
-                              class="form-select form-select-lg fs-6"
-                              aria-label="Default select example"
-                            >
-                              <option selected>Choose your city.....</option>
-                              <option value="Zarqa">Zarqa</option>
-                              <option value="Amman">Amman</option>
-                              <option value="Irbid">Irbid</option>
-                              <option value="Ajlon">Ajlon</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
                       {/* <div className="row">
                                                 <div className="w-100 ">
                                                     <label htmlFor="validationCustom01" className='mb-1 ms-2'><i className="fas fa-location-dot me-2" />Address</label>
@@ -329,94 +418,102 @@ export const Signup = () => {
                                                 </div>
                                             </div> */}
 
-                      <div className="form-check d-flex">
-                        <input
-                          className="form-check-input me-4"
-                          type="checkbox"
-                          defaultValue=""
-                          id="form2Example3"
-                        />
-                        <label
-                          className="d-flex form-check-label"
-                          htmlFor="form2Example3"
-                        >
-                          <div className=" p-0" style={{ width: "310px" }}>
-                            <p> I agree all statements in</p>
-                          </div>
-                          <div className="container-fluid p-0 ">
-                            {/* Button trigger modal */}
-                            <a
-                              type="button"
-                              className=" text-black fw-bold"
-                              data-bs-toggle="modal"
-                              data-bs-target="#exampleModal"
-                            >
-                              <u>Terms of Use</u>
-                            </a>
-                            {/* Modal */}
-                            <div
-                              className="modal fade"
-                              id="exampleModal"
-                              tabIndex={-1}
-                              aria-labelledby="exampleModalLabel"
-                              aria-hidden="true"
-                            >
-                              <div className="modal-dialog">
-                                <div className="modal-content">
-                                  <div className="modal-header ">
-                                    <h5
-                                      className="modal-title"
-                                      id="exampleModalLabel"
-                                    >
-                                      Terms of Use
-                                    </h5>
-                                    <button
-                                      type="button"
-                                      className="btn-close"
-                                      data-bs-dismiss="modal"
-                                      aria-label="Close"
-                                    />
-                                  </div>
-                                  <div className="modal-body">
-                                    You agree to use our website for legitimate
-                                    purposes and not for any illegal or
-                                    unauthorized purpose, including without
-                                    limitation, in violation of any intellectual
-                                    property or privacy law. By agreeing to the
-                                    Terms, you represent and warrant that you
-                                    are at least the age of majority in your
-                                    state or province of residence and are
-                                    legally capable of entering into a binding
-                                    contract.
-                                    <br />
-                                    <br />
-                                    You agree to not use our website to conduct
-                                    any activity that would constitute a civil
-                                    or criminal offence or violate any law. You
-                                    agree not to attempt to interfere with our
-                                    website’s network or security features or to
-                                    gain unauthorized access to our systems.
-                                  </div>
-                                  <div className="modal-footer justify-content-between">
-                                    <button
-                                      type="button"
-                                      className="btn bg-gradient bg-dark text-light"
-                                      data-bs-dismiss="modal"
-                                    >
-                                      Close
-                                    </button>
-                                    <button
-                                      type="button"
-                                      className="btn bg-gradient bg-warning "
-                                    >
-                                      I've read it
-                                    </button>
+                      <div className="form-check d-flex flex-wrap">
+                        <div>
+                          <input
+                            className="form-check-input me-4"
+                            type="checkbox"
+                            defaultValue=""
+                            id="form2Example3"
+                            required
+                          />
+                          <label
+                            className="d-flex form-check-label"
+                            htmlFor="form2Example3"
+                          >
+                            <div className=" p-0" style={{ width: "310px" }}>
+                              <p> I agree all statements in</p>
+                            </div>
+                            <div className="container-fluid p-0 ">
+                              {/* Button trigger modal */}
+                              <a
+                                type="button"
+                                className=" text-black fw-bold"
+                                data-bs-toggle="modal"
+                                data-bs-target="#exampleModal"
+                              >
+                                <u>Terms of Use</u>
+                              </a>
+                              {/* Modal */}
+                              <div
+                                className="modal fade"
+                                id="exampleModal"
+                                tabIndex={-1}
+                                aria-labelledby="exampleModalLabel"
+                                aria-hidden="true"
+                              >
+                                <div className="modal-dialog">
+                                  <div className="modal-content">
+                                    <div className="modal-header ">
+                                      <h5
+                                        className="modal-title"
+                                        id="exampleModalLabel"
+                                      >
+                                        Terms of Use
+                                      </h5>
+                                      <button
+                                        type="button"
+                                        className="btn-close"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Close"
+                                      />
+                                    </div>
+                                    <div className="modal-body">
+                                      You agree to use our website for
+                                      legitimate purposes and not for any
+                                      illegal or unauthorized purpose, including
+                                      without limitation, in violation of any
+                                      intellectual property or privacy law. By
+                                      agreeing to the Terms, you represent and
+                                      warrant that you are at least the age of
+                                      majority in your state or province of
+                                      residence and are legally capable of
+                                      entering into a binding contract.
+                                      <br />
+                                      <br />
+                                      You agree to not use our website to
+                                      conduct any activity that would constitute
+                                      a civil or criminal offence or violate any
+                                      law. You agree not to attempt to interfere
+                                      with our website’s network or security
+                                      features or to gain unauthorized access to
+                                      our systems.
+                                    </div>
+                                    <div className="modal-footer justify-content-between">
+                                      <button
+                                        type="button"
+                                        className="btn bg-gradient bg-dark text-light"
+                                        data-bs-dismiss="modal"
+                                      >
+                                        Close
+                                      </button>
+                                      <button
+                                        type="button"
+                                        className="btn bg-gradient bg-warning "
+                                      >
+                                        I've read it
+                                      </button>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        </label>
+                          </label>
+                        </div>
+                        <div>
+                          {" "}
+                          <Link to="/login">All ready have an account ?</Link>
+                        </div>
                       </div>
                       <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                         <button

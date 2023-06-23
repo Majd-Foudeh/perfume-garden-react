@@ -1,24 +1,80 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "../../components/SignUp/signUp.css";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import { UserContext } from "../../context/UserContext";
 
 export const Login = () => {
-  const [email, setemail] = useState("");
-  const [password, setpassword] = useState("");
+  const navigate = useNavigate();
+  const { auth, setAuth, refresh } = useContext(AuthContext);
+  const { user, setUser, userRefresh } = useContext(UserContext);
+  const [errors, setErrors] = useState({});
+  const [serverDataErrors, setServerDataErrors] = useState({
+    emailError: "",
+    passwordError: "",
+  });
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const validateForm = () => {
+    const errors = {};
+
+    // Perform validation checks
+
+    if (!formData.email) {
+      errors.email = "email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      errors.email = "Must be example@test.com";
+    }
+    if (!formData.password) {
+      errors.password = "password is required";
+    }
+    return errors;
+  };
 
   const handlesubmit = (e) => {
     e.preventDefault();
+    const errors = validateForm();
 
-    axios
-      .post("http://localhost:3000/login", { email, password })
-      .then((response) => {
-        console.log("user login successfuly");
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log("error in login the user");
-        console.error(error);
-      });
+    if (Object.keys(errors).length === 0) {
+      const userData = {
+        user_email: formData.email,
+        user_password: formData.password,
+      };
+
+      axios
+        .post("http://localhost:3000/login", userData)
+        .then((response) => {
+          console.log("user login successfuly");
+          console.log(response.data);
+          if (response.data.error == "email not found") {
+            setServerDataErrors({
+              ...serverDataErrors,
+              emailError: response.data.error,
+            });
+          } else if (response.data.error == "Invalid password") {
+            setServerDataErrors({
+              ...serverDataErrors,
+              passwordError: response.data.error,
+            });
+          } else {
+            localStorage.setItem("token", response.data.token);
+            setAuth(true);
+            userRefresh();
+            refresh();
+            navigate("/");
+          }
+        })
+        .catch((error) => {
+          console.log("error in login the user");
+          console.error(error);
+        });
+    } else {
+      setErrors(errors);
+    }
   };
   return (
     <>
@@ -95,10 +151,21 @@ export const Login = () => {
                               id="email"
                               placeholder="Enter your Email account"
                               required=""
+                              name="email"
                               onChange={(e) => {
-                                setemail(e.target.value);
+                                setFormData({
+                                  ...formData,
+                                  [e.target.name]: e.target.value,
+                                });
                               }}
                             />
+                            <div>
+                              {errors.email && (
+                                <span className="text-danger">
+                                  {errors.email}
+                                </span>
+                              )}
+                            </div>
                             <div className="valid-feedback">Looks good!</div>
                           </div>
                         </div>
@@ -121,14 +188,43 @@ export const Login = () => {
                               id="password"
                               placeholder="Enter your Password"
                               required=""
+                              name="password"
                               onChange={(e) => {
-                                setpassword(e.target.value);
+                                setFormData({
+                                  ...formData,
+                                  [e.target.name]: e.target.value,
+                                });
                               }}
                             />
+                            <div>
+                              {errors.password && (
+                                <span className="text-danger">
+                                  {errors.password}
+                                </span>
+                              )}
+                            </div>
                             <div className="valid-feedback">Looks good!</div>
                           </div>
                         </div>
                       </div>
+                      <Link to="/signup">
+                        <p>
+                          Dont have an account?{" "}
+                          <span className="border-bottom border-2 border-secondary">
+                            SIGN UP NOW
+                          </span>
+                        </p>
+                      </Link>
+                      {serverDataErrors.emailError && (
+                        <div class="alert alert-danger" role="alert">
+                          {serverDataErrors.emailError}
+                        </div>
+                      )}
+                      {serverDataErrors.passwordError && (
+                        <div class="alert alert-danger" role="alert">
+                          {serverDataErrors.passwordError}
+                        </div>
+                      )}
 
                       <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                         <button

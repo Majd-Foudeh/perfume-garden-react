@@ -25,23 +25,23 @@ const allusers = (req, res) => {
 const adduser = async (req, res) => {
     try {
 
-        const { fname, lname, email, password, phoneNumber } = req.body
+        const {first_Name,last_Name,user_email,user_password,user_phoneNumber}  = req.body
         const token = jwttoken({
-            first_Name: fname,
-            last_Name: lname,
-            user_email: email,
+            first_Name: first_Name,
+            last_Name: last_Name,
+            user_email: user_email,
         })
 
-        const isuserexist = await user.findOne({ user_email: email })
+        const isuserexist = await user.findOne({ user_email: user_email })
         if (isuserexist) {
             return res.json({ error: "this email is allready exists" })
         }
         const newaccount = new user({
-            first_Name: fname,
-            last_Name: lname,
-            user_email: email,
-            user_password: password,
-            user_phoneNumber: phoneNumber,
+            first_Name: first_Name,
+            last_Name: last_Name,
+            user_email: user_email,
+            user_password: user_password,
+            user_phoneNumber: user_phoneNumber,
             user_token: token,
         })
         const newuser = await newaccount.save()
@@ -52,28 +52,102 @@ const adduser = async (req, res) => {
     }
 }
 
-const login = async (req, res) => {
 
+const login =async (req, res) => {
     try {
-        // check if the user exists
-        const { email, password } = req.body
-        const isuser = await user.findOne({ user_email: email })
-        if (!isuser) {
-            return res.json({ error: "email is not found" })
-        }
-        // check if the password is correct 
-        const checkpassword = await bcrypt.compare(password, isuser.user_password)
-        if (!checkpassword) {
-            return res.json({ error: "incorrect password" })
-        }
+      const { user_email, user_password } = req.body;
+      // console.log(token);
+      const userInfo = await user.findOne({ user_email:user_email });
+      console.log(userInfo);
+      if (!userInfo) {
+        return res.json({ error: "email not found" });
+      }
 
-
-        res.json(isuser.user_token)
-        console.log(isuser.user_token);
+      const checkPass = await bcrypt.compare(user_password, userInfo.user_password);
+      if (!checkPass) {
+        return res.json({ error: "Invalid password" });
+      }
+      const token = jwttoken({
+        user_email: user_email,
+      });
+      res.json({ message: "Success Login user", token: token });
     } catch (error) {
-        console.error(error);
+      console.error("failed in login", error);
     }
+  }
+
+
+// const login = async (req, res) => {
+
+//     try {
+//         // check if the user exists
+//         const { user_email, user_password } = req.body
+//         const isuser = await user.findOne({ user_email: user_email })
+//         if (!isuser) {
+//             return res.json({ error: "email is not found" })
+//         }
+//         // check if the password is correct 
+//         const checkpassword = await bcrypt.compare(user_password, isuser.user_password)
+//         if (!checkpassword) {
+//             return res.json({ error: "incorrect password" })
+//         }
+
+
+//         res.json(isuser.user_token)
+//         console.log(isuser.user_token);
+//     } catch (error) {
+//         console.error(error);
+//     }
+// }
+
+const getUser=async(req, res) => {
+    try {
+      if (!req?.user) return res.status(400).json({ "message": 'User is UnAuthorized' });
+      const users = await user.findOne({ user_email: req.user.user_email }).exec();
+      console.log(users);
+      if (!users) {
+          return res.status(204).json({ 'message': `User Email ${req.user.user_email} not found` });
+      }
+      res.json(users);
+    } catch (error) {
+      console.error("failed in login", error);
+    }
+  }
+
+  const getImage= async(req, res) => {
+try {
+    const User= await user.findOne({ user_email: req.user.user_email})
+    const image= `http://localhost:3000/${User.imageUrl}`
+    res.json(image)
+} catch (error) {
+    console.error(error,"error in get the user image");
 }
 
+  };
 
-module.exports = { allusers, adduser, login }
+  const updateUser= async (req, res) => {
+    try {
+      const {first_Name, last_Name, user_phoneNumber,userId} = req.body
+      const {imageUrl}=req.file
+      const user = await user.findById(userId);
+  
+      if (!user) {
+        console.log('User not found');
+        return;
+      }
+  
+
+      user.first_Name = first_Name || user.first_Name;
+      user.last_Name = last_Name || user.last_Name;
+      user.user_phoneNumber = user_phoneNumber || user.user_phoneNumber
+user.imageUrl= imageUrl || user.imageUrl
+  
+      const updatedUser = await user.save();
+      res.json(updatedUser);
+    } catch (error) {
+      console.error('Error editing user:', error);
+    }
+  }
+
+
+module.exports = { allusers, adduser, login,getUser,getImage,updateUser }

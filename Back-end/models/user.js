@@ -29,12 +29,16 @@ const userSchema = new Schema({
         type: String, 
         // required: true
     },
-    payment:{type:[{}]},
-    user_store:{type: [{perfume_name:String, product_category:String,price:Number,description:String,perfume_picture:String}]},
+    // payment:{type:[{}]},
+    // user_store:{type: [{perfume_name:String, product_category:String,price:Number,description:String,perfume_picture:String}]},
     user_token: {
         type: String,
         // required: true,
+    },
+    imageUrl:{
+        type:String
     }
+
 
 }, { timestamp: true }
 )

@@ -12,10 +12,12 @@ import { EditProfile } from "./components/pages/EditProfile";
 import { About } from "./components/pages/About";
 import { Login } from "./components/pages/Login";
 import Layout from "./layout/layout";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "./context/AuthContext";
 
 function App() {
   const [hideNav, setHideNav] = useState(false);
+  const { auth } = useContext(AuthContext);
 
   const ScrollToTop = () => {
     const { pathname } = useLocation();
@@ -30,24 +32,49 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <ScrollToTop />
+        {auth ? (
+          <>
+            <ScrollToTop />
 
-        <Layout hideNav={hideNav} setHideNav={setHideNav}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/signUp" element={<Signup />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/checkOut" element={<Checkout />} />
-            <Route path="/shop" element={<Shop />} />
-            <Route path="/productDetails" element={<ProductDetails />} />
-            <Route path="/thankYou" element={<ThankYou />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/userprofile" element={<UserProfile />} />
-            <Route path="/editprofile" element={<EditProfile />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/login" element={<Login />} />
-          </Routes>
-        </Layout>
+            <Layout hideNav={hideNav} setHideNav={setHideNav}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/signUp" element={<Signup />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/checkOut" element={<Checkout />} />
+                <Route path="/shop" element={<Shop />} />
+                <Route path="/productDetails" element={<ProductDetails />} />
+                <Route path="/thankYou" element={<ThankYou />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/userprofile" element={<UserProfile />} />
+                <Route path="/editprofile" element={<EditProfile />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/login" element={<Login />} />
+              </Routes>
+            </Layout>
+          </>
+        ) : (
+          <>
+            <ScrollToTop />
+
+            <Layout hideNav={hideNav} setHideNav={setHideNav}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/signUp" element={<Signup />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/checkOut" element={<Checkout />} />
+                <Route path="/shop" element={<Shop />} />
+                <Route path="/productDetails" element={<ProductDetails />} />
+                <Route path="/thankYou" element={<ThankYou />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/userprofile" element={<Home />} />
+                <Route path="/editprofile" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/login" element={<Login />} />
+              </Routes>
+            </Layout>
+          </>
+        )}
       </BrowserRouter>
     </>
   );

@@ -1,11 +1,17 @@
-import React from 'react';
-import { FaEdit, FaSignOutAlt,  } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useContext } from "react";
+import { FaEdit, FaSignOutAlt } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import { UserContext } from "../../context/UserContext";
 
 export const UserInfo = () => {
+  const { auth, setAuth } = useContext(AuthContext);
+  const { user, setUser } = useContext(UserContext);
+
   const navigate = useNavigate();
   const handleLogOut = () => {
-    navigate('/');
+    navigate("/");
+    setAuth(false);
     localStorage.clear();
   };
 
@@ -23,10 +29,11 @@ export const UserInfo = () => {
                     alt="gurdeep singh osahan"
                   />
                   <div className="osahan-user-media-body">
-                    <h6 className="mb-2">Gurdeep Singh</h6>
-                    <p className="mb-1">+962-782535119</p>
-                    <p>majdfoude@gmail.com</p>
-                   
+                    <h6 className="mb-2">
+                      {user.first_Name} {user.last_Name}
+                    </h6>
+                    <p className="mb-1">{user.user_phoneNumber}</p>
+                    <p>{user.user_email}</p>
                   </div>
                 </div>
               </div>
@@ -37,7 +44,7 @@ export const UserInfo = () => {
               role="tablist"
             >
               <li className="nav-item " role="button">
-                <Link to='/editprofile' className="nav-link fs-6">
+                <Link to="/editprofile" className="nav-link fs-6">
                   <FaEdit className="w-5 h-5 me-3" />
                   EDIT MY PROFILE
                 </Link>
@@ -48,7 +55,6 @@ export const UserInfo = () => {
                   LOGOUT
                 </a>
               </li>
-              
             </ul>
           </div>
         </div>

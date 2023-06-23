@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const userRouts = require('./routes/userrouter')
+const path =require('path')
 
 const PORT = process.env.PORT
 
@@ -17,6 +18,8 @@ app.get('/', (req, res) => {
 })
 
 app.use(userRouts)
+app.use("/public", express.static(path.join(__dirname, "public")));
+
 
 module.exports = {
     server: app,

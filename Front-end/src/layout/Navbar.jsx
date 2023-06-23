@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 export const Navbar = ({ hideNav, setHideNav }) => {
-  const auth = useContext(AuthContext);
+  const { auth } = useContext(AuthContext);
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-black navbar-dark ">
@@ -95,13 +95,15 @@ export const Navbar = ({ hideNav, setHideNav }) => {
                   </button>
                 </Link>
               </form>
-              <Link to="/login">
-                <button type="button" className="btn btn-outline-light">
-                  login
-                </button>
-              </Link>
-
-              <ProfileDropdown />
+              {auth === true ? (
+                <ProfileDropdown />
+              ) : (
+                <Link to="/login">
+                  <button type="button" className="btn btn-outline-light">
+                    login
+                  </button>
+                </Link>
+              )}
             </div>
           </div>
         </div>
