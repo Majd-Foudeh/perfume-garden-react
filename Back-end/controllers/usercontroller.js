@@ -2,6 +2,7 @@ const user = require('../models/user')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
+
 function jwttoken({ first_Name, last_Name, user_email }) {
     const userdata = { first_Name, last_Name, user_email }
     const token = jwt.sign(userdata, process.env.ACCESS_TOKEN_SECRET)
@@ -34,7 +35,7 @@ const adduser = async (req, res) => {
 
         const isuserexist = await user.findOne({ user_email: user_email })
         if (isuserexist) {
-            return res.json({ error: "this email is allready exists" })
+            return res.json({ error: "this email is already exists" })
         }
         const newaccount = new user({
             first_Name: first_Name,
@@ -45,7 +46,7 @@ const adduser = async (req, res) => {
             user_token: token,
         })
         const newuser = await newaccount.save()
-        res.json({ message: "Signup successfuly" ,token:token})
+        res.json({ message: "Signup successfully" ,token:token})
     } catch (error) {
         console.error('error in signup', error);
         res.json({ message: 'error in signup' })
@@ -127,22 +128,23 @@ try {
 
   const updateUser= async (req, res) => {
     try {
-      const {first_Name, last_Name, user_phoneNumber,userId} = req.body
-      const {imageUrl}=req.file
-      const user = await user.findById(userId);
+      const {id}=req.params
+      const {fname, lname, phoneNumber} = req.body
+      const imagePath = req.file.path
+      const users = await user.findById(id);
   
-      if (!user) {
+      if (!users) {
         console.log('User not found');
         return;
       }
   
 
-      user.first_Name = first_Name || user.first_Name;
-      user.last_Name = last_Name || user.last_Name;
-      user.user_phoneNumber = user_phoneNumber || user.user_phoneNumber
-user.imageUrl= imageUrl || user.imageUrl
+      users.first_Name = fname || users.first_Name;
+      users.last_Name = lname || users.last_Name;
+      users.user_phoneNumber = phoneNumber || users.user_phoneNumber
+      users.imageUrl= imagePath || users.imageUrl
   
-      const updatedUser = await user.save();
+      const updatedUser = await users.save();
       res.json(updatedUser);
     } catch (error) {
       console.error('Error editing user:', error);

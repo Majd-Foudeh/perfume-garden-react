@@ -14,6 +14,7 @@ import { Login } from "./components/pages/Login";
 import Layout from "./layout/layout";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "./context/AuthContext";
+import { Page404 } from "./components/pages/Page404";
 
 function App() {
   const [hideNav, setHideNav] = useState(false);
@@ -50,6 +51,7 @@ function App() {
                 <Route path="/editprofile" element={<EditProfile />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="*" element={<Page404 />} />
               </Routes>
             </Layout>
           </>
@@ -67,10 +69,11 @@ function App() {
                 <Route path="/productDetails" element={<ProductDetails />} />
                 <Route path="/thankYou" element={<ThankYou />} />
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/userprofile" element={<Home />} />
-                <Route path="/editprofile" element={<Home />} />
+                <Route path="/userprofile" element={<Page404 />} />
+                <Route path="/editprofile" element={<Page404 />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="*" element={<Page404 />} />
               </Routes>
             </Layout>
           </>

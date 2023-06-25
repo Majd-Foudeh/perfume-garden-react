@@ -68,6 +68,7 @@ export const Signup = () => {
   const { user, setUser, userRefresh } = useContext(UserContext);
 
   const [errors, setErrors] = useState({});
+  const [serverError, setServerError] = useState();
 
   const navigate = useNavigate();
 
@@ -140,11 +141,15 @@ export const Signup = () => {
         .then((response) => {
           console.log("signed up successfully");
           console.log(response.data);
-          localStorage.setItem("token", response.data.token);
-          setAuth(true);
-          userRefresh();
-          refresh();
-          navigate("/");
+          if (response.data.error == "this email is already exists") {
+            setServerError(response.data.error);
+          } else {
+            localStorage.setItem("token", response.data.token);
+            setAuth(true);
+            userRefresh();
+            refresh();
+            navigate("/");
+          }
         })
         .catch((error) => {
           console.error(error, "error in signup the user");
@@ -406,7 +411,7 @@ export const Signup = () => {
 
                       {/* <div className="row">
                                                 <div className="w-100 ">
-                                                    <label htmlFor="validationCustom01" className='mb-1 ms-2'><i className="fas fa-location-dot me-2" />Address</label>
+                                                <label htmlFor="validationCustom01" className='mb-1 ms-2'><i className="fas fa-location-dot me-2" />Address</label>
                                                     <input
                                                         type="text"
                                                         className="form-control  "
@@ -418,6 +423,11 @@ export const Signup = () => {
                                                 </div>
                                             </div> */}
 
+                      {serverError && (
+                        <div class="alert alert-danger" role="alert">
+                          {serverError}
+                        </div>
+                      )}
                       <div className="form-check d-flex flex-wrap">
                         <div>
                           <input
