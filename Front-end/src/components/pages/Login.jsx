@@ -60,6 +60,11 @@ export const Login = () => {
               ...serverDataErrors,
               passwordError: response.data.error,
             });
+          } else if (response.data.error == "this user not active") {
+            setServerDataErrors({
+              ...serverDataErrors,
+              passwordError: response.data.error,
+            });
           } else {
             localStorage.setItem("token", response.data.token);
             setAuth(true);

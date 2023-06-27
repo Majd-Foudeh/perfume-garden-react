@@ -37,8 +37,11 @@ const userSchema = new Schema({
     },
     imageUrl:{
         type:String
+    },
+    isDeleted:{
+        type:Boolean,
+        default:false
     }
-
 
 }, { timestamp: true }
 )

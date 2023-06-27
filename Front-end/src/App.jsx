@@ -44,7 +44,10 @@ function App() {
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/checkOut" element={<Checkout />} />
                 <Route path="/shop" element={<Shop />} />
-                <Route path="/productDetails" element={<ProductDetails />} />
+                <Route
+                  path="/productDetails/:id"
+                  element={<ProductDetails />}
+                />
                 <Route path="/thankYou" element={<ThankYou />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/userprofile" element={<UserProfile />} />
@@ -66,7 +69,10 @@ function App() {
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/checkOut" element={<Checkout />} />
                 <Route path="/shop" element={<Shop />} />
-                <Route path="/productDetails" element={<ProductDetails />} />
+                <Route
+                  path="/productDetails/:id"
+                  element={<ProductDetails />}
+                />
                 <Route path="/thankYou" element={<ThankYou />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/userprofile" element={<Page404 />} />
