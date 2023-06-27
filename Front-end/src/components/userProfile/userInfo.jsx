@@ -24,9 +24,10 @@ export const UserInfo = () => {
               <div className="osahan-user text-center">
                 <div className="osahan-user-media">
                   <img
-                    className="mb-3 rounded-pill shadow-sm mt-1"
-                    src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                    alt="gurdeep singh osahan"
+                    className="mb-3  shadow-sm mt-1 rounded-circle mb-2"
+                    style={{height:"8rem",width:"8rem"}}
+                    src={`http://localhost:3000/${user.imageUrl}`}
+                    alt={`${user.first_Name} photo`}
                   />
                   <div className="osahan-user-media-body">
                     <h6 className="mb-2">
