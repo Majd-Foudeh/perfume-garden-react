@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "../../style/Shop.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export const Shop = () => {
   const [perfumes, setPerfumes] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/perfume")
+      .get("http://localhost:3000/allPerfumes")
       .then((response) => {
         setPerfumes(response.data);
         console.log(response.data);
@@ -339,9 +340,9 @@ export const Shop = () => {
                             Something else here
                           </a>
                         </li>
-                        {/* <li>
+                        <li>
                                       <hr class="dropdown-divider" />
-                                  </li> */}
+                                  </li>
                         <li>
                           <a className="dropdown-item" href="#">
                             Separated link
@@ -349,46 +350,7 @@ export const Shop = () => {
                         </li>
                       </ul>
                     </div>
-                    {/* <div class="choices d-flex " data-type="select-one" tabindex="0" role="listbox"
-                              aria-haspopup="true" aria-expanded="false">
-                              <div class="choices__inner form-control form-control-sm"><select
-                                      class="selectpicker choices__input dropdown"
-                                      data-customclass="form-control form-control-sm" hidden="" tabindex="-1"
-                                      data-choice="active">
-                                      <option value="">Sort By </option>
-                                  </select>
-                                  <div class="choices__list choices__list--single">
-                                      <div class="choices__item choices__placeholder choices__item--selectable"
-                                          data-item="" data-id="1" data-value="" data-custom-properties="null"
-                                          aria-selected="true">Sort By </div>
-                                  </div>
-                              </div>
-                              <div class="choices__list choices__list--dropdown" aria-expanded="false">
-                                  <div class="d-flex choices__list" role="listbox">
-                                      <div id="choices--qzwa-item-choice-5"
-                                          class="choices__item choices__item--choice is-selected choices__placeholder choices__item--selectable is-highlighted"
-                                          role="option" data-choice="" data-id="5" data-value=""
-                                          data-select-text="" data-choice-selectable="" aria-selected="true">Sort
-                                          By </div>
-                                      <div id="choices--qzwa-item-choice-1"
-                                          class="choices__item choices__item--choice choices__item--selectable"
-                                          role="option" data-choice="" data-id="1" data-value="default"
-                                          data-select-text="" data-choice-selectable="">Default sorting </div>
-                                      <div id="choices--qzwa-item-choice-2"
-                                          class="choices__item choices__item--choice choices__item--selectable"
-                                          role="option" data-choice="" data-id="2" data-value="popularity"
-                                          data-select-text="" data-choice-selectable="">Popularity </div>
-                                      <div id="choices--qzwa-item-choice-3"
-                                          class="choices__item choices__item--choice choices__item--selectable"
-                                          role="option" data-choice="" data-id="3" data-value="high-low"
-                                          data-select-text="" data-choice-selectable="">Price: High to Low </div>
-                                      <div id="choices--qzwa-item-choice-4"
-                                          class="choices__item choices__item--choice choices__item--selectable"
-                                          role="option" data-choice="" data-id="4" data-value="low-high"
-                                          data-select-text="" data-choice-selectable="">Price: Low to High </div>
-                                  </div>
-                              </div>
-                          </div> */}
+                    
                   </li>
                 </ul>
               </div>
@@ -400,10 +362,10 @@ export const Shop = () => {
               eiusmod tempor incididunt.
             </p>
             <div className="row gap-y-3 shopGap pb-5 mb-4">
-              {perfumes.map((data) => {
+              {perfumes&& perfumes.map((data) => {
                 return (
-                  <>
-                    <div className="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                  
+                    <div key={data._id} className="col-lg-3 col-md-6 mb-4 mb-lg-0">
                       {/* Card*/}
                       <div className="card rounded cardshadow border-0 ">
                         <div className="card-body p-4">
@@ -411,7 +373,7 @@ export const Shop = () => {
                             {" "}
                             <img
                               src={`http://localhost:4000/${data.perfume_picture}`}
-                              alt=""
+                              alt="test"
                               className="img-fluid d-block mx-auto mb-3"
                             />
                           </Link>
@@ -447,325 +409,11 @@ export const Shop = () => {
                         </div>
                       </div>
                     </div>
-                  </>
+                
                 );
               })}
 
-              <div className="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                {/* Card*/}
-                <div className="card rounded cardshadow border-0 ">
-                  <div className="card-body p-4">
-                    {" "}
-                    <a href="../product page/productPage.html">
-                      {" "}
-                      <img
-                        src="../images/products/eros.jpg"
-                        alt=""
-                        className="img-fluid d-block mx-auto mb-3"
-                      />
-                    </a>
-                    <h5>
-                      <a href="../product page/productPage.html"> </a>
-                      <a
-                        href="../product page/productPage.html"
-                        className="text-dark"
-                      >
-                        Awesome product
-                      </a>
-                    </h5>
-                    <p className="small text-muted font-italic">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    </p>
-                    <ul className="list-inline small">
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star text-warning" />
-                      </li>
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star text-warning" />
-                      </li>
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star text-warning" />
-                      </li>
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star-o text-warning" />
-                      </li>
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star-o text-warning" />
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                {/* Card*/}
-                <div className="card rounded cardshadow border-0 ">
-                  <div className="card-body p-4">
-                    {" "}
-                    <a href="../product page/productPage.html">
-                      {" "}
-                      <img
-                        src="../images/products/gio.jpg"
-                        alt=""
-                        className="img-fluid d-block mx-auto mb-3"
-                      />
-                    </a>
-                    <h5>
-                      <a href="../product page/productPage.html"> </a>
-                      <a
-                        href="../product page/productPage.html"
-                        className="text-dark"
-                      >
-                        Awesome product
-                      </a>
-                    </h5>
-                    <p className="small text-muted font-italic">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    </p>
-                    <ul className="list-inline small">
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star text-warning" />
-                      </li>
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star text-warning" />
-                      </li>
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star text-warning" />
-                      </li>
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star text-warning" />
-                      </li>
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star text-warning" />
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                {/* Card*/}
-                <div className="card rounded cardshadow border-0 ">
-                  <div className="card-body p-4">
-                    {" "}
-                    <a href="../product page/productPage.html">
-                      {" "}
-                      <img
-                        src="../images/products/amir-2O3NECoCdKw-unsplash.jpg"
-                        alt=""
-                        className="img-fluid d-block mx-auto mb-3"
-                      />
-                    </a>
-                    <h5>
-                      <a href="../product page/productPage.html"> </a>
-                      <a
-                        href="../product page/productPage.html"
-                        className="text-dark"
-                      >
-                        Awesome product
-                      </a>
-                    </h5>
-                    <p className="small text-muted font-italic">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    </p>
-                    <ul className="list-inline small">
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star text-warning" />
-                      </li>
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star text-warning" />
-                      </li>
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star text-warning" />
-                      </li>
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star text-warning" />
-                      </li>
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star-o text-warning" />
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                {/* Card*/}
-                <div className="card rounded cardshadow border-0 ">
-                  <div className="card-body p-4">
-                    {" "}
-                    <a href="../product page/productPage.html">
-                      {" "}
-                      <img
-                        src="../images/products/rosy-h-nguyen-5HrlEGTsaB4-unsplash.jpg"
-                        alt=""
-                        className="img-fluid d-block mx-auto mb-3"
-                      />
-                    </a>
-                    <h5>
-                      {" "}
-                      <a
-                        href="../product page/productPage.html"
-                        className="text-dark"
-                      >
-                        Awesome product
-                      </a>
-                    </h5>
-                    <p className="small text-muted font-italic">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    </p>
-                    <ul className="list-inline small">
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star text-warning" />
-                      </li>
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star text-warning" />
-                      </li>
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star text-warning" />
-                      </li>
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star text-warning" />
-                      </li>
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star-o text-warning" />
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                {/* Card*/}
-                <div className="card rounded cardshadow border-0 ">
-                  <div className="card-body p-4">
-                    <a href="../product page/productPage.html">
-                      {" "}
-                      <img
-                        src="../images/products/laura-chouette-RHMQ4_lmeDM-unsplash.jpg"
-                        alt=""
-                        className="img-fluid d-block mx-auto  mb-3"
-                      />
-                    </a>
-                    <h5>
-                      {" "}
-                      <a
-                        href="../product page/productPage.html"
-                        className="text-dark"
-                      >
-                        Awesome product
-                      </a>
-                    </h5>
-                    <p className="small text-muted font-italic">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    </p>
-                    <ul className="list-inline small">
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star text-warning" />
-                      </li>
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star text-warning" />
-                      </li>
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star text-warning" />
-                      </li>
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star-o text-warning" />
-                      </li>
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star-o text-warning" />
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                {/* Card*/}
-                <div className="card rounded cardshadow  ">
-                  <div className="card-body p-4">
-                    {" "}
-                    <a href="../product page/productPage.html">
-                      {" "}
-                      <img
-                        src="../images/products/jan-kopriva-nBwdYS1_rgA-unsplash.jpg"
-                        alt=""
-                        className="img-fluid d-block mx-auto mb-3 "
-                      />
-                    </a>
-                    <h5>
-                      {" "}
-                      <a
-                        href="../product page/productPage.html"
-                        className="text-dark"
-                      >
-                        Awesome product
-                      </a>
-                    </h5>
-                    <p className="small text-muted font-italic">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    </p>
-                    <ul className="list-inline small">
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star text-warning" />
-                      </li>
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star text-warning" />
-                      </li>
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star text-warning" />
-                      </li>
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star text-warning" />
-                      </li>
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star text-warning" />
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                {/* Card*/}
-                <div className="card rounded cardshadow border-0 ">
-                  <div className="card-body p-4">
-                    {" "}
-                    <a href="../product page/productPage.html">
-                      {" "}
-                      <img
-                        src="../images/products/nadia-cortellesi-xBbiOJqd7Mg-unsplash.jpg"
-                        alt=""
-                        className="img-fluid d-block mx-auto mb-3"
-                      />
-                    </a>
-                    <h5>
-                      {" "}
-                      <a
-                        href="../product page/productPage.html"
-                        className="text-dark"
-                      >
-                        Awesome product
-                      </a>
-                    </h5>
-                    <p className="small text-muted font-italic">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    </p>
-                    <ul className="list-inline small">
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star text-warning" />
-                      </li>
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star text-warning" />
-                      </li>
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star text-warning" />
-                      </li>
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star text-warning" />
-                      </li>
-                      <li className="list-inline-item m-0">
-                        <i className="fa fa-star-o text-warning" />
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+           
             </div>
 
             {/* PAGINATION*/}

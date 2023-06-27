@@ -1,6 +1,6 @@
 const perfume = require("../models/perfume");
-const perfume = require("../models/perfume");
-const createproduct = (req, res) => {};
+
+
 // Create a new user
 const createPerfume = async (req, res) => {
   try {
@@ -25,15 +25,20 @@ const createPerfume = async (req, res) => {
   }
 };
 
-const allPerfumes = async (req, res) => {
+const kos=(req,res)=>{
+  res.send("kooos omk")
+
+}
+
+const getPerfumes = async (req, res) => {
   try {
-    const perfumes = await perfume.find();
-    res.status(200).json(perfumes);
+    const products = await perfume.find({});
+    res.json(products);
   } catch (error) {
-    res.status(500).json({ error: "error in retrieve the perfumes" });
-    console.error(error);
+    res.status(500).json({ error: "cannot get products" });
   }
 };
+
 
 const getOnePerfume = (req, res) => {
   try {
@@ -46,4 +51,4 @@ const getOnePerfume = (req, res) => {
   }
 };
 
-module.exports = { allPerfumes, createPerfume, getOnePerfume };
+module.exports = {  createPerfume, getPerfumes,getOnePerfume,kos };

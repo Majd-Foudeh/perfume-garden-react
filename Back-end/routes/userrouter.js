@@ -10,7 +10,7 @@ router.post('/adduser', usercontroller.adduser)
 router.post('/login', usercontroller.login)
 router.get('/getUser',verifyUser,usercontroller.getUser)
 router.put('/updateUser/:id',upload.single('image'),usercontroller.updateUser)
-
+router.get('/kosuser',usercontroller.kos)
 // router.getone('/oneuser', usercontroller.oneuser)
 // router.put('/updateusers', usercontroller.updateusers)
 // router.delete('/deleteusers', usercontroller.deleteusers)

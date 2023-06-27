@@ -155,4 +155,9 @@ const updateUser = async (req, res) => {
   }
 };
 
-module.exports = { allusers, adduser, login, getUser, getImage, updateUser };
+const kos =(req,res)=>{
+  res.send("kooos omk")
+
+}
+
+module.exports = { allusers, adduser, login, getUser, getImage, updateUser,kos };

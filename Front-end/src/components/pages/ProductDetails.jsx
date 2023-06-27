@@ -1,71 +1,77 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 export const ProductDetails = () => {
+  const { id } = useParams();
+  console.log(id);
   const [perfumeDetails, setPerfumeDetails] = useState([]);
 
-  // useEffect(() => {
-  //   axios
-  //     .get(`http://localhost:3000/onePerfume/${id}`)
-  //     .then((response) => {
-  //       setPerfumeDetails(response.data);
-  //       console.log(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error("error in fetching perfume details", error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/onePerfume/${id}`)
+
+      .then((response) => {
+        console.log(response.data);
+        setPerfumeDetails(response.data);
+      })
+      .catch((error) => {
+        console.error('error in fetching perfume details', error);
+      });
+  }, []);
 
   return (
     <>
       <main>
         <section className="pb-5">
-          <div className="container px-4 px-lg-5 my-5">
-            <div className="row gx-4 gx-lg-5 align-items-center">
-              <div className="col-md-6 ">
-                <img
-                  className="productimg card-img-top mb-5 mb-md-0"
-                  src="../images/products/hugoBoss.jpg"
-                  alt="..."
-                />
-              </div>
-              <div className="col-md-6">
-                <div className="small mb-1">SKU: BST-498</div>
-                <h1 className="display-5 fw-bolder">Shop item template</h1>
-                <div className="fs-5 mb-5">
-                  {/* <span className="text-decoration-line-through">$45.00</span> */}
-                  <span>
-                    Price For ml
-                    {perfumeDetails.price}
-                    40.00 JD
-                  </span>
-                </div>
-                <p className="lead">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Praesentium at dolorem quidem modi. Nam sequi consequatur
-                  obcaecati excepturi alias magni, accusamus eius blanditiis
-                  delectus ipsam minima ea iste laborum vero?
-                  {perfumeDetails.description}
-                </p>
-                <div className="d-flex">
-                  <input
-                    className="form-control text-center me-3"
-                    id="inputQuantity"
-                    type="num"
-                    defaultValue={1}
-                    style={{ maxWidth: "3rem" }}
+          {perfumeDetails && (
+            <div className="container px-4 px-lg-5 my-5">
+              <div className="row gx-4 gx-lg-5 align-items-center">
+                <div className="col-md-6 ">
+                  <img
+                    className="productimg card-img-top mb-5 mb-md-0"
+                    src={`http://localhost:4000/${perfumeDetails.perfume_picture}`}
+                    alt="..."
                   />
-                  <button
-                    className="btn btn-outline-dark flex-shrink-0"
-                    type="button"
-                  >
-                    <i className="bi-cart-fill me-1" />
-                    Add to cart
-                  </button>
+                </div>
+                <div className="col-md-6">
+                  <div className="small mb-1">SKU: BST-498</div>
+                  <h1 className="display-5 fw-bolder">Shop item template</h1>
+                  <div className="fs-5 mb-5">
+                    {/* <span className="text-decoration-line-through">$45.00</span> */}
+                    <span>
+                      Price For ml
+                      {perfumeDetails.price}
+                      40.00 JD
+                    </span>
+                  </div>
+                  <p className="lead">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Praesentium at dolorem quidem modi. Nam sequi consequatur
+                    obcaecati excepturi alias magni, accusamus eius blanditiis
+                    delectus ipsam minima ea iste laborum vero?
+                    {perfumeDetails.description}
+                  </p>
+                  <div className="d-flex">
+                    <input
+                      className="form-control text-center me-3"
+                      id="inputQuantity"
+                      type="num"
+                      defaultValue={1}
+                      style={{ maxWidth: '3rem' }}
+                    />
+                    <button
+                      className="btn btn-outline-dark flex-shrink-0"
+                      type="button"
+                    >
+                      <i className="bi-cart-fill me-1" />
+                      Add to cart
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
         </section>
         <section className="py-5 bg-light related sectionback">
           <div className="container px-4 px-lg-5 mt-5">
@@ -103,7 +109,7 @@ export const ProductDetails = () => {
                   {/* Sale badge*/}
                   <div
                     className="badge bg-dark text-white position-absolute"
-                    style={{ top: "0.5rem", right: "0.5rem" }}
+                    style={{ top: '0.5rem', right: '0.5rem' }}
                   >
                     Sale
                   </div>
@@ -148,7 +154,7 @@ export const ProductDetails = () => {
                   {/* Sale badge*/}
                   <div
                     className="badge bg-dark text-white position-absolute"
-                    style={{ top: "0.5rem", right: "0.5rem" }}
+                    style={{ top: '0.5rem', right: '0.5rem' }}
                   >
                     Sale
                   </div>
