@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export const OrderHistory = () => {
   return (
@@ -25,7 +25,7 @@ export const OrderHistory = () => {
                     </h5>
                     <a href="#">
                       <span className="float-end  text-info">
-                        Delivered on Mon, Nov 12, 7:18 PM{' '}
+                        Delivered on Mon, Nov 12, 7:18 PM{" "}
                         <i className="icofont-check-circled text-success" />
                       </span>
                     </a>
@@ -34,7 +34,7 @@ export const OrderHistory = () => {
                       Rd, Memphis, TN 38117, USA
                     </p>
                     <p className="text-gray mb-3">
-                      <i className="icofont-list" /> ORDER #25102589748{' '}
+                      <i className="icofont-list" /> ORDER #25102589748{" "}
                       <i className="icofont-clock-time ml-2" /> Mon, Nov 12,
                       6:26 PM
                     </p>
@@ -54,9 +54,9 @@ export const OrderHistory = () => {
                       </div>
                       <p className="mb-0 text-black text-primary pt-2 order-1">
                         <b className="text-black font-weight-bold">
-                          {' '}
+                          {" "}
                           Total Paid:
-                        </b>{' '}
+                        </b>{" "}
                         $300
                       </p>
                     </div>
@@ -78,7 +78,7 @@ export const OrderHistory = () => {
                     </h5>
                     <a href="#">
                       <span className="float-end text-info">
-                        Delivered on Mon, Nov 12, 7:18 PM{' '}
+                        Delivered on Mon, Nov 12, 7:18 PM{" "}
                         <i className="icofont-check-circled text-success" />
                       </span>
                     </a>
@@ -87,7 +87,7 @@ export const OrderHistory = () => {
                       Rd, Memphis, TN 38117, USA
                     </p>
                     <p className="text-gray mb-3">
-                      <i className="icofont-list" /> ORDER #25102589748{' '}
+                      <i className="icofont-list" /> ORDER #25102589748{" "}
                       <i className="icofont-clock-time ml-2" /> Mon, Nov 12,
                       6:26 PM
                     </p>
@@ -107,9 +107,9 @@ export const OrderHistory = () => {
                       </div>
                       <p className="mb-0 text-black text-primary pt-2 order-1">
                         <b className="text-black font-weight-bold">
-                          {' '}
+                          {" "}
                           Total Paid:
-                        </b>{' '}
+                        </b>{" "}
                         $300
                       </p>
                     </div>
@@ -130,7 +130,7 @@ export const OrderHistory = () => {
                     </h5>
                     <a href="#">
                       <span className="float-end text-info">
-                        Delivered on Mon, Nov 12, 7:18 PM{' '}
+                        Delivered on Mon, Nov 12, 7:18 PM{" "}
                         <i className="icofont-check-circled text-success" />
                       </span>
                     </a>
@@ -139,7 +139,7 @@ export const OrderHistory = () => {
                       Rd, Memphis, TN 38117, USA
                     </p>
                     <p className="text-gray mb-3">
-                      <i className="icofont-list" /> ORDER #25102589748{' '}
+                      <i className="icofont-list" /> ORDER #25102589748{" "}
                       <i className="icofont-clock-time ml-2" /> Mon, Nov 12,
                       6:26 PM
                     </p>
@@ -159,9 +159,9 @@ export const OrderHistory = () => {
                       </div>
                       <p className="mb-0 text-black text-primary pt-2 order-1">
                         <b className="text-black font-weight-bold">
-                          {' '}
+                          {" "}
                           Total Paid:
-                        </b>{' '}
+                        </b>{" "}
                         $300
                       </p>
                     </div>

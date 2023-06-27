@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
@@ -7,7 +7,8 @@ const perfumeSchema = new Schema({
   perfume_category: { type: String,enum: ['Light', 'Medium', 'Strong'] },
   price: { type: Number, required: true },
   description: { type: String },
-  perfume_picture: {type:String}
+  perfume_picture: { type: String },
+  isDeleted: { type: Boolean, default: false },
 });
 
-module.exports=mongoose.model("perfume",perfumeSchema)
+module.exports = mongoose.model("perfume", perfumeSchema);
