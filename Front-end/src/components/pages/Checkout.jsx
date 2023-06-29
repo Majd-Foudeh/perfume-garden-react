@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "../../style/Checkout.css";
+import CreditCardUi from "../creditCard/CreditCardUi";
 
 export const Checkout = () => {
   const navigate = useNavigate();
@@ -284,7 +285,7 @@ export const Checkout = () => {
                     </div> */}
                   <>
                     <h4 className="mb-3 mt-1">Payment Info</h4>
-
+                    <CreditCardUi />
                     <div className="row">
                       <div className="col-md-6 mb-3">
                         <label htmlFor="cc-name">Name on card</label>
