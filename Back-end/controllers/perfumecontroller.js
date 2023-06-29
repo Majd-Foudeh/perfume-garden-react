@@ -1,6 +1,5 @@
 const perfume = require("../models/perfume");
 
-
 // Create a new user
 const createPerfume = async (req, res) => {
   try {
@@ -25,11 +24,6 @@ const createPerfume = async (req, res) => {
   }
 };
 
-const kos=(req,res)=>{
-  res.send("kooos omk")
-
-}
-
 const getPerfumes = async (req, res) => {
   try {
     const products = await perfume.find({});
@@ -39,11 +33,20 @@ const getPerfumes = async (req, res) => {
   }
 };
 
+const getFourPerfumes = async (req, res) => {
+  try {
+    const products = await perfume.aggregate([{ $sample: { size: 4 } }]);
+    res.json(products);
+  } catch (error) {
+    res.status(500).json({ error: "Cannot get four products" });
+  }
+};
 
-const getOnePerfume = (req, res) => {
+const getOnePerfume = async (req, res) => {
   try {
     const id = req.params.id;
-    const myPerfume = perfume.findById(id);
+    console.log(id);
+    const myPerfume = await perfume.findById(id);
     res.status(200).json(myPerfume);
   } catch (error) {
     res.status(500).json({ error: "error in get one perfume " });
@@ -51,4 +54,4 @@ const getOnePerfume = (req, res) => {
   }
 };
 
-module.exports = {  createPerfume, getPerfumes,getOnePerfume,kos };
+module.exports = { createPerfume, getPerfumes, getOnePerfume, getFourPerfumes };

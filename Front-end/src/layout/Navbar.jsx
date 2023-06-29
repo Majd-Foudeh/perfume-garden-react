@@ -1,11 +1,18 @@
 import { Link } from "react-router-dom";
 import "../../src/style/navbar.css";
 import { ProfileDropdown } from "../components/profileDropdown/profileDropdown";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 export const Navbar = ({ hideNav, setHideNav }) => {
   const { auth } = useContext(AuthContext);
+  let cartCount = JSON.parse(localStorage.getItem("cartCount"));
+  let count = cartCount ? JSON.parse(cartCount) : 0;
+  const [cartItemsNumber, setCartItemsNumber] = useState();
+
+  useEffect(() => {
+    setCartItemsNumber(count);
+  }, [cartCount]);
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-black navbar-dark ">
@@ -90,7 +97,7 @@ export const Navbar = ({ hideNav, setHideNav }) => {
                     <i className="fa fa-cart-shopping me-1" />
                     Cart
                     <span className="badge bg-dark text-white ms-1 rounded-pill">
-                      0
+                      {cartItemsNumber}
                     </span>
                   </button>
                 </Link>
