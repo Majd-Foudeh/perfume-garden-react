@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import "../../style/Shop.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
+import light from "../../assets/light.png";
+import medium from "../../assets/medium.png";
+import strong from "../../assets/strong.png";
 export const Shop = () => {
   const [perfumes, setPerfumes] = useState([]);
 
@@ -11,7 +13,7 @@ export const Shop = () => {
       .get("http://localhost:3000/allPerfumes")
       .then((response) => {
         setPerfumes(response.data);
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch((error) => {
         console.error(error, "error fetching perfumes in react");
@@ -20,16 +22,16 @@ export const Shop = () => {
 
   return (
     <>
-      <main>
+      <main className="perfume">
         <header
           className="bannerimg  py-5 shadow-6-strong mb-4"
           style={{ height: 280 }}
         >
           <div className="container px-4 px-lg-5 my-5">
             <div className="text-center text-black">
-              <h1 className="display-4 fw-bolder">Shop in style</h1>
+              <h1 className="display-4 fw-bolder">Perfume Shop </h1>
               <p className="lead fw-normal text-white-50 mb-0">
-                With this shop hompeage template
+                find your favorite perfume with ease{" "}
               </p>
             </div>
           </div>
@@ -155,37 +157,6 @@ export const Shop = () => {
                 </a>
               </li>
             </ul>
-            {/* <h6 class="text-uppercase mb-4">Price range</h6>
-          <div class="price-range pt-4 mb-5">
-              <div id="range" class="noUi-target noUi-ltr noUi-horizontal noUi-txt-dir-ltr">
-                  <div class="noUi-base">
-                      <div class="noUi-connects">
-                          <div class="noUi-connect noUi-draggable"
-                              style="transform: translate(5%, 0px) scale(0.45, 1);"></div>
-                      </div>
-                      <div class="noUi-origin" style="transform: translate(-95%, 0px); z-index: 5;">
-                          <div class="noUi-handle noUi-handle-lower" data-handle="0" tabindex="0" role="slider"
-                              aria-orientation="horizontal" aria-valuemin="0.0" aria-valuemax="700.0"
-                              aria-valuenow="100.0" aria-valuetext="$100">
-                              <div class="noUi-touch-area"></div>
-                              <div class="noUi-tooltip">$100</div>
-                          </div>
-                      </div>
-                      <div class="noUi-origin" style="transform: translate(-50%, 0px); z-index: 6;">
-                          <div class="noUi-handle noUi-handle-upper" data-handle="1" tabindex="0" role="slider"
-                              aria-orientation="horizontal" aria-valuemin="400.0" aria-valuemax="2000.0"
-                              aria-valuenow="1000.0" aria-valuetext="$1000">
-                              <div class="noUi-touch-area"></div>
-                              <div class="noUi-tooltip">$1000</div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="row pt-2">
-                  <div class="col-6"><strong class="small fw-bold text-uppercase">From</strong></div>
-                  <div class="col-6 text-end"><strong class="small fw-bold text-uppercase">To</strong></div>
-              </div>
-          </div> */}
             <h6 className="text-uppercase mb-3">Show only</h6>
             <div className="form-check mb-1">
               <input
@@ -341,8 +312,8 @@ export const Shop = () => {
                           </a>
                         </li>
                         <li>
-                                      <hr class="dropdown-divider" />
-                                  </li>
+                          <hr class="dropdown-divider" />
+                        </li>
                         <li>
                           <a className="dropdown-item" href="#">
                             Separated link
@@ -350,7 +321,6 @@ export const Shop = () => {
                         </li>
                       </ul>
                     </div>
-                    
                   </li>
                 </ul>
               </div>
@@ -362,34 +332,61 @@ export const Shop = () => {
               eiusmod tempor incididunt.
             </p>
             <div className="row gap-y-3 shopGap pb-5 mb-4">
-              {perfumes&& perfumes.map((data) => {
-                return (
-                  
-                    <div key={data._id} className="col-lg-3 col-md-6 mb-4 mb-lg-0">
+              {perfumes &&
+                perfumes.map((data) => {
+                  return (
+                    <div
+                      key={data._id}
+                      className="col-lg-3 col-md-6 mb-4 mb-lg-0"
+                    >
                       {/* Card*/}
                       <div className="card rounded cardshadow border-0 ">
-                        <div className="card-body p-4">
+                        <div className="card-body p-3">
                           <Link to={`/productDetails/${data._id}`}>
                             {" "}
                             <img
                               src={`http://localhost:4000/${data.perfume_picture}`}
                               alt="test"
-                              className="img-fluid d-block mx-auto mb-3"
+                              className="img-fluid d-block rounded mx-auto mb-3"
                             />
                           </Link>
-                          <h5>
-                            {" "}
-                            <a
-                              href="../product page/productPage.html"
-                              className="text-dark"
-                            >
-                              {data.perfume_name}
-                            </a>
-                          </h5>
-                          <p className="small text-muted font-italic">
+                          <div className="d-flex  justify-content-between align-items-center">
+                            <div className="d-flex flex-column">
+                              <h6 className="m-1">
+                                {" "}
+                                <a
+                                  href="../product page/productPage.html"
+                                  className="text-dark"
+                                >
+                                  {data.perfume_name}
+                                </a>
+                              </h6>
+                              <div className="m-1">
+                                <div>
+                                  <span className="fw-bold h4">
+                                    {" "}
+                                    {data.price}
+                                  </span>{" "}
+                                  <span className="text-warning">JD</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div>
+                              {data.perfume_category == "Light" && (
+                                <img height="45vh" src={light} alt="" />
+                              )}
+                              {data.perfume_category == "Medium" && (
+                                <img height="45vh" src={medium} alt="" />
+                              )}
+                              {data.perfume_category == "Strong" && (
+                                <img height="45vh" src={strong} alt="" />
+                              )}
+                            </div>
+                          </div>
+                          {/* <p className="small text-muted font-italic">
                             {data.description}
-                          </p>
-                          <ul className="list-inline small">
+                          </p> */}
+                          {/* <ul className="list-inline small">
                             <li className="list-inline-item m-0">
                               <i className="fa fa-star text-warning" />
                             </li>
@@ -405,15 +402,12 @@ export const Shop = () => {
                             <li className="list-inline-item m-0">
                               <i className="fa fa-star-o text-warning" />
                             </li>
-                          </ul>
+                          </ul> */}
                         </div>
                       </div>
                     </div>
-                
-                );
-              })}
-
-           
+                  );
+                })}
             </div>
 
             {/* PAGINATION*/}

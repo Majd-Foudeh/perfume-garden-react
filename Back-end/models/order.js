@@ -1,22 +1,38 @@
-const mongoose=require('mongoose')
-
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 // Order collection schema
-const orderSchema = new Schema({
-    user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-    products: [{
-      product: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
-      quantity: { type: Number, required: true },
-    }],
+const orderSchema = new Schema(
+  {
+    userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    products: [
+      {
+        perfumeId: {
+          type: Schema.Types.ObjectId,
+          ref: "Product",
+          required: true,
+        },
+        perfumeName: { type: String, required: true },
+        quantity: { type: Number, required: true },
+      },
+    ],
     total: { type: Number, required: true },
-    status: { type: String, enum: ['pending', 'completed', 'cancelled'], default: 'pending' },
+    status: {
+      type: String,
+      enum: ["pending", "completed", "cancelled"],
+      default: "pending",
+    },
+    shippingAddress: { type: String },
+    date: {
+      type: Date,
+      default: Date.now,
+    },
     // Additional fields like payment method, shipping details, timestamps, etc.
-  },{timestamp:true});
+  },
+  { timestamp: true }
+);
 
-
-  module.exports=mongoose.model("order" ,orderSchema )
-
-
+module.exports = mongoose.model("order", orderSchema);
 
 // let x ="sss(sd)sss(sss[sss]ssS)"
 // let arr=[]
@@ -41,12 +57,10 @@ const orderSchema = new Schema({
 //   arr.pop()
 // }
 
-
 // if (arr.length==0) {
 //   return true
 // }else{
 //   return false
 // }
 
-  
 // }

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const perfumeController = require("../controllers/perfumeController");
+const perfumeController = require("../controllers/perfumecontroller");
 
 router.get("/allPerfumes", perfumeController.getPerfumes);
 router.get("/onePerfume/:id", perfumeController.getOnePerfume);
