@@ -6,19 +6,61 @@ import { AuthContext } from "../context/AuthContext";
 
 export const Navbar = ({ hideNav, setHideNav }) => {
   const { auth } = useContext(AuthContext);
-  let cartCount = JSON.parse(localStorage.getItem("cartCount"));
-  let count = cartCount ? JSON.parse(cartCount) : 0;
-  const [cartItemsNumber, setCartItemsNumber] = useState();
+  // let cartCount = JSON.parse(localStorage.getItem("cartCount"));
+  // let count = cartCount ? JSON.parse(cartCount) : 0;
+  // const [cartItemsNumber, setCartItemsNumber] = useState(count);
+
+  // useEffect(() => {
+  //   const handleStorageChange = (event) => {
+  //     if (event.key === "cartCount") {
+  //       setCartItemsNumber(JSON.parse(event.newValue));
+  //     }
+  //   };
+
+  //   window.addEventListener("storage", handleStorageChange);
+
+  //   return () => {
+  //     window.removeEventListener("storage", handleStorageChange);
+  //   };
+  // }, [cartCount]);
+
+  // const useLocalStorage = (key, initialValue) => {
+  //   const [value, setValue] = useState(() => {
+  //     const storedValue = localStorage.getItem(key);
+  //     return storedValue ? JSON.parse(storedValue) : initialValue;
+  //   });
+
+  //   useEffect(() => {
+  //     localStorage.setItem(key, JSON.stringify(value));
+  //   }, [key, value]);
+
+  //   return [value, setValue];
+  // };
+
+  // const [cartCount, setCartCount] = useLocalStorage("cartCount", 0);
+  // console.log(cartCount);
+
+  const [cartItemsNumber, setCartItemsNumber] = useState(
+    JSON.parse(localStorage.getItem("cartCount")) || 0
+  );
 
   useEffect(() => {
-    setCartItemsNumber(count);
-  }, [cartCount]);
+    const intervalId = setInterval(() => {
+      const count = JSON.parse(localStorage.getItem("cartCount")) || 0;
+      setCartItemsNumber(count);
+    }, 100);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-black navbar-dark ">
         <div className="container px-4 px-lg-5">
           <Link className="navbar-brand" to="/">
-            Start Bootstrap
+            Perfume Garden
           </Link>
           <button
             className="navbar-toggler"
@@ -56,42 +98,10 @@ export const Navbar = ({ hideNav, setHideNav }) => {
                   Contact Us
                 </Link>
               </li>
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  id="navbarDropdown"
-                  href="./cartPage/cart.html"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Shop
-                </a>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li>
-                    <a className="dropdown-item" href="#!">
-                      All Products
-                    </a>
-                  </li>
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#!">
-                      Popular Items
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#!">
-                      New Arrivals
-                    </a>
-                  </li>
-                </ul>
-              </li>
             </ul>
 
             <div className="d-flex gap-3 align-items-center">
-              <form className="d-flex">
+              <div className="d-flex">
                 <Link to="/cart">
                   <button type="button" className="btn btn-outline-light">
                     <i className="fa fa-cart-shopping me-1" />
@@ -101,7 +111,7 @@ export const Navbar = ({ hideNav, setHideNav }) => {
                     </span>
                   </button>
                 </Link>
-              </form>
+              </div>
               {auth === true ? (
                 <ProfileDropdown />
               ) : (

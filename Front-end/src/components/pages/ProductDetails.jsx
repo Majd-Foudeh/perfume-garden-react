@@ -10,7 +10,7 @@ import Toast from "react-bootstrap/Toast";
 export const ProductDetails = () => {
   const { id } = useParams();
   const [perfumeDetails, setPerfumeDetails] = useState([]);
-  const [quantity, setQuantity] = useState(1);
+  const [quantity1, setQuantity] = useState(1);
   const [show, setShow] = useState(false);
   const [show2, setShow2] = useState(false);
   const [existingCartItems, setExistingCartItems] = useState(
@@ -48,8 +48,8 @@ export const ProductDetails = () => {
     const item = {
       id: perfumeDetails._id,
       name: perfumeDetails.perfume_name,
-      price: perfumeDetails.price * quantity,
-      quantity: quantity,
+      price: perfumeDetails.price * quantity1,
+      quantity: quantity1,
       img: perfumeDetails.perfume_picture,
       category: perfumeDetails.perfume_category,
     };
@@ -72,22 +72,6 @@ export const ProductDetails = () => {
     setShow(true);
     count++;
     localStorage.setItem("cartCount", JSON.stringify(count));
-  };
-
-  const handleUpdateQuantity = (itemId, newQuantity) => {
-    const updatedCartItems = existingCartItems.map((item) => {
-      if (item.id === itemId) {
-        return {
-          ...item,
-          quantity: newQuantity,
-          price: perfumeDetails.price * newQuantity,
-        };
-      }
-      return;
-    });
-
-    setExistingCartItems(updatedCartItems);
-    localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
   };
 
   return (
@@ -183,16 +167,19 @@ export const ProductDetails = () => {
                     </span>
                   </div>
                   <p className="lead">{perfumeDetails.description}</p>
+
+                  <p className="fw-semibold">
+                    Select the quantity you want in ml :
+                  </p>
                   <div className="d-flex">
                     <input
                       className="form-control text-center me-3"
                       id="inputQuantity"
                       type="number"
                       defaultValue={1}
+                      // value={1}
                       style={{ maxWidth: "5rem" }}
-                      onChange={(e) =>
-                        handleUpdateQuantity(perfumeDetails._id, e.target.value)
-                      }
+                      onChange={(e) => setQuantity(e.target.value)}
                     />
                     <button
                       className="btn btn-outline-dark flex-shrink-0"
@@ -214,11 +201,11 @@ export const ProductDetails = () => {
             <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
               {relatedPerfumes &&
                 relatedPerfumes.map((perfume) => (
-                  <div key={perfume._id} className="col mb-5">
-                    <div className="card h-100">
+                  <div key={perfume._id} className="col  mb-5">
+                    <div className="card h-100 bg-light bg-opacity-75">
                       {/* Product image*/}
                       <img
-                        className="card-img-top"
+                        className=" card-img-top"
                         src={`http://localhost:4000/${perfume.perfume_picture}`}
                         alt="..."
                       />
@@ -236,7 +223,7 @@ export const ProductDetails = () => {
                         <div className="text-center">
                           <Link
                             to={`/productDetails/${perfume._id}`}
-                            className="btn btn-outline-dark mt-auto"
+                            className="btn btn-sm btn-outline-dark mt-auto"
                           >
                             View Details
                           </Link>

@@ -13,6 +13,6 @@
 .related img{
     /* width: 100%; */
     aspect-ratio: 3/2;
-    object-fit:contain;
+    object-fit:cover;
 
 }

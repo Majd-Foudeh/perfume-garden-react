@@ -2,7 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const userRouts = require("./routes/userrouter");
-const perfumeRoutes=require("./routes/perfumerouter")
+const perfumeRoutes = require("./routes/perfumerouter");
+const orderRoutes = require("./routes/orderrouter");
 const path = require("path");
 
 const PORT = process.env.PORT;
@@ -19,7 +20,8 @@ app.get("/", (req, res) => {
 });
 
 app.use(userRouts);
-app.use(perfumeRoutes)
+app.use(orderRoutes);
+app.use(perfumeRoutes);
 app.use("/public", express.static(path.join(__dirname, "public")));
 
 module.exports = {

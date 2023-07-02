@@ -1,11 +1,24 @@
-import React, { useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "../../style/Checkout.css";
+import Card from "react-credit-cards-2";
+
+import {
+  formatCreditCardNumber,
+  formatCVC,
+  formatExpirationDate,
+  formatFormData,
+} from "../creditCard/utils";
+
+import "react-credit-cards-2/dist/es/styles-compiled.css";
+import axios from "axios";
+import { UserContext } from "../../context/UserContext";
 
 export const Checkout = () => {
   const navigate = useNavigate();
+  const { user } = useContext(UserContext);
 
   const [cardNumber, setCardNumber] = useState("");
   const [existingCartItems, setExistingCartItems] = useState(
@@ -19,25 +32,85 @@ export const Checkout = () => {
   let count = cartCount ? JSON.parse(cartCount) : 0;
   const [cartItemsNumber, setCartItemsNumber] = useState();
 
+  const subTotal = JSON.parse(localStorage.getItem("subTotal"));
+
   useEffect(() => {
     setCartItemsNumber(count);
+    setTotal(subTotal + 5);
   }, [cartCount]);
 
-  const handleCardNumberChange = (e) => {
-    const value = e.target.value;
-    console.log(value);
-    const formattedValue = value.replace(/[^\d]/g, "").slice(0, 16);
-    const spacedValue = formattedValue.replace(/(\d{4})/g, "$1 ").trim();
-    setCardNumber(spacedValue);
-  };
-  const subTotal = JSON.parse(localStorage.getItem("subTotal"));
-  let total0 = subTotal + 5;
-
   JSON.stringify(localStorage.setItem("total", total));
-  console.log(total);
 
-  console.log(cartItemsNumber);
-  console.log(existingCartItems);
+  //! --------------------------------For Credit card------------------------------------
+  const [number, setNumber] = useState("");
+  const [name, setName] = useState("");
+  const [expiry, setExpiry] = useState("");
+  const [cvc, setCvc] = useState("");
+  const [issuer, setIssuer] = useState("");
+  const [focused, setFocused] = useState("");
+  const [formData, setFormData] = useState(null);
+  const formRef = useRef(null);
+
+  const handleCallback = ({ issuer }, isValid) => {
+    if (isValid) {
+      setIssuer(issuer);
+    }
+  };
+
+  const handleInputFocus = ({ target }) => {
+    setFocused(target.name);
+  };
+
+  const handleInputChange = ({ target }) => {
+    let value = target.value;
+    const name = target.name;
+
+    if (name === "number") {
+      value = formatCreditCardNumber(value);
+    } else if (name === "expiry") {
+      value = formatExpirationDate(value);
+    } else if (name === "cvc") {
+      value = formatCVC(value);
+    }
+
+    if (name === "number") {
+      setNumber(value);
+    } else if (name === "name") {
+      setName(value);
+    } else if (name === "expiry") {
+      setExpiry(value);
+    } else if (name === "cvc") {
+      setCvc(value);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // const elements = [...formRef.current.elements];
+
+    const orderData = {
+      userId: user._id,
+      products: existingCartItems.map((perfume) => ({
+        perfumeId: perfume.id,
+        perfumeName: perfume.name,
+        quantity: perfume.quantity,
+      })),
+      total: total, // Calculate the total based on the products if needed
+      shippingAddress: "123 Main St, City, Country",
+    };
+
+    axios
+      .post("http://localhost:3000/newOrder", orderData)
+      .then((response) => {
+        console.log("Order saved successfully");
+        console.log(response.data);
+        // navigate("/thankYou");
+      })
+      .catch((error) => {
+        console.error(error, "error in save the order");
+      });
+  };
+  //! ----------------------------------------------------------------------------------------------
   return (
     <>
       <>
@@ -124,281 +197,138 @@ export const Checkout = () => {
               </div>
               <div className="col-md-8 order-md-1">
                 {/* <h4 className="mb-3">Billing address</h4> */}
-                <form className="needs-validation" noValidate="">
-                  {/* <div className="row">
-                    <div className="col-md-6 mb-3">
-                      <label htmlFor="firstName">Full name</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="firstName"
-                        placeholder=""
-                        defaultValue=""
-                        required=""
-                      />
-                      <div className="invalid-feedback">
-                        {" "}
-                        Valid first name is required.{" "}
-                      </div>
-                    </div>
-                    <div className="col-md-6 mb-3">
-                      <label htmlFor="lastName">Phone number</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="lastName"
-                        placeholder=""
-                        defaultValue=""
-                        required=""
-                      />
-                      <div className="invalid-feedback">
-                        {" "}
-                        Valid last name is required.{" "}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="username">Username</label>
-                    <div className="input-group">
-                      <div className="input-group-prepend">
-                        <span className="input-group-text">@</span>
-                      </div>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="username"
-                        placeholder="Username"
-                        required=""
-                      />
-                      <div
-                        className="invalid-feedback"
-                        style={{ width: "100%" }}
-                      >
-                        {" "}
-                        Your username is required.{" "}
-                      </div>
-                    </div>
-                  </div>
-                  <>
-  <div className="mb-3">
-    <label htmlFor="email">
-      Email <span className="text-muted">(Optional)</span>
-    </label>
-    <input
-      type="email"
-      className="form-control"
-      id="email"
-      placeholder="you@example.com"
-    />
-    <div className="invalid-feedback">
-      {" "}
-      Please enter a valid email address for shipping updates.{" "}
-    </div>
-  </div>
-  <div className="mb-3">
-    <label htmlFor="address">Address</label>
-    <input
-      type="text"
-      className="form-control"
-      id="address"
-      placeholder="1234 Main St"
-      required=""
-    />
-    <div className="invalid-feedback">
-      {" "}
-      Please enter your shipping address.{" "}
-    </div>
-  </div>
-  <div className="mb-3">
-    <label htmlFor="address2">
-      Address 2 <span className="text-muted">(Optional)</span>
-    </label>
-    <input
-      type="text"
-      className="form-control"
-      id="address2"
-      placeholder="Apartment or suite"
-    />
-  </div>
-</>
-
-                  <div className="row justify-content-center align-items-center">
-                    <div className="col-md-5 col-lg-5  mb-3">
-                      <div className="dropdown">
-                        <button
-                          className="btn btn-outline-dark dropdown-toggle"
-                          type="button"
-                          data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        >
-                          Select Your City{" "}
-                        </button>
-                        <ul className="dropdown-menu">
-                          <li>
-                            <a className="dropdown-item" href="#">
-                              Action
-                            </a>
-                          </li>
-                          <li>
-                            <a className="dropdown-item" href="#">
-                              Another action
-                            </a>
-                          </li>
-                          <li>
-                            <a className="dropdown-item" href="#">
-                              Something else here
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div className="col-md-4 mb-3">
-                      <label htmlFor="state">State</label>
-                      <select
-                        className="custom-select d-block w-100"
-                        id="state"
-                        required=""
-                      >
-                        <option value="">Choose...</option>
-                        <option>California</option>
-                      </select>
-                      <div className="invalid-feedback">
-                        {" "}
-                        Please provide a valid state.{" "}
-                      </div>
-                    </div>
-                    <div className="col-md-3 mb-3">
-                      <label htmlFor="zip">Zip</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="zip"
-                        placeholder=""
-                        required=""
-                      />
-                      <div className="invalid-feedback">
-                        {" "}
-                        Zip code required.{" "}
-                        </div>
-                        </div>
-                    </div> */}
+                <form
+                  className="needs-validation"
+                  noValidate=""
+                  onSubmit={handleSubmit}
+                >
                   <>
                     <h4 className="mb-3 mt-1">Payment Info</h4>
+                    {/*---------------------------------- Credit Card --------------------------------------------- */}
 
-                    <div className="row">
-                      <div className="col-md-6 mb-3">
-                        <label htmlFor="cc-name">Name on card</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="cc-name"
-                          placeholder=""
-                          required=""
+                    <div key="Payment">
+                      <div className="App-payment">
+                        <h1>React Credit Cards</h1>
+                        <h4>Beautiful credit cards for your payment forms</h4>
+                        <Card
+                          number={number}
+                          name={name}
+                          expiry={expiry}
+                          cvc={cvc}
+                          focused={focused}
+                          callback={handleCallback}
                         />
-                        <small className="text-muted">
-                          Full name as displayed on card
-                        </small>
-                        <div className="invalid-feedback">
-                          {" "}
-                          Name on card is required{" "}
-                        </div>
-                      </div>
-                      <div className="col-md-6 mb-3">
-                        <label htmlFor="cc-number">Credit card number</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="cc-number"
-                          placeholder="1234 5678 9012 3456"
-                          required=""
-                          maxLength="19"
-                          onChange={handleCardNumberChange}
-                        />
-                        <div className="invalid-feedback">
-                          {" "}
-                          Credit card number is required{" "}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-md-3 mb-3">
-                        <label htmlFor="cc-expiration">Expiration</label>
 
-                        <input
-                          type="text"
-                          className="form-control "
-                          size="sm"
-                          id="cc-expiration"
-                          placeholder=""
-                          required=""
-                        />
-                        <div className="invalid-feedback">
-                          {" "}
-                          Expiration date required{" "}
+                        <div className="form-group">
+                          <input
+                            type="tel"
+                            name="number"
+                            className="form-control"
+                            placeholder="Card Number"
+                            //   pattern="[\d]{16,22}"
+                            required
+                            onChange={handleInputChange}
+                            onFocus={handleInputFocus}
+                          />
+                          <small>E.g.: 49..., 51..., 36..., 37...</small>
                         </div>
-                      </div>
-                      <div className="col-md-3 mb-3">
-                        <label htmlFor="cc-cvv">CVV</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="cc-cvv"
-                          placeholder=""
-                          required=""
-                        />
-                        <div className="invalid-feedback">
-                          {" "}
-                          Security code required{" "}
+                        <div className="form-group">
+                          <input
+                            type="text"
+                            name="name"
+                            className="form-control"
+                            placeholder="Name"
+                            required
+                            onChange={handleInputChange}
+                            onFocus={handleInputFocus}
+                          />
                         </div>
+                        <div className="row">
+                          <div className="col-6">
+                            <input
+                              type="tel"
+                              name="expiry"
+                              className="form-control bg-red"
+                              placeholder="Valid Thru"
+                              pattern="\d\d/\d\d"
+                              required
+                              onChange={handleInputChange}
+                              onFocus={handleInputFocus}
+                            />
+                          </div>
+                          <div className="col-6">
+                            <input
+                              type="tel"
+                              name="cvc"
+                              className="form-control"
+                              placeholder="CVC"
+                              pattern="\d{3,4}"
+                              required
+                              onChange={handleInputChange}
+                              onFocus={handleInputFocus}
+                            />
+                          </div>
+                        </div>
+                        <input type="hidden" name="issuer" value={issuer} />
+
+                        <h4 className="mb-3 mt-3">Shipping Address</h4>
+                        <div className="d-block my-3">
+                          <div className="custom-control custom-radio">
+                            <input
+                              id="credit"
+                              name="paymentMethod"
+                              type="radio"
+                              className="custom-control-input"
+                              defaultChecked=""
+                              required=""
+                            />
+                            <label
+                              className="ms-2 custom-control-label"
+                              htmlFor="credit"
+                            >
+                              Main Address
+                            </label>
+                          </div>
+                          <div className="custom-control custom-radio">
+                            <input
+                              id="debit"
+                              name="paymentMethod"
+                              type="radio"
+                              className="custom-control-input"
+                              required=""
+                            />
+                            <label
+                              className="ms-2 custom-control-label"
+                              htmlFor="debit"
+                            >
+                              Second Address
+                            </label>
+                          </div>
+                        </div>
+
+                        {/* <button class="btn col-4 btn-dark submitbtn btn-lg btn-block" type="submit">Continue to checkout</button> */}
+
+                        <div className="form-actions">
+                          <button className="checkoutbtn2 ">
+                            <span className="circle1" />
+                            <span className="circle2" />
+                            <span className="circle3" />
+                            <span className="circle4" />
+                            <span className="circle5" />
+                            <span className="text">Submit</span>
+                          </button>
+                        </div>
+
+                        {/* {formData && (
+                          <div className="App-highlight">
+                            {formatFormData(formData).map((d, i) => (
+                              <div key={i}>{d}</div>
+                            ))}
+                          </div>
+                        )} */}
                       </div>
                     </div>
                   </>
-                  <h4 className="mb-3 mt-3">Shipping Address</h4>
-                  <div className="d-block my-3">
-                    <div className="custom-control custom-radio">
-                      <input
-                        id="credit"
-                        name="paymentMethod"
-                        type="radio"
-                        className="custom-control-input"
-                        defaultChecked=""
-                        required=""
-                      />
-                      <label
-                        className="ms-2 custom-control-label"
-                        htmlFor="credit"
-                      >
-                        Main Address
-                      </label>
-                    </div>
-                    <div className="custom-control custom-radio">
-                      <input
-                        id="debit"
-                        name="paymentMethod"
-                        type="radio"
-                        className="custom-control-input"
-                        required=""
-                      />
-                      <label
-                        className="ms-2 custom-control-label"
-                        htmlFor="debit"
-                      >
-                        Second Address
-                      </label>
-                    </div>
-                  </div>
-
-                  {/* <button class="btn col-4 btn-dark submitbtn btn-lg btn-block" type="submit">Continue to checkout</button> */}
-                  <Link to="/thankyou">
-                    <button className="checkoutbtn2">
-                      <span className="circle1" />
-                      <span className="circle2" />
-                      <span className="circle3" />
-                      <span className="circle4" />
-                      <span className="circle5" />
-                      <span className="text">Submit</span>
-                    </button>
-                  </Link>
                 </form>
               </div>
             </div>

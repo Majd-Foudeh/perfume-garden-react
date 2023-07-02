@@ -19,9 +19,10 @@ body {
     height: 25vh;
     background-position: center right; */
 }
-main img{
+.perfume img{
     aspect-ratio: 3/4;
-    object-fit:contain;
+    object-fit:cover;
+    
 
 }
 .cardshadow{
