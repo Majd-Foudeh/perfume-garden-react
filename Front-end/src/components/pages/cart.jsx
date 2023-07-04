@@ -1,15 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../../style/cart.css";
+import "react-toastify/dist/ReactToastify.css";
+// import { ToastContainer, toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { AuthContext } from "../../context/AuthContext";
 export const Cart = () => {
   const navigate = useNavigate();
+  const { auth } = useContext(AuthContext);
+
   const [existingCartItems, setExistingCartItems] = useState(
     JSON.parse(localStorage.getItem("cartItems")) || []
   );
   // console.log(existingCartItems);
-
+  const handleAlert = () => {
+    Swal.fire({
+      title: "You are not loged in !! ",
+      text: "please login or signup to continue",
+      icon: "error",
+    });
+  };
   const handleDelete = (itemId) => {
     console.log(itemId);
     const updatedCartItems = existingCartItems.filter(
@@ -225,13 +237,25 @@ export const Cart = () => {
                         <p className="text-muted">
                           Taxes and shipping are calculated at checkout
                         </p>
-                        <Link
-                          to="/checkout"
-                          role="button"
-                          className="btn checkoutbtn bg-black text-light "
-                        >
-                          <span className="fs-6">Go to checkout</span>{" "}
-                        </Link>
+
+                        {auth ? (
+                          <Link
+                            to="/checkout"
+                            role="button"
+                            className="btn checkoutbtn bg-black text-light "
+                          >
+                            <span className="fs-6">Go to checkout</span>{" "}
+                          </Link>
+                        ) : (
+                          <Link
+                            onClick={handleAlert}
+                            to="/login"
+                            role="button"
+                            className="btn checkoutbtn bg-black text-light "
+                          >
+                            <span className="fs-6">Go to checkout</span>{" "}
+                          </Link>
+                        )}
                       </div>
                     </div>
                   </div>

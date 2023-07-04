@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import { OrderHistory } from "../userProfile/orderHistory";
-import { UserProducts } from "../userProfile/userProducts";
+import { UserWishList } from "../userProfile/UserWishList";
 import { UserInfo } from "../userProfile/userInfo";
 
 export const UserProfile = () => {
@@ -45,7 +45,7 @@ export const UserProfile = () => {
                 <OrderHistory />
               </Tab>
               <Tab eventKey="longer-tab" title="My products">
-                <UserProducts />
+                <UserWishList />
               </Tab>
               <Tab eventKey="add product" title="add product">
                 Tab content for Contact

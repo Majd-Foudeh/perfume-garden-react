@@ -4,12 +4,12 @@ const Schema = mongoose.Schema;
 // Order collection schema
 const orderSchema = new Schema(
   {
-    userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    userId: { type: Schema.Types.ObjectId, ref: "user", required: true },
     products: [
       {
         perfumeId: {
           type: Schema.Types.ObjectId,
-          ref: "Product",
+          ref: "Perfume",
           required: true,
         },
         perfumeName: { type: String, required: true },

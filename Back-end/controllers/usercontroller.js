@@ -109,7 +109,7 @@ const getUser = async (req, res) => {
     const users = await user
       .findOne({ user_email: req.user.user_email })
       .exec();
-    console.log(users);
+
     if (!users) {
       return res
         .status(204)
@@ -155,9 +155,51 @@ const updateUser = async (req, res) => {
   }
 };
 
-const kos =(req,res)=>{
-  res.send("kooos omk")
+const addToWishList = async (req, res) => {
+  const { perfumeId } = req.body;
+  const { id } = req.params;
+  try {
+    // Find the user by ID and update the wishlist
+    const users = await user.findByIdAndUpdate(
+      id,
+      { $addToSet: { wishList: { perfumeId } } },
+      { new: true }
+    );
 
-}
+    res.json({
+      success: true,
+      users,
+      message: "perfume added to wish list successfully",
+    });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ success: false, error: "error in add the perfume to wish list" });
+  }
+};
 
-module.exports = { allusers, adduser, login, getUser, getImage, updateUser,kos };
+const getWishList = async (req, res) => {
+  const { id } = req.params;
+  console.log("this is the user id", id);
+  try {
+    const User = await user.findById(id).populate("wishList");
+    console.log("this is the user", User);
+    res.json({ success: true, wishList: User.wishList });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ success: false, error: "error in get the users wish list" });
+  }
+};
+module.exports = {
+  allusers,
+  adduser,
+  login,
+  getUser,
+  getImage,
+  updateUser,
+  addToWishList,
+  getWishList,
+};

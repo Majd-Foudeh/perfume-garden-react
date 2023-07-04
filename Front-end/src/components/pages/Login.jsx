@@ -4,9 +4,13 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { UserContext } from "../../context/UserContext";
+import Swal from "sweetalert2";
 
 export const Login = () => {
   const navigate = useNavigate();
+
+  const cartCount = localStorage.getItem("cartCount");
+
   const { auth, setAuth, refresh } = useContext(AuthContext);
   const { user, setUser, userRefresh } = useContext(UserContext);
   const [errors, setErrors] = useState({});
@@ -70,7 +74,16 @@ export const Login = () => {
             setAuth(true);
             userRefresh();
             refresh();
-            navigate("/");
+            if (cartCount > 0) {
+              navigate("/cart");
+              Swal.fire(
+                "Great!",
+                "Now you can continue to checkout",
+                "success"
+              );
+            } else {
+              navigate("/");
+            }
           }
         })
         .catch((error) => {
@@ -107,9 +120,8 @@ export const Login = () => {
               >
                 <div className="row justify-content-center rounded ">
                   <div className="col-md-12 mb-md-4 rounded col-sm-11 col-lg-8 col-xl-4 d-flex flex-column justify-content-center order-2 order-lg-2">
-                    <div className="text-center my-3">
-                      <p>or sign up with:</p>
-                      <div className=" d-flex justify-content-center gap-5  me-3">
+                    <div className="text-center mt-3">
+                      <div className="mb-4 mt-2 d-flex justify-content-center gap-5  ">
                         <button
                           type="button"
                           className="btn btn-link btn-floating mx-1"
@@ -129,6 +141,7 @@ export const Login = () => {
                           <i className="fab fa-twitter text-warning bg-dark rounded-9" />
                         </button>
                       </div>
+                      <p className="m-0">or sign up with:</p>
                     </div>
                     <p className="text-muted fw-bold mx-1 mx-md-4 mt-4">
                       Log in

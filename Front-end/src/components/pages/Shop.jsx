@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../../style/Shop.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import light from "../../assets/light.png";
 import medium from "../../assets/medium.png";
 import strong from "../../assets/strong.png";
+import { UserContext } from "../../context/UserContext";
 export const Shop = () => {
   const [perfumes, setPerfumes] = useState([]);
-
+  const [isWishListed, setIsWishListed] = useState(false);
+  const { user } = useContext(UserContext);
   useEffect(() => {
     axios
       .get("http://localhost:3000/allPerfumes")
@@ -19,6 +21,32 @@ export const Shop = () => {
         console.error(error, "error fetching perfumes in react");
       });
   }, []);
+
+  const handleWishList = (perfumeId) => {
+    setIsWishListed((prevState) => !prevState);
+    axios
+      .post(`http://localhost:3000/wishList/${user._id}`, { perfumeId })
+      .then((response) => {
+        // Handle the response data if needed
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const [postsPerPage] = useState(3);
+
+  // // ...
+
+  // const indexOfLastPost = currentPage * postsPerPage;
+  // const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  // const currentPosts = perfumes.slice(indexOfFirstPost, indexOfLastPost);
+
+  // const paginate = ({ selected }) => {
+  //   setCurrentPage(selected + 1);
+  // };
 
   return (
     <>
@@ -372,14 +400,32 @@ export const Shop = () => {
                               </div>
                             </div>
                             <div>
+                              <label className="container">
+                                <input
+                                  type="checkbox"
+                                  onClick={() => handleWishList(data._id)}
+                                />
+                                <svg
+                                  id="Layer_1"
+                                  version={1.0}
+                                  viewBox="0 0 24 24"
+                                  xmlSpace="preserve"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  xmlnsXlink="http://www.w3.org/1999/xlink"
+                                >
+                                  <path d="M16.4,4C14.6,4,13,4.9,12,6.3C11,4.9,9.4,4,7.6,4C4.5,4,2,6.5,2,9.6C2,14,12,22,12,22s10-8,10-12.4C22,6.5,19.5,4,16.4,4z" />
+                                </svg>
+                              </label>
+                            </div>
+                            <div>
                               {data.perfume_category == "Light" && (
-                                <img height="45vh" src={light} alt="" />
+                                <img height="40vh" src={light} alt="Light" />
                               )}
                               {data.perfume_category == "Medium" && (
-                                <img height="45vh" src={medium} alt="" />
+                                <img height="40vh" src={medium} alt="Medium" />
                               )}
                               {data.perfume_category == "Strong" && (
-                                <img height="45vh" src={strong} alt="" />
+                                <img height="40vh" src={strong} alt="Strong" />
                               )}
                             </div>
                           </div>
@@ -411,35 +457,6 @@ export const Shop = () => {
             </div>
 
             {/* PAGINATION*/}
-            <nav aria-label="Page navigation example">
-              <ul className="pagination justify-content-center justify-content-lg-center ">
-                <li className="page-item mx-1">
-                  <a className="page-link" href="#!" aria-label="Previous">
-                    <span aria-hidden="true">«</span>
-                  </a>
-                </li>
-                <li className="page-item mx-1 active text-danger">
-                  <a className="page-link" href="#!">
-                    1
-                  </a>
-                </li>
-                <li className="page-item mx-1">
-                  <a className="page-link" href="#!">
-                    2
-                  </a>
-                </li>
-                <li className="page-item mx-1">
-                  <a className="page-link" href="#!">
-                    3
-                  </a>
-                </li>
-                <li className="page-item ms-1">
-                  <a className="page-link" href="#!" aria-label="Next">
-                    <span aria-hidden="true">»</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
           </div>
         </div>
       </main>

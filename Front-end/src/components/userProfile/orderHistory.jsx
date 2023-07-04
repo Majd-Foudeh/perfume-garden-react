@@ -23,7 +23,7 @@ export const OrderHistory = () => {
       .catch((error) => {
         console.log(error.message);
       });
-  }, [user._id, userOrders.status]);
+  }, [user._id]);
   let count = 0;
   const [test, setTest] = useState([]);
   const handleReorder = async (cart, total) => {
@@ -70,7 +70,7 @@ export const OrderHistory = () => {
             role="tabpanel"
             aria-labelledby="orders-tab"
           >
-            <h4 className="font-weight-bold mt-0 mb-4">Past Orders</h4>
+            <h4 className="font-weight-bold mt-0 mb-4">Past Orders </h4>
 
             {userOrders &&
               userOrders.map((item) => (
