@@ -4,7 +4,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { UserContext } from "../../context/UserContext";
-
+import Swal from "sweetalert2";
 export const Login = () => {
   const navigate = useNavigate();
   const { auth, setAuth, refresh } = useContext(AuthContext);
@@ -18,6 +18,7 @@ export const Login = () => {
     email: "",
     password: "",
   });
+  const cartCount = localStorage.getItem("cartCount");
 
   const validateForm = () => {
     const errors = {};
@@ -70,7 +71,16 @@ export const Login = () => {
             setAuth(true);
             userRefresh();
             refresh();
-            navigate("/");
+            if (cartCount > 0) {
+              navigate("/cart");
+              Swal.fire(
+                "Great!",
+                "Now you can continue to checkout",
+                "success"
+              );
+            } else {
+              navigate("/");
+            }
           }
         })
         .catch((error) => {

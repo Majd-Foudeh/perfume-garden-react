@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { UserContext } from "../../context/UserContext";
+import Swal from "sweetalert2";
 
 export const ProfileDropdown = () => {
   const { auth, setAuth } = useContext(AuthContext);
@@ -9,9 +10,22 @@ export const ProfileDropdown = () => {
 
   const navigate = useNavigate();
   const handleLogOut = () => {
-    localStorage.clear();
-    setAuth(false);
-    navigate("/");
+    Swal.fire({
+      title: "Are you sure to log out?",
+      text: "Your cart will be deleted !",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, log out !",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("logged out!", "logged out successfully .", "success");
+        localStorage.clear();
+        setAuth(false);
+        navigate("/");
+      }
+    });
   };
   return (
     <>

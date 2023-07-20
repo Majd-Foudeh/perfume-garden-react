@@ -6,39 +6,6 @@ import { AuthContext } from "../context/AuthContext";
 
 export const Navbar = ({ hideNav, setHideNav }) => {
   const { auth } = useContext(AuthContext);
-  // let cartCount = JSON.parse(localStorage.getItem("cartCount"));
-  // let count = cartCount ? JSON.parse(cartCount) : 0;
-  // const [cartItemsNumber, setCartItemsNumber] = useState(count);
-
-  // useEffect(() => {
-  //   const handleStorageChange = (event) => {
-  //     if (event.key === "cartCount") {
-  //       setCartItemsNumber(JSON.parse(event.newValue));
-  //     }
-  //   };
-
-  //   window.addEventListener("storage", handleStorageChange);
-
-  //   return () => {
-  //     window.removeEventListener("storage", handleStorageChange);
-  //   };
-  // }, [cartCount]);
-
-  // const useLocalStorage = (key, initialValue) => {
-  //   const [value, setValue] = useState(() => {
-  //     const storedValue = localStorage.getItem(key);
-  //     return storedValue ? JSON.parse(storedValue) : initialValue;
-  //   });
-
-  //   useEffect(() => {
-  //     localStorage.setItem(key, JSON.stringify(value));
-  //   }, [key, value]);
-
-  //   return [value, setValue];
-  // };
-
-  // const [cartCount, setCartCount] = useLocalStorage("cartCount", 0);
-  // console.log(cartCount);
 
   const [cartItemsNumber, setCartItemsNumber] = useState(
     JSON.parse(localStorage.getItem("cartCount")) || 0
