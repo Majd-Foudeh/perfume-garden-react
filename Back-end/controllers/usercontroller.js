@@ -155,9 +155,95 @@ const updateUser = async (req, res) => {
   }
 };
 
-const kos =(req,res)=>{
-  res.send("kooos omk")
+const getWishList = async (req, res) => {
+  const { id } = req.params;
+  console.log("this is the user id", id);
+  try {
+    const User = await user.findById(id).populate("wishList.perfume");
+    res.json({ success: true, wishList: User.wishList });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ success: false, error: "error in get the users wish list" });
+  }
+};
 
-}
+const addToWishList = async (req, res) => {
+  const { perfumeId } = req.body;
+  const { id } = req.params;
+  console.log(perfumeId);
+  console.log(id);
+  try {
+    const isPerfumeInWishlist = await user.exists({
+      _id: id,
+      "wishList.perfume": perfumeId,
+    });
 
-module.exports = { allusers, adduser, login, getUser, getImage, updateUser,kos };
+    if (isPerfumeInWishlist) {
+      console.log("Perfume is already in the wishlist");
+      return;
+    }
+
+    // Add the new perfume to the wishlist using the findOneAndUpdate method
+    const updatedUser = await user.findOneAndUpdate(
+      { _id: id },
+      { $push: { wishList: { perfume: perfumeId } } },
+      { new: true }
+    );
+
+    console.log("Perfume added to the wishlist successfully");
+    console.log(updatedUser);
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ success: false, error: "error in add the perfume to wish list" });
+  }
+};
+
+const removeFromWishlist = async (req, res) => {
+  // const { perfumeId } = req.body;
+  const { id } = req.params;
+  const { perfumeId } = req.params;
+
+  try {
+    // Check if the perfume is in the wishlist
+    const isPerfumeInWishlist = await user.exists({
+      _id: id,
+      "wishList.perfume": perfumeId,
+    });
+
+    if (!isPerfumeInWishlist) {
+      console.log("Perfume is not in the wishlist");
+      return;
+    }
+
+    // Remove the perfume from the wishlist using the findOneAndUpdate method
+    const updatedUser = await user.findOneAndUpdate(
+      { _id: id },
+      { $pull: { wishList: { perfume: perfumeId } } },
+      { new: true }
+    );
+
+    console.log("Perfume removed from the wishlist successfully");
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({
+      success: false,
+      error: "error in removing the perfume from the wish list",
+    });
+  }
+};
+
+module.exports = {
+  allusers,
+  adduser,
+  login,
+  getUser,
+  getImage,
+  updateUser,
+  getWishList,
+  addToWishList,
+  removeFromWishlist,
+};

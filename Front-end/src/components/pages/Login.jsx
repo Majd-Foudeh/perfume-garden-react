@@ -4,6 +4,8 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { UserContext } from "../../context/UserContext";
+import Form from "react-bootstrap/Form";
+
 import Swal from "sweetalert2";
 export const Login = () => {
   const navigate = useNavigate();
@@ -160,6 +162,7 @@ export const Login = () => {
                               <i className="fas fa-envelope me-2" />
                               Email
                             </label>
+
                             <input
                               type="text"
                               className="form-control "

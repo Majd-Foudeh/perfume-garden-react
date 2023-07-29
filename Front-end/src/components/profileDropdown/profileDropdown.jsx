@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 
 export const ProfileDropdown = () => {
   const { auth, setAuth } = useContext(AuthContext);
-  const { user } = useContext(UserContext);
+  const { user, userRefresh } = useContext(UserContext);
 
   const navigate = useNavigate();
   const handleLogOut = () => {
@@ -62,7 +62,7 @@ export const ProfileDropdown = () => {
           </div>
         </a>
         <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <li>
+          <li onClick={() => userRefresh()}>
             <Link className="dropdown-item" to="/userprofile">
               My profile
             </Link>

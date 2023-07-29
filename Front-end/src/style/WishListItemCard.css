@@ -1,0 +1,14 @@
+.perfumeImg img {
+    aspect-ratio: 5/4;
+    object-fit:cover;
+}
+.image-container {
+    position: relative;
+  }
+  
+  .delete-button {
+    position: absolute;
+    top: 5px; /* Adjust the top position to align the button as desired */
+    right: 5px; /* Adjust the right position to align the button as desired */
+  }
+  

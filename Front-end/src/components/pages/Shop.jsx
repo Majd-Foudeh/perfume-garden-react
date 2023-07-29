@@ -1,13 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../../style/Shop.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import light from "../../assets/light.png";
 import medium from "../../assets/medium.png";
 import strong from "../../assets/strong.png";
+import { UserContext } from "../../context/UserContext";
+import Form from "react-bootstrap/Form";
+import { AuthContext } from "../../context/AuthContext";
+
 export const Shop = () => {
   const [perfumes, setPerfumes] = useState([]);
-
+  const [filteredPerfumes, setFilteredPerfumes] = useState([]);
+  const [isWishListed, setIsWishListed] = useState(false);
+  const { user } = useContext(UserContext);
+  const { auth } = useContext(AuthContext);
   useEffect(() => {
     axios
       .get("http://localhost:3000/allPerfumes")
@@ -19,6 +26,21 @@ export const Shop = () => {
         console.error(error, "error fetching perfumes in react");
       });
   }, []);
+
+  const handleWishList = (perfumeId) => {
+    console.log(perfumeId);
+    console.log(user._id);
+    setIsWishListed((prevState) => !prevState);
+    axios
+      .post(`http://localhost:3000/wishList/${user._id}`, { perfumeId })
+      .then((response) => {
+        // Handle the response data if needed
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
 
   return (
     <>
@@ -48,15 +70,15 @@ export const Shop = () => {
             <ul className="list-unstyled small text-muted ps-lg-4 font-weight-normal">
               <li className="mb-2">
                 <a className="reset-anchor text-muted" href="#!">
-                  Women's T-Shirts
+                  Women's Perfumes
                 </a>
               </li>
               <li className="mb-2">
                 <a className="reset-anchor text-muted" href="#!">
-                  Men's T-Shirts
+                  Men's Perfumes
                 </a>
               </li>
-              <li className="mb-2">
+              {/* <li className="mb-2">
                 <a className="reset-anchor text-muted" href="#!">
                   Dresses
                 </a>
@@ -75,49 +97,34 @@ export const Shop = () => {
                 <a className="reset-anchor text-muted" href="#!">
                   Men's sunglasses
                 </a>
-              </li>
+              </li> */}
             </ul>
             <div
               className="py-2 px-4  mb-3"
               style={{ backgroundColor: "#faf2da" }}
             >
               <strong className="small text-uppercase fw-bold">
-                Health &amp; Beauty
+                Perfume Concentration
               </strong>
             </div>
             <ul className="list-unstyled small text-muted ps-lg-4 font-weight-normal">
               <li className="mb-2">
                 <a className="reset-anchor text-muted" href="#!">
-                  Shavers
+                  Strong
                 </a>
               </li>
               <li className="mb-2">
                 <a className="reset-anchor text-muted" href="#!">
-                  bags
+                  Medium
                 </a>
               </li>
               <li className="mb-2">
                 <a className="reset-anchor text-muted" href="#!">
-                  Cosmetic
-                </a>
-              </li>
-              <li className="mb-2">
-                <a className="reset-anchor text-muted" href="#!">
-                  Nail Art
-                </a>
-              </li>
-              <li className="mb-2">
-                <a className="reset-anchor text-muted" href="#!">
-                  Skin Masks &amp; Peels
-                </a>
-              </li>
-              <li className="mb-2">
-                <a className="reset-anchor text-muted" href="#!">
-                  Korean cosmetics
+                  Light
                 </a>
               </li>
             </ul>
-            <div
+            {/* <div
               className="py-2 px-4  mb-3"
               style={{ backgroundColor: "#faf2da" }}
             >
@@ -156,7 +163,7 @@ export const Shop = () => {
                   Keyboards
                 </a>
               </li>
-            </ul>
+            </ul> */}
             <h6 className="text-uppercase mb-3">Show only</h6>
             <div className="form-check mb-1">
               <input
@@ -373,15 +380,35 @@ export const Shop = () => {
                             </div>
                             <div>
                               {data.perfume_category == "Light" && (
-                                <img height="45vh" src={light} alt="" />
+                                <img height="35vh" src={light} alt="" />
                               )}
                               {data.perfume_category == "Medium" && (
-                                <img height="45vh" src={medium} alt="" />
+                                <img height="35vh" src={medium} alt="" />
                               )}
                               {data.perfume_category == "Strong" && (
-                                <img height="45vh" src={strong} alt="" />
+                                <img height="35vh" src={strong} alt="" />
                               )}
                             </div>
+                            {auth && (
+                              <div>
+                                <label className="wishList">
+                                  <input
+                                    type="checkbox"
+                                    onClick={() => handleWishList(data._id)}
+                                  />
+                                  <svg
+                                    id="Layer_1"
+                                    version={1.0}
+                                    viewBox="0 0 24 24"
+                                    xmlSpace="preserve"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    xmlnsXlink="http://www.w3.org/1999/xlink"
+                                  >
+                                    <path d="M16.4,4C14.6,4,13,4.9,12,6.3C11,4.9,9.4,4,7.6,4C4.5,4,2,6.5,2,9.6C2,14,12,22,12,22s10-8,10-12.4C22,6.5,19.5,4,16.4,4z" />
+                                  </svg>
+                                </label>
+                              </div>
+                            )}
                           </div>
                           {/* <p className="small text-muted font-italic">
                             {data.description}
