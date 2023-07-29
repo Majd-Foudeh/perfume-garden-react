@@ -1,54 +1,59 @@
-const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
-
-const Schema = mongoose.Schema
-const userSchema = new Schema({
-
+const Schema = mongoose.Schema;
+const userSchema = new Schema(
+  {
     first_Name: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
 
     last_Name: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     user_email: {
-        type: String,
-        required: true,
-        unique: true,
-        lowercase: true
-
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
     },
     user_password: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     user_phoneNumber: {
-        type: String, 
-        // required: true
+      type: String,
+      // required: true
     },
     // payment:{type:[{}]},
     // user_store:{type: [{perfume_name:String, product_category:String,price:Number,description:String,perfume_picture:String}]},
     user_token: {
-        type: String,
-        // required: true,
+      type: String,
+      // required: true,
     },
-    imageUrl:{
-        type:String
+    imageUrl: {
+      type: String,
     },
-    isDeleted:{
-        type:Boolean,
-        default:false
-    }
-
-
-
-}, { timestamp: true }
-)
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
+    // wishList: [{ type: Schema.Types.ObjectId, ref: "Perfume" }],
+    wishList: [
+      {
+        perfume: {
+          type: Schema.Types.ObjectId,
+          ref: "Perfume",
+        },
+      },
+    ],
+  },
+  { timestamp: true }
+);
 userSchema.pre("save", async function () {
-    this.user_password = await bcrypt.hash(this.user_password, 10)
-})
+  this.user_password = await bcrypt.hash(this.user_password, 10);
+});
 
-module.exports = mongoose.model("user", userSchema) 
+module.exports = mongoose.model("user", userSchema);

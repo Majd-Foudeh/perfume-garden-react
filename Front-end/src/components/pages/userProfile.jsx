@@ -6,6 +6,7 @@ import Tabs from "react-bootstrap/Tabs";
 import { OrderHistory } from "../userProfile/orderHistory";
 import { UserProducts } from "../userProfile/userProducts";
 import { UserInfo } from "../userProfile/userInfo";
+import WishListItemCard from "../userProfile/WishListItemCard";
 
 export const UserProfile = () => {
   const navigate = useNavigate();
@@ -41,17 +42,11 @@ export const UserProfile = () => {
               <Tab eventKey="profile" title="Profile">
                 <UserInfo />{" "}
               </Tab>
-              <Tab eventKey="home" title="Home">
+              <Tab eventKey="home" title="Orders History">
                 <OrderHistory />
               </Tab>
-              <Tab eventKey="longer-tab" title="My products">
-                <UserProducts />
-              </Tab>
-              <Tab eventKey="add product" title="add product">
-                Tab content for Contact
-              </Tab>
-              <Tab eventKey="contact" title="Contact">
-                Tab content for Contact
+              <Tab eventKey="longer-tab" title="My Wish List">
+                <WishListItemCard />
               </Tab>
             </Tabs>
           </div>
