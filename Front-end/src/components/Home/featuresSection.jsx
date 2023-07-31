@@ -1,128 +1,135 @@
-
-import React from 'react'
-import ease from '../../assets/easy-use.png'
+import React from "react";
+import ease from "../../assets/easy-use.png";
+import "../../style/featuresSection.css";
 export const FeaturesSection = () => {
-    return (
-        <>
-            <>
-                {/* Feature */}
-                <section className="mt-5" >
-                    <div className="container text-dark pt-3">
-                        <header className="pt-4 pb-3">
-                            <h3>Why choose us</h3>
-                        </header>
-                        <div className="row mb-4">
-                            <div className="col-lg-4 col-md-6">
-                                <figure className="d-flex align-items-center mb-4">
-                                    <span className="rounded-circle bg-white p-3 d-flex me-2 mb-2">
-                                        <i className="fas fa-camera-retro fa-2x fa-fw text-warning floating" />
-                                    </span>
-                                    <figcaption className="info">
-                                        <h6 className="title">Reasonable prices</h6>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do
-                                            eiusmor
-                                        </p>
-                                    </figcaption>
-                                </figure>
-                                {/* itemside // */}
-                            </div>
-                            {/* col // */}
-                            <div className="col-lg-4 col-md-6">
-                                <figure className="d-flex align-items-center mb-4">
-                                    <span className="rounded-circle bg-white p-3 d-flex me-2 mb-2">
-                                        <i className="fas fa-star fa-2x fa-fw text-warning floating" />
-                                    </span>
-                                    <figcaption className="info">
-                                        <h6 className="title">Best quality</h6>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do
-                                            eiusmor
-                                        </p>
-                                    </figcaption>
-                                </figure>
-                                {/* itemside // */}
-                            </div>
-                            {/* col // */}
-                            <div className="col-lg-4 col-md-6">
-                                <figure className="d-flex align-items-center mb-4">
-                                    <span className="rounded-circle bg-white p-3 d-flex me-2 mb-2">
-                                        <i className="fas fa-plane fa-2x fa-fw text-warning floating" />
-                                    </span>
-                                    <figcaption className="info">
-                                        <h6 className="title">Worldwide shipping</h6>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do
-                                            eiusmor
-                                        </p>
-                                    </figcaption>
-                                </figure>
-                                {/* itemside // */}
-                            </div>
-                            {/* col // */}
-                            <div className="col-lg-4 col-md-6">
-                                <figure className="d-flex align-items-center mb-4">
-                                    <span className="rounded-circle bg-white p-3 d-flex me-2 mb-2">
-                                        <i className="fas fa-users fa-2x fa-fw text-warning floating" />
-                                    </span>
-                                    <figcaption className="info">
-                                        <h6 className="title">Customer satisfaction</h6>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do
-                                            eiusmor
-                                        </p>
-                                    </figcaption>
-                                </figure>
-                                {/* itemside // */}
-                            </div>
-                            {/* col // */}
-                            <div className="col-lg-4 col-md-6">
-                                <figure className="d-flex align-items-center mb-4">
-                                    <span className="rounded-circle bg-white p-3 d-flex me-2 mb-2">
-                                        <i className="fas fa-thumbs-up fa-2x fa-fw text-warning floating" />
-                                    </span>
-                                    <figcaption className="info">
-                                        <h6 className="title">Happy customers</h6>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do
-                                            eiusmor
-                                        </p>
-                                    </figcaption>
-                                </figure>
-                                {/* itemside // */}
-                            </div>
-                            {/* col // */}
-                            <div className="col-lg-4 col-md-6">
-                                <figure className="d-flex align-items-center mb-4">
-                                    <span className="rounded-circle bg-white p-3 d-flex me-2 mb-2">
-                                        <i className="fas fa-box fa-2x fa-fw text-warning floating" />
-                                    </span>
-                                    <figcaption className="info">
-                                        <h6 className="title">Thousand items</h6>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do
-                                            eiusmor
-                                        </p>
-                                    </figcaption>
-                                </figure>
-                                {/* itemside // */}
-                            </div>
-                            {/* col // */}
-                        </div>
-                    </div>
-                    {/* container end.// */}
-                </section>
-                {/* Feature */}
-                
-            </>
+  return (
+    <>
+      <>
+        {/* Feature */}
+        <section className="section services-section" id="services">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-6">
+                <div className="section-title">
+                  <h2>E-Commerce Perfume Oils</h2>
+                  <p>
+                    Discover a world of exquisite fragrance at E-Commerce
+                    Perfume Oils. We offer unique and high-quality perfume oils,
+                    catering to your distinct preferences with personalized
+                    blends. Our long-lasting scents delight your senses, and
+                    ordering is simple and convenient through our user-friendly
+                    website. Experience the magic of fragrance today!
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              {/* feaure box */}
+              <div className="col-sm-6 col-lg-4">
+                <div className="feature-box-1">
+                  <div className="icon">
+                    <i className="fa fa-desktop" />
+                  </div>
+                  <div className="feature-content">
+                    <h5>Unique Fragrance Blends</h5>
+                    <p>
+                      Explore exclusive blends of floral, woody, and more,
+                      tailored to suit your individual taste.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {/* / */}
+              {/* feaure box */}
+              <div className="col-sm-6 col-lg-4">
+                <div className="feature-box-1">
+                  <div className="icon">
+                    <i className="fa fa-user" />
+                  </div>
+                  <div className="feature-content">
+                    <h5>Personalized Perfume Selection</h5>
+                    <p>
+                      Customize your own perfume oil to perfectly complement
+                      your personality.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {/* / */}
+              {/* feaure box */}
+              <div className="col-sm-6 col-lg-4">
+                <div className="feature-box-1">
+                  <div className="icon">
+                    <i className="fa fa-comment" />
+                  </div>
+                  <div className="feature-content">
+                    <h5>Simple and Convenient Ordering</h5>
+                    <p>
+                      Easily browse and order your favorite perfume oil from our
+                      user-friendly website.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {/* / */}
+              {/* feaure box */}
+              <div className="col-sm-6 col-lg-4">
+                <div className="feature-box-1">
+                  <div className="icon">
+                    <i className="fa fa-image" />
+                  </div>
+                  <div className="feature-content">
+                    <h5>Long-lasting Fragrance</h5>
+                    <p>
+                      Experience enchanting, long-lasting aroma that lingers
+                      throughout the day.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {/* / */}
+              {/* feaure box */}
+              <div className="col-sm-6 col-lg-4">
+                <div className="feature-box-1">
+                  <div className="icon">
+                    <i className="fa fa-th" />
+                  </div>
+                  <div className="feature-content">
+                    <h5>Quality Assurance</h5>
+                    <p>
+                      Each bottle is crafted with utmost care to maintain the
+                      highest quality standards.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {/* / */}
+              {/* feaure box */}
+              <div className="col-sm-6 col-lg-4">
+                <div className="feature-box-1">
+                  <div className="icon">
+                    <i className="fa fa-cog" />
+                  </div>
+                  <div className="feature-content">
+                    <h5>Various Sizing Options</h5>
+                    <p>
+                      Choose from a range of sizes to fit your needs for
+                      on-the-go use or everyday indulgence.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {/* / */}
+            </div>
+          </div>
+        </section>
+      </>
+    </>
+  );
+};
 
-
-        </>)
-}
-
-
-
-{/* <section className=" mb-10 ">
+{
+  /* <section className=" mb-10 ">
                 <div className="container">
                     <div className="mb-3 row justify-content-center">
                         <div className="col-lg-8">
@@ -177,4 +184,5 @@ export const FeaturesSection = () => {
                         </div>
                     </div>
                 </div>
-            </section> */}
+            </section> */
+}

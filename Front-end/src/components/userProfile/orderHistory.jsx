@@ -103,7 +103,8 @@ export const OrderHistory = () => {
                         </div>
                         <a href="#">
                           <span className="float-end  text-info">
-                            Date of order: {item.date}{" "}
+                            Date of order:{" "}
+                            {new Date(item.date).toLocaleString()}{" "}
                             <i className="icofont-check-circled text-success" />
                           </span>
                         </a>

@@ -16,6 +16,8 @@ router.put(
 router.post("/wishList/:id", usercontroller.addToWishList);
 router.get("/wishList/:id", usercontroller.getWishList);
 router.delete("/wishList/:id/:perfumeId", usercontroller.removeFromWishlist);
+router.get("/usersNumber", usercontroller.userNumber);
+
 // router.getone('/oneuser', usercontroller.oneuser)
 // router.put('/updateusers', usercontroller.updateusers)
 // router.delete('/deleteusers', usercontroller.deleteusers)

@@ -54,4 +54,44 @@ const getOnePerfume = async (req, res) => {
   }
 };
 
-module.exports = { createPerfume, getPerfumes, getOnePerfume, getFourPerfumes };
+const getGenderCategory = async (req, res) => {
+  const { name } = req.params;
+  console.log(name);
+  try {
+    const filtered = await perfume.find({ gender: name });
+    res.status(200).json(filtered);
+  } catch (error) {
+    res.status(500).json({ error: "error in get the filtered perfumes " });
+    console.error(error);
+  }
+};
+const getCategory = async (req, res) => {
+  const { name } = req.params;
+  console.log(name);
+  try {
+    const filtered = await perfume.find({ perfume_category: name });
+    res.status(200).json(filtered);
+  } catch (error) {
+    res.status(500).json({ error: "error in get the filtered perfumes " });
+    console.error(error);
+  }
+};
+
+const perfumeNumber = async (req, res) => {
+  try {
+    const num = await perfume.estimatedDocumentCount();
+    res.status(200).json(num);
+  } catch (error) {
+    res.status(500).json({ error: "error in get perfume number " });
+    console.error(error);
+  }
+};
+module.exports = {
+  createPerfume,
+  getPerfumes,
+  getOnePerfume,
+  getFourPerfumes,
+  getGenderCategory,
+  getCategory,
+  perfumeNumber,
+};

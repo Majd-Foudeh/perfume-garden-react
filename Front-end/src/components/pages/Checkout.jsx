@@ -15,6 +15,7 @@ import {
 import "react-credit-cards-2/dist/es/styles-compiled.css";
 import axios from "axios";
 import { UserContext } from "../../context/UserContext";
+import Swal from "sweetalert2";
 
 export const Checkout = () => {
   const navigate = useNavigate();
@@ -109,6 +110,18 @@ export const Checkout = () => {
       .catch((error) => {
         console.error(error, "error in save the order");
       });
+
+    localStorage.removeItem("cartItems");
+    localStorage.removeItem("cartCount");
+    localStorage.removeItem("total");
+    localStorage.removeItem("subTotal");
+
+    Swal.fire(
+      "Order completed!",
+      "You can view your orders in your profile!",
+      "success"
+    );
+    navigate("/");
   };
   //! ----------------------------------------------------------------------------------------------
   return (

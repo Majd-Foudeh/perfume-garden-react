@@ -63,4 +63,14 @@ const findUserOrders = async (req, res) => {
     });
   }
 };
-module.exports = { newOrder, findUserOrders };
+
+const ordersNumber = async (req, res) => {
+  try {
+    const num = await Order.estimatedDocumentCount();
+    res.status(200).json(num);
+  } catch (error) {
+    res.status(500).json({ error: "error in get user number " });
+    console.error(error);
+  }
+};
+module.exports = { newOrder, findUserOrders, ordersNumber };

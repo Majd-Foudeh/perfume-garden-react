@@ -236,6 +236,16 @@ const removeFromWishlist = async (req, res) => {
   }
 };
 
+const userNumber = async (req, res) => {
+  try {
+    const num = await user.estimatedDocumentCount();
+    res.status(200).json(num);
+  } catch (error) {
+    res.status(500).json({ error: "error in get user number " });
+    console.error(error);
+  }
+};
+
 module.exports = {
   allusers,
   adduser,
@@ -246,4 +256,5 @@ module.exports = {
   getWishList,
   addToWishList,
   removeFromWishlist,
+  userNumber,
 };
