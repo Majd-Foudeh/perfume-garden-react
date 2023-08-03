@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Lexend&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container3{
+    /* background-color: #0a0c1b; */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card3{
+    background-color: #1f1f0e;
+    width: 90vw;
+    height: 500px;
+    display: flex;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.statsText p,
+h2{
+    color: white;
+}
+
+.statsText h2{
+    font-family: 'Inter', sans-serif;
+    font-size: 2.1rem;
+}
+
+.para.stat-text{
+    margin-top: -25px;
+    color: hsla(0, 0%, 100%, 0.75);
+    font-size: .8rem;
+    letter-spacing: .1em;
+}
+
+.para{
+    font-family: 'Lexend', sans-serif;
+    padding-top: 2.1em;
+    font-size: .9rem;
+    color: hsla(0, 0%, 100%, 0.75);
+    line-height: 1.75em;
+}
+.number{
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 1.5em;
+    color: white;
+}
+
+.highlight{
+    color: #FFC107;
+}
+
+.left{
+    padding: 4.7em 7em 3em 5em;
+    flex-basis: 50%;
+}
+
+.stats{
+    margin-top: 4.5em;
+    display: flex;
+    justify-content: space-between;
+}
+
+.right{
+    background-image: url(https://images.pexels.com/photos/5760898/pexels-photo-5760898.jpeg?auto=compress&cs=tinysrgb&w=600);
+    background-size:cover;
+    flex-basis: 50%;
+}
+
+.overlay{
+    background-color:  rgba(209, 209, 131, 0.75);
+    background-blend-mode: multiply;
+}
+
+@media (max-width: 1145px){
+    .container3{
+        padding: 2em;
+        }
+    .card3{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    }
+    .right{
+        background-image: url(https://lholcomb.github.io/Stats-preview-card3-component/images/image-header-mobile.jpg);
+        height: 100%;
+        order: -1;
+    }
+    .left h2{
+        text-align: center;
+    }
+    .left p{
+        text-align: center;
+    }
+    .left{
+        padding: 2em 3em;
+    }
+    .stats{
+        margin-top: 0;
+        flex-direction: column;
+    }
+    .stats div{
+        padding-top: 3em;
+    }
+}
