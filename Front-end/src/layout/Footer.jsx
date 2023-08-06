@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 
 
 export const Footer = () => {
@@ -8,34 +9,30 @@ export const Footer = () => {
                 <hr />
                     <div className="row py-4">
                         <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                            <img src="img/logo.png" alt="" width={180} className="mb-3" />
+                            <h3 className="mb-3">perfume garden</h3>
                             <p className="font-italic text-muted">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                eiusmod tempor incididunt.
+                            Explore fragrances that elevate your senses.
                             </p>
                             <ul className="list-inline mt-4">
                                 <li className="list-inline-item">
-                                    <a href="#" target="_blank" title="twitter">
+                                    <a href="https://twitter.com/MajdFoudeh29" target="_blank" title="twitter">
                                         <i className="fa fa-twitter text-dark"  />
                                     </a>
                                 </li>
                                 <li className="list-inline-item">
-                                    <a href="#" target="_blank" title="facebook">
+                                    <a href="https://web.facebook.com/majd.foudeh.1/" target="_blank" title="facebook">
                                         <i className="fa fa-facebook text-dark"  />
                                     </a>
                                 </li>
                                 <li className="list-inline-item">
-                                    <a href="#" target="_blank" title="instagram">
+                                    <a href="https://www.instagram.com/majd.foudeh.1/" target="_blank" title="instagram">
                                         <i className="fa fa-instagram  text-dark"  />
                                     </a>
                                 </li>
+                                
+                                
                                 <li className="list-inline-item">
-                                    <a href="#" target="_blank" title="pinterest">
-                                        <i className="fa fa-pinterest  text-dark"  />
-                                    </a>
-                                </li>
-                                <li className="list-inline-item">
-                                    <a href="#" target="_blank" title="vimeo">
+                                    <a href="https://github.com/Majd-Foudeh" target="_blank" title="vimeo">
                                         <i className="fa fa-github text-dark"  />
                                     </a>
                                 </li>
@@ -45,24 +42,24 @@ export const Footer = () => {
                             <h6 className="text-uppercase font-weight-bold mb-4">Shop</h6>
                             <ul className="list-unstyled mb-0">
                                 <li className="mb-2">
-                                    <a href="#" className="text-muted">
+                                    <Link to="/shop" className="text-muted">
                                         For Women
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li className="mb-2">
-                                    <a href="#" className="text-muted">
+                                    <Link to="/shop" className="text-muted">
                                         For Men
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li className="mb-2">
-                                    <a href="#" className="text-muted">
+                                    <Link to="/shop" className="text-muted">
                                         Stores
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li className="mb-2">
-                                    <a href="#" className="text-muted">
+                                    <Link to="/shop" className="text-muted">
                                         Our Blog
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
                         </div>
@@ -70,25 +67,26 @@ export const Footer = () => {
                             <h6 className="text-uppercase font-weight-bold mb-4">Company</h6>
                             <ul className="list-unstyled mb-0">
                                 <li className="mb-2">
-                                    <a href="#" className="text-muted">
+                                    <Link to="/" className="text-muted">
                                         Login
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li className="mb-2">
-                                    <a href="#" className="text-muted">
+                                    <Link to="/" className="text-muted">
                                         Register
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li className="mb-2">
-                                    <a href="#" className="text-muted">
+                                    <Link to="/userprofile" className="text-muted">
                                         Wishlist
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li className="mb-2">
-                                    <a href="#" className="text-muted">
-                                        Our Products
-                                    </a>
+                                    <Link to="/userprofile" className="text-muted">
+                                        Orders History
+                                    </Link>
                                 </li>
+                                
                             </ul>
                         </div>
                         <div className="col-lg-4 col-md-6 mb-lg-0">
@@ -119,7 +117,7 @@ export const Footer = () => {
                 <div className=" py-4 bg-black">
                     <div className="container text-center">
                         <p className="text-light mb-0 py-2">
-                            © 2019 Bootstrapious All rights reserved.
+                            © 2023 MajdFoudeh All rights reserved.
                         </p>
                     </div>
                 </div>

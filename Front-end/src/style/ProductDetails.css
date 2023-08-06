@@ -3,6 +3,16 @@
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
+.contentBack{
+      background-image: url("https://img.freepik.com/free-vector/yellow-gold-watercolor-banner_41066-1946.jpg?w=1480&t=st=1691173718~exp=1691174318~hmac=edf2bd669ae5df9c206d11eb2bb0d88951d42e5147d9128f410ed2d26599d109");
+      background-repeat: no-repeat;
+      background-size: 100% ;
+}
+.featuredBack{
+      background-image: url("https://img.freepik.com/free-photo/yellow-shape-watercolor_23-2148531391.jpg?w=1380&t=st=1691174432~exp=1691175032~hmac=1f41068f6ed5e17c4563dde499030684ff04d1e7132c26b8453a2ab725709dbb");
+      background-repeat: no-repeat;
+      background-size: 100% 100% ;
+}
 .navbar-toggler-icon {
     background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
   }

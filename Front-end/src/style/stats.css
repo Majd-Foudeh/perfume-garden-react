@@ -7,14 +7,14 @@
 
 .container3{
     /* background-color: #0a0c1b; */
-    height: 100vh;
+    height: 70vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .card3{
-    background-color: #1f1f0e;
+    background-color: #0e0e07;
     width: 90vw;
     height: 500px;
     display: flex;
@@ -81,7 +81,7 @@ h2{
 
 @media (max-width: 1145px){
     .container3{
-        padding: 2em;
+        padding: 1.7em;
         }
     .card3{
     height: 100%;

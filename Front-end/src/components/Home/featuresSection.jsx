@@ -7,7 +7,7 @@ export const FeaturesSection = () => {
       <>
         {/* Feature */}
         <section className="section services-section" id="services">
-          <div className="container">
+          <div className="mx-auto " style={{width:"90vw"}}>
             <div className="row">
               <div className="col-lg-6">
                 <div className="section-title">
