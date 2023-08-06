@@ -1,42 +1,48 @@
-import React from "react";
-import { FeaturesSection } from "./featuresSection";
-import strong from "../../assets/strong.png";
-import medium from "../../assets/medium.png";
-import light from "../../assets/light.png";
-import hero4 from "../../assets/hero4.jpg";
+import React from 'react';
+import { FeaturesSection } from './featuresSection';
+import strong from '../../assets/strong.png';
+import medium from '../../assets/medium.png';
+import light from '../../assets/light.png';
+import hero4 from '../../assets/hero4.jpg';
 
 export const Content = () => {
   return (
     <>
       <div>
         <>
-          <div className="row mx-auto my-5 justify-content-center align-items-center featurette">
+          <div className="row mx-auto my-5 py-5 justify-content-center contentBack align-items-center featurette rounded" style={{width:"90vw"}}>
             <div className="col-md-7">
               <h2 className="featurette-heading fw-normal lh-1">
-                First featurette heading.{" "}
+                Perfume Oil Collection{' '}
                 <span className="text-body-secondary">
-                  It’ll blow your mind.
+                  Discover the Essence of Luxury.
                 </span>
               </h2>
               <p className="lead">
-                Some great placeholder content for the first featurette here.
-                Imagine some exciting prose here.
+                Welcome to our exquisite perfume oil collection! Indulge your
+                senses with our premium selection of perfume oils that capture
+                the true essence of luxury and elegance. Our handcrafted scents
+                are carefully curated to provide a unique and unforgettable
+                experience.
               </p>
             </div>
-            <div className="col-md-4 ">
+            <div className="col-md-4">
               <img
                 className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
                 src={hero4}
+                alt="Perfume Oil"
               />
             </div>
           </div>
 
           {/* bottel type section */}
-          <hr />
-          <section className="row my-5 gap-4 " style={{ width: "100%" }}>
+          <div className="d-flex  justify-content-center ">
+            <hr className="w-75" />
+          </div>
+          <section className="row my-5 gap-4 " style={{ width: '100%' }}>
             <div className="container col-lg-5 col-md-10 col-sm-10 order-2 d-flex flex-column justify-content-evenly gap-4  ">
               <div className="row align-items-center justify-content-center">
-                <div className="col-3 " style={{ height: "8vh" }}>
+                <div className="col-3 " style={{ height: '8vh' }}>
                   <img
                     src={strong}
                     height="100%"
@@ -49,7 +55,7 @@ export const Content = () => {
                 </div>
               </div>
               <div className="row align-items-center justify-content-center ">
-                <div className="col-3 " style={{ height: "8vh" }}>
+                <div className="col-3 " style={{ height: '8vh' }}>
                   <img
                     src={medium}
                     height="100%"
@@ -62,7 +68,7 @@ export const Content = () => {
                 </div>
               </div>
               <div className="row align-items-center justify-content-center">
-                <div className="col-3 " style={{ height: "8vh" }}>
+                <div className="col-3 " style={{ height: '8vh' }}>
                   <img
                     src={light}
                     height="100%"
@@ -83,13 +89,15 @@ export const Content = () => {
               />
             </div>
           </section>
-          <hr />
+          <div className="d-flex  justify-content-center ">
+            <hr className="w-75" />
+          </div>
           {/* bottel type section */}
 
-          <div className="row featurette mx-auto my-5 justify-content-center align-items-center">
+          {/* <div className="row featurette mx-auto my-5 justify-content-center align-items-center">
             <div className="col-md-7 order-md-2">
               <h2 className="featurette-heading fw-normal lh-1">
-                Oh yeah, it’s that good.{" "}
+                Oh yeah, it’s that good.{' '}
                 <span className="text-body-secondary">See for yourself.</span>
               </h2>
               <p className="lead">
@@ -125,9 +133,8 @@ export const Content = () => {
                 </text>
               </svg>
             </div>
-          </div>
+          </div> */}
 
-          <hr />
         </>
       </div>
     </>
