@@ -1,8 +1,32 @@
-import React from "react";
+import React, { useRef } from "react";
+import emailjs from "@emailjs/browser";
+
 import "../../style/contact.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const Contact = () => {
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_pbxp48q",
+        "template_vesec6q",
+        form.current,
+        "uZ8j4egpOOTqxqB1c"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+  };
+
   return (
     <>
       <div
@@ -21,7 +45,7 @@ export const Contact = () => {
                   <div className="col-lg-8">
                     <div className="contact-box p-5">
                       <h4 className="title">Contact Us</h4>
-                      <form>
+                      <form ref={form} onSubmit={sendEmail}>
                         <div className="row ">
                           <div className="col-lg-6">
                             <div className="form-group mt-3">
@@ -29,6 +53,7 @@ export const Contact = () => {
                                 className="form-control"
                                 type="text"
                                 placeholder="name"
+                                name="userName"
                               />
                             </div>
                           </div>
@@ -38,6 +63,7 @@ export const Contact = () => {
                                 className="form-control"
                                 type="text"
                                 placeholder="email"
+                                name="email"
                               />
                             </div>
                           </div>
@@ -47,6 +73,7 @@ export const Contact = () => {
                                 className="form-control"
                                 type="text"
                                 placeholder="phone"
+                                name="phone"
                               />
                             </div>
                           </div>
@@ -56,6 +83,7 @@ export const Contact = () => {
                                 className="form-control"
                                 type="text"
                                 placeholder="location"
+                                name="location"
                               />
                             </div>
                           </div>
@@ -65,6 +93,7 @@ export const Contact = () => {
                                 className="form-control"
                                 type="text"
                                 placeholder="message"
+                                name="message"
                               />
                             </div>
                           </div>
