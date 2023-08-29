@@ -51,14 +51,23 @@ export function formatCVC(value, prevValue, allValues = {}) {
 
 export function formatExpirationDate(value) {
   const clearValue = clearNumber(value);
+  if (clearValue.length >= 1) {
+    const month = clearValue.slice(0, 2);
+    const year = clearValue.slice(2, 4);
 
-  if (clearValue.length >= 3) {
-    return `${clearValue.slice(0, 2)}/${clearValue.slice(2, 4)}`;
+    if (month.length === 1 && parseInt(month) > 1) {
+      return `0${month}/${year}`;
+    } else if (
+      month.length === 2 &&
+      /^\d{2}$/.test(month) &&
+      /^\d{2}$/.test(year)
+    ) {
+      if (parseInt(month) >= 1 && parseInt(month) <= 12) {
+        return `${month}/${year}`;
+      } else if (parseInt(month) === 0) {
+        return "";
+      }
+    }
   }
-
   return clearValue;
-}
-
-export function formatFormData(data) {
-  return Object.keys(data).map((d) => `${d}: ${data[d]}`);
 }

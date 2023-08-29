@@ -5,6 +5,7 @@ import { FaCircleNotch } from "react-icons/fa";
 import { FiCheckCircle } from "react-icons/fi";
 import { BsClockHistory } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export const OrderHistory = () => {
   const { user } = useContext(UserContext);
@@ -57,6 +58,12 @@ export const OrderHistory = () => {
     localStorage.setItem("total", JSON.stringify(total));
     localStorage.setItem("subTotal", JSON.stringify(total - 5));
     localStorage.setItem("cartCount", JSON.stringify(cartItems.length));
+
+    Swal.fire(
+      "Here is your previous order !",
+      "You can add another perfumes or edit your order quantity",
+      "success"
+    );
     navigate("/cart");
   };
 
