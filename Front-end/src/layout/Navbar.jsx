@@ -38,10 +38,10 @@ export const Navbar = ({ hideNav, setHideNav }) => {
             aria-expanded="true"
             aria-label="Toggle navigation"
           >
-            <span className="navbar-toggler-icon" />
+            <i class="fa-solid fa-bars"></i>{" "}
           </button>
           <div
-            className="navbar-collapse collapse show"
+            className="navbar-collapse collapse "
             id="navbarSupportedContent"
           >
             <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">

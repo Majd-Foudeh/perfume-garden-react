@@ -9,7 +9,6 @@ import {
   formatCreditCardNumber,
   formatCVC,
   formatExpirationDate,
-  formatFormData,
 } from "../creditCard/utils";
 
 import "react-credit-cards-2/dist/es/styles-compiled.css";
@@ -28,6 +27,20 @@ export const Checkout = () => {
   const [total, setTotal] = useState(
     JSON.parse(localStorage.getItem("total")) || 0
   );
+
+  const [cardData, setCardData] = useState({
+    number: "",
+    name: "",
+    expiry: "",
+    cvc: "",
+  });
+
+  const [validationErrors, setValidationErrors] = useState({
+    number: "",
+    name: "",
+    expiry: "",
+    cvc: "",
+  });
 
   let cartCount = JSON.parse(localStorage.getItem("cartCount"));
   let count = cartCount ? JSON.parse(cartCount) : 0;
@@ -50,6 +63,9 @@ export const Checkout = () => {
   const [issuer, setIssuer] = useState("");
   const [focused, setFocused] = useState("");
   const [formData, setFormData] = useState(null);
+  const [formattedCardNumber, setFormattedCardNumber] = useState();
+  const [formattedExpirationDate, setFormattedExpirationDate] = useState();
+  const [formattedCvc, setFormattedCvc] = useState();
   const formRef = useRef(null);
 
   const handleCallback = ({ issuer }, isValid) => {
@@ -63,15 +79,22 @@ export const Checkout = () => {
   };
 
   const handleInputChange = ({ target }) => {
+    setCardData({ ...cardData, [target.name]: target.value });
+
     let value = target.value;
     const name = target.name;
 
     if (name === "number") {
       value = formatCreditCardNumber(value);
+      setFormattedCardNumber(value);
     } else if (name === "expiry") {
       value = formatExpirationDate(value);
+      console.log(value);
+      setFormattedExpirationDate(value);
+      // console.log(value.slice(3));
     } else if (name === "cvc") {
       value = formatCVC(value);
+      setFormattedCvc(value);
     }
 
     if (name === "number") {
@@ -89,40 +112,99 @@ export const Checkout = () => {
     e.preventDefault();
     // const elements = [...formRef.current.elements];
 
-    const orderData = {
-      userId: user._id,
-      products: existingCartItems.map((perfume) => ({
-        perfumeId: perfume.id,
-        perfumeName: perfume.name,
-        quantity: perfume.quantity,
-      })),
-      total: total, // Calculate the total based on the products if needed
-      shippingAddress: "123 Main St, City, Country",
-    };
+    const errors = validateForm();
+    if (Object.keys(errors).length === 0) {
+      // Form data is valid, proceed with submission
+      console.log("Form data is valid:", cardData);
+      // Add your submission logic here
+      const orderData = {
+        userId: user._id,
+        products: existingCartItems.map((perfume) => ({
+          perfumeId: perfume.id,
+          perfumeName: perfume.name,
+          quantity: perfume.quantity,
+        })),
+        total: total, // Calculate the total based on the products if needed
+        shippingAddress: "123 Main St, City, Country",
+      };
 
-    axios
-      .post("http://localhost:3000/newOrder", orderData)
-      .then((response) => {
-        console.log("Order saved successfully");
-        console.log(response.data);
-        // navigate("/thankYou");
-      })
-      .catch((error) => {
-        console.error(error, "error in save the order");
-      });
+      axios
+        .post("http://localhost:3000/newOrder", orderData)
+        .then((response) => {
+          console.log("Order saved successfully");
+          console.log(response.data);
+          // navigate("/thankYou");
+        })
+        .catch((error) => {
+          console.error(error, "error in save the order");
+        });
 
-    localStorage.removeItem("cartItems");
-    localStorage.removeItem("cartCount");
-    localStorage.removeItem("total");
-    localStorage.removeItem("subTotal");
+      localStorage.removeItem("cartItems");
+      localStorage.removeItem("cartCount");
+      localStorage.removeItem("total");
+      localStorage.removeItem("subTotal");
 
-    Swal.fire(
-      "Order completed!",
-      "You can view your orders in your profile!",
-      "success"
-    );
-    navigate("/");
+      Swal.fire(
+        "Order completed!",
+        "You can view your orders in your profile!",
+        "success"
+      );
+      navigate("/");
+    } else {
+      setValidationErrors(errors);
+    }
   };
+
+  const validateForm = () => {
+    const errors = {};
+    // Implement your validation logic here
+    // For each field, check its validity and populate the 'errors' object
+    // Example validation using regular expressions
+    const cardNumberPattern = /^[\d]{16,22}$/;
+    const expiryPattern = /^\d\d\/\d\d$/;
+    const cvcPattern = /^\d{3,4}$/;
+    const currentYear = new Date().getFullYear() % 100; // Last two digits of the current year
+    const currentMonth = new Date().getMonth() + 1; // Current month (1-12)
+
+    if (!cardData.number) {
+      errors.number = "Card number is required";
+    }
+
+    if (cardData.name.trim() === "") {
+      errors.name = "Name is required";
+    }
+
+    let monthValue;
+    if (cardData.expiry.slice(0, 1) == 0) {
+      monthValue = cardData.expiry.slice(1, 2);
+    } else {
+      monthValue = cardData.expiry.slice(0, 2);
+    }
+
+    if (cardData.expiry.slice(2, 4) < currentYear) {
+      errors.expiry = "Invalid expiry date";
+    } else if (cardData.expiry.slice(2, 4) >= currentYear) {
+      if (Number(monthValue) < currentMonth) {
+        errors.expiry = "Invalid expiry date";
+      }
+    }
+
+    if (!cvcPattern.test(cardData.cvc)) {
+      errors.cvc = "Invalid CVC";
+    }
+
+    return errors;
+  };
+
+  const formatCardNumber = (input) => {
+    const trimmedInput = input.replace(/\s+/g, ""); // Remove existing spaces
+    let formattedNumber = "";
+    for (let i = 0; i < trimmedInput.length; i += 4) {
+      formattedNumber += trimmedInput.slice(i, i + 4) + " ";
+    }
+    return formattedNumber.trim(); // Remove trailing space
+  };
+
   //! ----------------------------------------------------------------------------------------------
   return (
     <>
@@ -222,7 +304,9 @@ export const Checkout = () => {
                     <div key="Payment">
                       <div className="App-payment">
                         <h1>React Credit Cards</h1>
-                        <h4>Beautiful credit cards for your payment forms</h4>
+                        <h4 className="mb-5">
+                          Beautiful credit cards for your payment forms
+                        </h4>
                         <Card
                           number={number}
                           name={name}
@@ -233,19 +317,35 @@ export const Checkout = () => {
                         />
 
                         <div className="form-group">
+                          <label htmlFor="" className="mt-2 mb-1">
+                            Card Number <sup className="text-danger">*</sup>
+                          </label>
                           <input
                             type="tel"
                             name="number"
-                            className="form-control"
+                            className={`form-control ${
+                              validationErrors.number ? "is-invalid" : ""
+                            } `}
                             placeholder="Card Number"
-                            //   pattern="[\d]{16,22}"
+                            value={formattedCardNumber}
+                            // pattern="[\d| ]{16,22}"
                             required
                             onChange={handleInputChange}
                             onFocus={handleInputFocus}
                           />
-                          <small>E.g.: 49..., 51..., 36..., 37...</small>
+                          {validationErrors.number && (
+                            <div className="invalid-feedback">
+                              {validationErrors.number}
+                            </div>
+                          )}
+
+                          {/* <small>E.g.: 49..., 51..., 36..., 37...</small> */}
                         </div>
                         <div className="form-group">
+                          <label htmlFor="" className="mt-2 mb-1">
+                            Name on the card{" "}
+                            <sup className="text-danger">*</sup>
+                          </label>
                           <input
                             type="text"
                             name="name"
@@ -258,23 +358,39 @@ export const Checkout = () => {
                         </div>
                         <div className="row">
                           <div className="col-6">
+                            <label htmlFor="" className="mt-2 mb-1">
+                              Expiry Date
+                              <sup className="text-danger">*</sup>
+                            </label>
                             <input
                               type="tel"
                               name="expiry"
-                              className="form-control bg-red"
+                              className={`form-control ${
+                                validationErrors.expiry ? "is-invalid" : ""
+                              } `}
                               placeholder="Valid Thru"
+                              value={formattedExpirationDate}
                               pattern="\d\d/\d\d"
                               required
                               onChange={handleInputChange}
                               onFocus={handleInputFocus}
                             />
+                            {validationErrors.expiry && (
+                              <div className="invalid-feedback">
+                                {validationErrors.expiry}
+                              </div>
+                            )}
                           </div>
                           <div className="col-6">
+                            <label htmlFor="" className="mt-2 mb-1">
+                              CVC <sup className="text-danger">*</sup>{" "}
+                            </label>
                             <input
                               type="tel"
                               name="cvc"
                               className="form-control"
                               placeholder="CVC"
+                              value={formattedCvc}
                               pattern="\d{3,4}"
                               required
                               onChange={handleInputChange}

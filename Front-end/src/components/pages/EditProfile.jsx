@@ -7,7 +7,6 @@ import axios from "axios";
 import { FaUser } from "react-icons/fa";
 
 export const EditProfile = () => {
-
   const [editUser, setEditUser] = useState({
     fname: "",
     lname: "",
@@ -15,8 +14,6 @@ export const EditProfile = () => {
   });
   const [file, setFile] = useState(null);
   const { user, setUser, userRefresh } = useContext(UserContext);
-
- 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,21 +25,20 @@ export const EditProfile = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
-      const formData = new FormData();
-      formData.append("image", file);
-      formData.append("fname", editUser.fname);
-      formData.append("lname", editUser.lname);
-      formData.append("phoneNumber", editUser.phoneNumber);
-      try {
-        axios
-          .put(`http://localhost:3000/updateUser/${user._id}`, formData)
-          .then(() => {
-            userRefresh();
-          });
-      } catch (error) {
-        console.log(error);
-      }
-   
+    const formData = new FormData();
+    formData.append("image", file);
+    formData.append("fname", editUser.fname);
+    formData.append("lname", editUser.lname);
+    formData.append("phoneNumber", editUser.phoneNumber);
+    try {
+      axios
+        .put(`http://localhost:3000/updateUser/${user._id}`, formData)
+        .then(() => {
+          userRefresh();
+        });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -175,9 +171,8 @@ export const EditProfile = () => {
                         type="text"
                         name="fname"
                         onChange={handleChange}
-                        value={user.first_Name}
+                        defaultValue={user.first_Name}
                       />
-                     
                     </div>
                     {/* Form Group (last name)*/}
                     <div className="col-md-6">
@@ -192,7 +187,6 @@ export const EditProfile = () => {
                         type="text"
                         defaultValue={user.last_Name}
                       />
-                      
                     </div>
                   </div>
 
@@ -209,7 +203,6 @@ export const EditProfile = () => {
                       type="tel"
                       placeholder={user.user_phoneNumber}
                     />
-                   
                   </div>
 
                   {/* Save changes button*/}

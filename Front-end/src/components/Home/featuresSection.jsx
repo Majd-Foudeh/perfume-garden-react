@@ -6,19 +6,18 @@ export const FeaturesSection = () => {
     <>
       <>
         {/* Feature */}
-        <section className="section services-section" id="services">
-          <div className="mx-auto " style={{width:"90vw"}}>
+        <section className="mt-5 services-section" id="services">
+          <div className="mx-auto " style={{ width: "90vw" }}>
             <div className="row">
               <div className="col-lg-6">
                 <div className="section-title">
-                  <h2>E-Commerce Perfume Oils</h2>
+                  <h2>Perfume Garden Oils</h2>
                   <p>
-                    Discover a world of exquisite fragrance at E-Commerce
-                    Perfume Oils. We offer unique and high-quality perfume oils,
-                    catering to your distinct preferences with personalized
-                    blends. Our long-lasting scents delight your senses, and
-                    ordering is simple and convenient through our user-friendly
-                    website. Experience the magic of fragrance today!
+                    We offer unique and high-quality perfume oils, catering to
+                    your distinct preferences with personalized blends. Our
+                    long-lasting scents delight your senses, and ordering is
+                    simple and convenient through our user-friendly website.
+                    Experience the magic of fragrance today!
                   </p>
                 </div>
               </div>

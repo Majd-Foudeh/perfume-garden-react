@@ -1,16 +1,82 @@
-import React from 'react'
-import hero1 from '../../assets/hero1.jpg'
-import hero2 from '../../assets/hero2.jpg'
-import hero3 from '../../assets/hero3.jpg'
-import { Link } from 'react-router-dom'
-
+import React from "react";
+import hero1 from "../../assets/hero1.jpg";
+import hero2 from "../../assets/hero2.jpg";
+import hero3 from "../../assets/hero3.jpg";
+import { Link } from "react-router-dom";
+import heroFinal from "../../assets/videos/heroFinal.mp4";
 export const Hero = () => {
-    return (
-        <>
-
-            <>
-                {/* Example Code */}
-                <div
+  return (
+    <>
+      {/* <div
+        class="ratio ratio-21x9
+"
+      >
+        <iframe
+          autoPlay
+          loop
+          muted
+          playsInline
+          src={heroFinal}
+          title="YouTube video"
+        ></iframe>
+      </div> */}
+      <header style={{ paddingLeft: 0 }}>
+        <div
+          className=" text-center bg-video"
+          style={{ height: "94vh", position: "relative", overflow: "hidden" }}
+        >
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="ratio ratio-16x9"
+            style={{
+              // position: "absolute",
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
+          >
+            <source src={heroFinal} type="video/mp4" />
+            {/* You can add additional <source> elements for different video formats */}
+          </video>
+          <div
+            className="mask"
+            style={{
+              backgroundColor: "rgba(0, 0, 0, 0.3)",
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+            }}
+          >
+            <div className="d-flex justify-content-center align-items-center h-100">
+              <div className="text-white">
+                <h1 className="mb-3 text-light" style={{ fontSize: "80px" }}>
+                  Perfume Garden
+                </h1>
+                <h4
+                  className="mb-3 txt-light fw-light "
+                  style={{ color: "#c5c3c3" }}
+                >
+                  Discover a world of exquisite fragrance <br /> at Perfume
+                  Garden
+                </h4>
+                <Link
+                  className="btn btn-outline-light "
+                  to="/shop"
+                  role="button"
+                >
+                  Shop now
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <>
+        {/* Example Code */}
+        {/* <div
                     id="carouselExampleFade"
                     className="carousel slide carousel-fade"
                     data-bs-ride="carousel"
@@ -81,11 +147,9 @@ export const Hero = () => {
                         <span className="carousel-control-next-icon" aria-hidden="true" />
                         <span className="visually-hidden">Next</span>
                     </button>
-                </div>
-                {/* End Example Code */}
-            </>
-
-
-        </>
-    )
-}
+                </div> */}
+        {/* End Example Code */}
+      </>
+    </>
+  );
+};

@@ -206,8 +206,8 @@ export const Cart = () => {
                               );
                             })
                           ) : (
-                            <tbody className="w-100">
-                              <tr className=" align-items-center text-center">
+                            <div className="w-100">
+                              <div className=" align-items-center text-center">
                                 <div className="mb-2">
                                   There is nothing in the cart
                                 </div>
@@ -216,8 +216,8 @@ export const Cart = () => {
                                     Back to shop
                                   </div>
                                 </Link>
-                              </tr>
-                            </tbody>
+                              </div>
+                            </div>
                           )}
                         </table>
                       </div>

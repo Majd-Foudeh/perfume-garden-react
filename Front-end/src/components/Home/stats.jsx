@@ -40,7 +40,11 @@ export const Stats = () => {
   }, []);
   return (
     <>
-      <div className="container3">
+      {/* <div className="m-auto" style={{ width: "90vw" }}>
+        <h2 className="fw-bolder mb-3">perfume categories </h2>
+        <p className=" mb-4">Know what these perfume category icons means</p>
+      </div> */}
+      <div className="container3 my-5">
         <div className="card3">
           <div className="left">
             <h2 className="text-white statsText">
