@@ -9,6 +9,7 @@ import { UserContext } from "../../context/UserContext";
 import Form from "react-bootstrap/Form";
 import { AuthContext } from "../../context/AuthContext";
 import Toast from "react-bootstrap/Toast";
+import Pagination from "react-bootstrap/Pagination"; // Import Bootstrap Pagination
 
 export const Shop = () => {
   const [perfumes, setPerfumes] = useState([]);
@@ -20,6 +21,9 @@ export const Shop = () => {
   const { user } = useContext(UserContext);
   const { auth } = useContext(AuthContext);
   const [show, setShow] = useState(false);
+  const [FilterDataproducts, setFilterDataproducts] = useState([]);
+  const [currentPageproducts, setCurrentPageproducts] = useState(1);
+  const itemsPerPage = 8;
 
   useEffect(() => {
     axios
@@ -27,6 +31,7 @@ export const Shop = () => {
       .then((response) => {
         setPerfumes(response.data);
         // console.log(response.data);
+        setFilterDataproducts(response.data);
       })
       .catch((error) => {
         console.error(error, "error fetching perfumes in react");
@@ -59,30 +64,45 @@ export const Shop = () => {
   };
 
   const handleGenderCategory = (name) => {
-    console.log(name);
     axios
       .get(`http://localhost:3000/genderCategory/${name}`)
       .then((response) => {
         setFilteredPerfumes(response.data);
-        console.log(response.data);
         setCategoryPressed(true);
+        setFilterDataproducts(response.data);
       })
       .catch((error) => {
         console.error(error);
       });
   };
   const handleCategory = (name) => {
-    console.log(name);
     axios
       .get(`http://localhost:3000/category/${name}`)
       .then((response) => {
         setFilteredPerfumes(response.data);
-        console.log(response.data);
         setCategoryPressed(true);
+        setFilterDataproducts(response.data);
       })
       .catch((error) => {
         console.error(error);
       });
+  };
+
+  let totalItemsproducts = FilterDataproducts.length;
+
+  let totalPagesproducts = Math.ceil(totalItemsproducts / itemsPerPage);
+
+  const startIndexproducts = (currentPageproducts - 1) * itemsPerPage;
+
+  const endIndexproducts = startIndexproducts + itemsPerPage;
+
+  let slicedArrayproducts = FilterDataproducts.slice(
+    startIndexproducts,
+    endIndexproducts
+  );
+
+  const handlePageChangeproducts = (pageNumber) => {
+    setCurrentPageproducts(pageNumber);
   };
 
   return (
@@ -193,112 +213,6 @@ export const Shop = () => {
                 </li>
               </ul>
             </div>
-            {/* <h6 className="text-uppercase mb-3">Show only</h6>
-            <div className="form-check mb-1">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                id="checkbox_1"
-              />
-              <label className="form-check-label" htmlFor="checkbox_1">
-                Returns Accepted
-              </label>
-            </div>
-            <div className="form-check mb-1">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                id="checkbox_2"
-              />
-              <label className="form-check-label" htmlFor="checkbox_2">
-                Returns Accepted
-              </label>
-            </div>
-            <div className="form-check mb-1">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                id="checkbox_3"
-              />
-              <label className="form-check-label" htmlFor="checkbox_3">
-                Completed Items
-              </label>
-            </div>
-            <div className="form-check mb-1">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                id="checkbox_4"
-              />
-              <label className="form-check-label" htmlFor="checkbox_4">
-                Sold Items
-              </label>
-            </div>
-            <div className="form-check mb-1">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                id="checkbox_5"
-              />
-              <lab el className="form-check-label" htmlFor="checkbox_5">
-                Deals &amp; Savings
-              </lab>
-            </div>
-            <div className="form-check mb-4">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                id="checkbox_6"
-              />
-              <label className="form-check-label" htmlFor="checkbox_6">
-                Authorized Seller
-              </label>
-            </div>
-            <h6 className="text-uppercase mb-3">Buying format</h6>
-            <div className="form-check mb-1">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="customRadio"
-                id="radio_1"
-              />
-              <label className="form-check-label" htmlFor="radio_1">
-                All Listings
-              </label>
-            </div>
-            <div className="form-check mb-1">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="customRadio"
-                id="radio_2"
-              />
-              <label className="form-check-label" htmlFor="radio_2">
-                Best Offer
-              </label>
-            </div>
-            <div className="form-check mb-1">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="customRadio"
-                id="radio_3"
-              />
-              <label className="form-check-label" htmlFor="radio_3">
-                Auction
-              </label>
-            </div>
-            <div className="form-check mb-1">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="customRadio"
-                id="radio_4"
-              />
-              <label className="form-check-label" htmlFor="radio_4">
-                Buy It Now
-              </label>
-            </div> */}
           </div>
           {/* SHOP LISTING*/}
           <div className="col-lg-9 order-1 order-lg-2 mb-5 mb-lg-0 ">
@@ -330,37 +244,15 @@ export const Shop = () => {
                       <button
                         type="button"
                         className="btn btn-sm btn-light "
-                        onClick={() => setCategoryPressed(false)}
+                        onClick={() => {
+                          setCategoryPressed(false),
+                            setFilterDataproducts(perfumes);
+                        }}
                         // data-mdb-toggle="dropdown"
                         // aria-expanded="false"
                       >
                         Show all{" "}
                       </button>
-                      {/* <ul className="dropdown-menu">
-                        <li>
-                          <a className="dropdown-item" href="#">
-                            Action
-                          </a>
-                        </li>
-                        <li>
-                          <a className="dropdown-item" href="#">
-                            Another action
-                          </a>
-                        </li>
-                        <li>
-                          <a className="dropdown-item" href="#">
-                            Something else here
-                          </a>
-                        </li>
-                        <li>
-                          <hr class="dropdown-divider" />
-                        </li>
-                        <li>
-                          <a className="dropdown-item" href="#">
-                            Separated link
-                          </a>
-                        </li>
-                      </ul> */}
                     </div>
                   </li>
                   <li className="list-inline-item text-muted me-3">
@@ -394,7 +286,7 @@ export const Shop = () => {
             </p>
             <div className="row gap-y-3 shopGap pb-5 mb-4">
               {categoryPressed === false
-                ? perfumes
+                ? slicedArrayproducts
                     .filter((perfume) => {
                       const searchLowerCase = search.toLowerCase();
                       const searchUpperCase = search.toUpperCase();
@@ -479,32 +371,12 @@ export const Shop = () => {
                                   </div>
                                 )}
                               </div>
-                              {/* <p className="small text-muted font-italic">
-                            {data.description}
-                          </p> */}
-                              {/* <ul className="list-inline small">
-                            <li className="list-inline-item m-0">
-                              <i className="fa fa-star text-warning" />
-                            </li>
-                            <li className="list-inline-item m-0">
-                              <i className="fa fa-star text-warning" />
-                            </li>
-                            <li className="list-inline-item m-0">
-                              <i className="fa fa-star text-warning" />
-                            </li>
-                            <li className="list-inline-item m-0">
-                              <i className="fa fa-star text-warning" />
-                            </li>
-                            <li className="list-inline-item m-0">
-                              <i className="fa fa-star-o text-warning" />
-                            </li>
-                          </ul> */}
                             </div>
                           </div>
                         </div>
                       );
                     })
-                : filteredPerfumes
+                : slicedArrayproducts
                     .filter((perfume) => {
                       const searchLowerCase = search.toLowerCase();
                       const searchUpperCase = search.toUpperCase();
@@ -586,26 +458,6 @@ export const Shop = () => {
                                   </div>
                                 )}
                               </div>
-                              {/* <p className="small text-muted font-italic">
-                            {data.description}
-                          </p> */}
-                              {/* <ul className="list-inline small">
-                            <li className="list-inline-item m-0">
-                              <i className="fa fa-star text-warning" />
-                            </li>
-                            <li className="list-inline-item m-0">
-                              <i className="fa fa-star text-warning" />
-                            </li>
-                            <li className="list-inline-item m-0">
-                              <i className="fa fa-star text-warning" />
-                            </li>
-                            <li className="list-inline-item m-0">
-                              <i className="fa fa-star text-warning" />
-                            </li>
-                            <li className="list-inline-item m-0">
-                              <i className="fa fa-star-o text-warning" />
-                            </li>
-                          </ul> */}
                             </div>
                           </div>
                         </div>
@@ -614,7 +466,23 @@ export const Shop = () => {
             </div>
 
             {/* PAGINATION*/}
-            <nav aria-label="Page navigation example">
+            <div>
+              <div className="flex w-full justify-center mt-5">
+                <Pagination>
+                  {Array.from({ length: totalPagesproducts }, (_, index) => (
+                    <Pagination.Item
+                      key={index}
+                      active={index + 1 === currentPageproducts}
+                      onClick={() => handlePageChangeproducts(index + 1)}
+                    >
+                      {index + 1}
+                    </Pagination.Item>
+                  ))}
+                </Pagination>
+              </div>
+            </div>
+
+            {/* <nav aria-label="Page navigation example">
               <ul className="pagination justify-content-center justify-content-lg-center ">
                 <li className="page-item mx-1">
                   <a className="page-link" href="#!" aria-label="Previous">
@@ -642,7 +510,7 @@ export const Shop = () => {
                   </a>
                 </li>
               </ul>
-            </nav>
+            </nav> */}
           </div>
         </div>
       </main>

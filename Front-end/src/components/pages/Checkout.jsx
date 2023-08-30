@@ -67,7 +67,7 @@ export const Checkout = () => {
   const [formattedExpirationDate, setFormattedExpirationDate] = useState();
   const [formattedCvc, setFormattedCvc] = useState();
   const formRef = useRef(null);
-
+  const [address, setAddress] = useState();
   const handleCallback = ({ issuer }, isValid) => {
     if (isValid) {
       setIssuer(issuer);
@@ -125,7 +125,7 @@ export const Checkout = () => {
           quantity: perfume.quantity,
         })),
         total: total, // Calculate the total based on the products if needed
-        shippingAddress: "123 Main St, City, Country",
+        shippingAddress: address,
       };
 
       axios
@@ -157,11 +157,7 @@ export const Checkout = () => {
 
   const validateForm = () => {
     const errors = {};
-    // Implement your validation logic here
-    // For each field, check its validity and populate the 'errors' object
-    // Example validation using regular expressions
-    const cardNumberPattern = /^[\d]{16,22}$/;
-    const expiryPattern = /^\d\d\/\d\d$/;
+
     const cvcPattern = /^\d{3,4}$/;
     const currentYear = new Date().getFullYear() % 100; // Last two digits of the current year
     const currentMonth = new Date().getMonth() + 1; // Current month (1-12)
@@ -402,36 +398,16 @@ export const Checkout = () => {
 
                         <h4 className="mb-3 mt-3">Shipping Address</h4>
                         <div className="d-block my-3">
-                          <div className="custom-control custom-radio">
+                          <div className="form-group">
                             <input
-                              id="credit"
-                              name="paymentMethod"
-                              type="radio"
-                              className="custom-control-input"
-                              defaultChecked=""
-                              required=""
+                              type="text"
+                              name="address"
+                              className="form-control"
+                              placeholder="Enter your address"
+                              required
+                              onChange={(e) => setAddress(e.target.value)}
+                              onFocus={handleInputFocus}
                             />
-                            <label
-                              className="ms-2 custom-control-label"
-                              htmlFor="credit"
-                            >
-                              Main Address
-                            </label>
-                          </div>
-                          <div className="custom-control custom-radio">
-                            <input
-                              id="debit"
-                              name="paymentMethod"
-                              type="radio"
-                              className="custom-control-input"
-                              required=""
-                            />
-                            <label
-                              className="ms-2 custom-control-label"
-                              htmlFor="debit"
-                            >
-                              Second Address
-                            </label>
                           </div>
                         </div>
 
